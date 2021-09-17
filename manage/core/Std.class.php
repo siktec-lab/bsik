@@ -69,8 +69,7 @@ class BsikCoreStd {
 	 * @param string $str
 	 */
 	public static function str_strip_comments(string $str = '' ) : string {
-		$str = preg_replace( '![ \t]*//.*[ \t]*[\r\n]!', '', $str );
-		return $str;
+		return preg_replace('~(" (?:\\\\. | [^"])*+ ") | \# [^\v]*+ | // [^\v]*+ | /\* .*? \*/~xs', '$1', $str);
 	}
     /********************** ARRAY HELPERS *********************************************/    
     /**
@@ -98,7 +97,72 @@ class BsikCoreStd {
     final public static function arr_filter_out(array $input, array $exclude = []) : array {
         return array_diff_key($input, array_flip($exclude));
     }
-    
+
+    /**
+     * Merge two arrays - will preserve keys that start with $ e.x $key => finall value.
+     * @param array $arr1
+     * @param array $arr2
+     *
+     * @return array
+     */
+    final public static function arr_extend(array $arr1, array $arr2)
+    {
+        if (empty($arr1)) {
+            return $arr2;
+        } else if (empty($arr2)) {
+            return $arr1;
+        }
+        foreach ($arr2 as $key => $value) {
+            if (is_string($key) && $key[0] === '$')
+                continue;
+            if (is_int($key)) {
+                $arr1[] = $value;
+            } elseif (is_array($arr2[$key])) {
+                if (!isset($arr1[$key])) {
+                    $arr1[$key] = array();
+                }
+                if (is_int($key)) {
+                    $arr1[] = self::arr_extend($arr1[$key], $value);
+                } else {
+                    $arr1[$key] = self::arr_extend($arr1[$key], $value);
+                }
+            } else {
+                $arr1[$key] = $value;
+            }
+        }
+        return $arr1;
+    }
+    /**
+     * arr_validate - walks an arry and validate keys and value type.
+     * @param array $required - example ["key1" => "string", "key2.key22" => "integer"]
+     * @param array $against
+     *
+     * @return array
+     */
+    final public static function arr_validate(array $required, array $against) : bool {
+        foreach ($required as $key => $type) {
+            $keys = explode(".", $key);
+            $cond = explode(":", $type);
+            $cur = array_shift($keys);
+            if (
+                isset($against[$cur]) && 
+                ((!empty($keys) && gettype($against[$cur]) === "array") ||
+                 (
+                     (empty($keys) && gettype($against[$cur]) === $cond[0])
+                     &&
+                     (!isset($cond[1]) || $cond[1] !== "empty" || !empty($against[$cur]))
+                 ) 
+                )
+            ) {
+                if (!empty($keys) && !self::arr_validate([implode(".", $keys) => $type], $against[$cur]))
+                    return false;
+            } else {
+                // print $key." - ".$cur."<br />";
+                return false;
+            }
+        }
+        return true;
+    }
     /********************** DATE HELPERS *********************************************/    
     /**
      * time_datetime
@@ -138,6 +202,14 @@ class BsikCoreStd {
             case "themes":
                 $path = PLAT_PATH_MANAGE.DS."lib".DS."themes".DS;
                 $url  .= "/manage/lib/themes/"; 
+                break;
+            case "core":
+                $path = PLAT_PATH_MANAGE.DS."core".DS;
+                $url  .= "/manage/core/"; 
+                break;
+            case "schema":
+                $path = PLAT_PATH_MANAGE.DS."core".DS."schema".DS;;
+                $url  .= "/manage/core/schema/"; 
                 break;
         }
         $path .= implode(DS, $path_to_file);
