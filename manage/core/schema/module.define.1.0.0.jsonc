@@ -1,0 +1,62 @@
+{
+	"schema" : "1.0.0",
+	"$schema_naming" : {
+		"settings_container" 	: "settings",
+		"author_container" 		: "author",
+		"defaults_container" 	: "defaults",
+		"privileges_container" 	: "privileges",
+		"menu_container" 		: "menu",
+		"tables_container" 		: "tables"
+	},
+	"$schema_required" : {
+		"schema" 				: "string:empty",
+		"type" 					: "string:empty",
+		"name" 					: "string:empty",
+		"ver" 					: "string:empty",
+		"author.name" 			: "string:empty",
+		"install_script" 		: "string",
+		"activate_script" 		: "string",
+		"disable_script" 		: "string",
+		"uninstall_script" 		: "string"
+	},
+
+	"type"  : "included", /* included | remote */
+	"name"  : "schema_module", /* module name must be the same as the static folder or zip module*/
+	"url"   : "", /* also used by remote type */
+	"ver"   : "1.0.0",
+	/* this part is only for single modules */
+	"author" : {
+		"name" 	: "Unknown Author",
+		"email" : "siktec.lab@gmail.com",
+		"about" : "Unknown Author",
+		"web" 	: "siktec.net"
+	},
+	"settings" : {
+		"title" : "Schema Module Page Title",
+		"desc"  : "Schema Module page description."
+	},
+	"defaults" : {
+		"display_menu" : true
+	}, 
+	"privileges" : { /* require user priv for use with this module */
+		"users"   : false,
+		"content" : false,
+		"admin"   : false,
+		"install" : false
+	}, 
+	"menu" : {
+		"text": "Schema Module",
+		"title": "BSIK - Schema Module",
+		"desc": "Schema module visible description.",
+		"icon": "fas fa-question",
+		"action": "schema",
+		"order": 1,
+		"sub": []
+	},
+	"tables"  			: [],
+	"depend"			: [],
+	"install_script"	: "",
+	"activate_script"	: "",
+	"disable_script"	: "",
+	"uninstall_script"	: ""
+}
