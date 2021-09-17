@@ -1,0 +1,151 @@
+//
+// Base theme override
+//
+$font-family-sans-serif: // Safari for OS X and iOS (San Francisco)
+-apple-system, // Chrome < 56 for OS X (San Francisco)
+BlinkMacSystemFont, // Windows
+"Roboto", // Android
+"Roboto", // Basic web fallback
+"Helvetica Neue",
+Arial,
+sans-serif, // Emoji fonts
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol" !default;
+//
+//Color base:
+//
+$admin-base-background: #151515;
+$admin-base-lighter-background: #242424;
+$admin-base-primary-color: #fbb040;
+$admin-base-secondary-color: #353535;
+$admin-base-actions-color: #2d9ffd;
+$admin-base-text-main: #CECECE;
+$admin-base-text-sub: #8b8b8b;
+$admin-base-text-light: #4f4f4f;
+$admin-base-text-error: #ff8d8d;
+$admin-base-font-weight: 400;
+$admin-base-font-size: 1rem;
+//
+//Colors:
+//
+$primary: $admin-base-primary-color;
+$secondary: $admin-base-secondary-color;
+$success: #8ee7be;
+$info: #94deec;
+$warning: #e9c98d;
+$danger: #e07d87;
+$light: $admin-base-text-main;
+$dark: $admin-base-lighter-background;
+//
+//Dyn Tables variables:
+//
+$dyn-table-border-color: #4c4c4c;
+$dyn-table-hover-bg: rgba(0, 0, 0, .075);
+$dyn-table-background: $admin-base-secondary-color;
+$dyn-table-color: $admin-base-text-main;
+$dyn-table-dark-border-color: #4c4c4c;
+$dyn-table-toolbar-btn-bg: $admin-base-primary-color;
+$dyn-table-toolbar-btn-color: $admin-base-lighter-background;
+$dyn-table-actions-color: $admin-base-actions-color;
+$dyn-table-pager-bg: $admin-base-secondary-color;
+$dyn-table-pager-border: #4c4c4c;
+$dyn-table-pager-focus: 0 0 1px 0.1rem rgba($admin-base-primary-color, .7);
+//
+//Module content space
+//
+$module-header-title-color: $admin-base-text-main;
+$module-header-title-size: 1.8rem;
+$module-header-which-color: lighten($admin-base-primary-color, 10%);
+$module-header-subtitle-color: #484747;
+$module-header-border-color: $admin-base-text-sub;
+$module-title-color :lighten($admin-base-primary-color, 10%);
+$module-title-size: 1.4rem;
+$module-title-border-color: $admin-base-text-sub;
+$module-title-shadow-color: black;
+$module-title-inner-shadow-color: $admin-base-text-sub;
+// ===========================================================================
+// Overwrite bootstrap base variables:
+// ===========================================================================
+
+/** Bootstraps Base: ****************************************/
+
+$body-bg: $admin-base-background;
+$body-color: $admin-base-text-main;
+$font-weight-base: $admin-base-font-weight;
+$font-size-base: $admin-base-font-size; // Assumes the browser default, typically `16px`
+$font-size-sm: $font-size-base * .875;
+$font-size-lg: $font-size-base * 1.25;
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+$border-radius: .25rem !default;
+$border-radius-sm: .2rem !default;
+$border-radius-lg: .3rem !default;
+$border-radius-pill: 50rem !default;
+
+/** List group: ****************************************/
+
+$list-group-color: $admin-base-text-main;
+$list-group-bg: transparent;
+$list-group-border-color: gray;
+$list-group-border-width: 1px;
+$list-group-border-radius: 0px;
+$list-group-hover-bg: $admin-base-lighter-background;
+$list-group-active-color: $admin-base-text-main;
+$list-group-active-bg: lighten($list-group-hover-bg, 15%);
+$list-group-active-border-color: $admin-base-lighter-background;
+//$list-group-disabled-color : $gray-600;
+//$list-group-disabled-bg : $list-group-bg;
+$list-group-action-color: $admin-base-text-main;
+$list-group-action-hover-color: $admin-base-text-main;
+$list-group-action-active-color: $admin-base-text-main;
+$list-group-action-active-bg: lighten($list-group-hover-bg, 15%);
+// $box-shadow: 0 .5rem 1rem rgba(#000, .15) !default;
+// $box-shadow-sm: 0 .125rem .25rem rgba(#000, .075) !default;
+// $box-shadow-lg: 0 1rem 3rem rgba(#000, .175) !default;
+// $box-shadow-inset: inset 0 1px 2px rgba(#000, .075) !default;
+// // Bootstrap  Buttons:
+// $component-active-color: #fff;
+// $component-active-bg: rgb(87, 88, 168);
+
+
+
+/** Modals: ****************************************/
+// $modal-inner-padding:               $spacer;
+
+// $modal-footer-margin-between:       .5rem;
+
+// $modal-dialog-margin:               .5rem;
+// $modal-dialog-margin-y-sm-up:       1.75rem;
+
+// $modal-title-line-height:           $line-height-base;
+
+// $modal-content-color:               null;
+// $modal-content-bg:                  $white;
+// $modal-content-border-color:        rgba($black, .2);
+// $modal-content-border-width:        $border-width;
+// $modal-content-border-radius:       $border-radius-lg;
+// $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width);
+// $modal-content-box-shadow-xs:       $box-shadow-sm;
+// $modal-content-box-shadow-sm-up:    $box-shadow;
+
+// $modal-backdrop-bg:                 $black;
+// $modal-backdrop-opacity:            .5;
+// $modal-header-border-color:         $border-color;
+// $modal-footer-border-color:         $modal-header-border-color;
+// $modal-header-border-width:         $modal-content-border-width;
+// $modal-footer-border-width:         $modal-header-border-width;
+// $modal-header-padding-y:            $modal-inner-padding;
+// $modal-header-padding-x:            $modal-inner-padding;
+// $modal-header-padding:              $modal-header-padding-y $modal-header-padding-x; // Keep this for backwards compatibility
+
+// $modal-sm:                          300px;
+// $modal-md:                          500px;
+// $modal-lg:                          800px;
+// $modal-xl:                          1140px;
+
+$modal-fade-transform:              translate(0, -50px);
+$modal-show-transform:              none;
+$modal-transition:                  transform .3s ease-out;
+$modal-scale-transform:             scale(1.02);

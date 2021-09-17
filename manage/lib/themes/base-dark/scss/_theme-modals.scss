@@ -1,0 +1,24 @@
+//Variables:
+// $sys-notify-console-background: $admin-base-background !default;
+// $sys-notify-console-left-border: $secondary !default;
+// $sys-notify-console-max-width: 300px !default;
+// $sys-notify-console-hover-color: $admin-base-text-main !default;
+// $sys-notify-console-hover-carret-color:$primary !default;
+// $sys-notify-console-badge-color: darken($info, 60%) !default;
+// $sys-notify-console-badge-bg: $info !default;
+// $sys-notify-info-bg: $info !default;
+// $sys-notify-info-color: darken($info, 40%) !default;
+// $sys-notify-warn-bg: $warning !default;
+// $sys-notify-warn-color: darken($warning, 40%) !default;
+// $sys-notify-error-bg: $danger !default;
+// $sys-notify-error-color: darken($danger, 40%) !default;
+$bsik-modal-text-color: $admin-base-text-sub !default;
+$bsik-modal-title-color: $admin-base-text-light !default;
+
+
+.bsik-modal.modal {
+    color: $bsik-modal-text-color;
+    h5.modal-title {
+        color: $bsik-modal-title-color;
+    }
+}
