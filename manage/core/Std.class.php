@@ -59,11 +59,19 @@ class BsikCoreStd {
      * @param mixed ...$args => packed arguments to pass to json_decode
      * @return bool 
      */
-    final public static function is_json(...$args) : bool {
+    final public static function str_is_json(...$args) : bool {
         json_decode(...$args);
         return (json_last_error()===JSON_ERROR_NONE);
     }
-    
+    /**
+     * str_strip_comments - remove comments from strings
+	 * From https://stackoverflow.com/a/19136663/319266
+	 * @param string $str
+	 */
+	public static function str_strip_comments(string $str = '' ) : string {
+		$str = preg_replace( '![ \t]*//.*[ \t]*[\r\n]!', '', $str );
+		return $str;
+	}
     /********************** ARRAY HELPERS *********************************************/    
     /**
      * arr_get_from
