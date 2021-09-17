@@ -10,7 +10,6 @@
     ->creation - initial
 *******************************************************************************/
 require_once "Excep.class.php";
-require_once 'Db.class.php';
 
 class BsikCoreStd {
 
@@ -54,7 +53,17 @@ class BsikCoreStd {
             sprintf(self::$regex["filter-none"], implode($allowed));
         return preg_replace($regex, '', $str);
     }
-
+    /**
+     * is_json - validates a json string by safely parsing it
+     * 
+     * @param mixed ...$args => packed arguments to pass to json_decode
+     * @return bool 
+     */
+    final public static function is_json(...$args) : bool {
+        json_decode(...$args);
+        return (json_last_error()===JSON_ERROR_NONE);
+    }
+    
     /********************** ARRAY HELPERS *********************************************/    
     /**
      * arr_get_from
@@ -143,4 +152,5 @@ class BsikStd {
     public static BsikCoreStd $std;
 
 }
+
 BsikStd::$std = new BsikCoreStd();
