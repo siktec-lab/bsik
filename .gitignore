@@ -11,6 +11,9 @@ manage/spsapi.php
 /manage/lib/required/
 /manage/lib/themes/bootstrap/
 /logs/
+/test.php
+bsik_m_temp*
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
