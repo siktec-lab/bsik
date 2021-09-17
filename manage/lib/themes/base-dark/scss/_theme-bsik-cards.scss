@@ -1,0 +1,176 @@
+//Variables:
+// $sys-notify-console-background: $admin-base-background !default;
+// $sys-notify-console-left-border: $secondary !default;
+// $sys-notify-console-max-width: 300px !default;
+// $sys-notify-console-hover-color: $admin-base-text-main !default;
+// $sys-notify-console-hover-carret-color:$primary !default;
+// $sys-notify-console-badge-color: darken($info, 60%) !default;
+// $sys-notify-console-badge-bg: $info !default;
+// $sys-notify-info-bg: $info !default;
+// $sys-notify-info-color: darken($info, 40%) !default;
+// $sys-notify-warn-bg: $warning !default;
+// $sys-notify-warn-color: darken($warning, 40%) !default;
+// $sys-notify-error-bg: $danger !default;
+// $sys-notify-error-color: darken($danger, 40%) !default;
+//$bsik-card-stats-text-color: $admin-base-text-sub !default;
+//$bsik-modal-title-color: $admin-base-text-light !default;
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+//$bsik-card-stats-
+
+.card {
+    &.card-stats {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        border: 1px solid rgba(0, 0, 0, .05);
+        border-radius: .375rem;
+        background-color: #212121;
+        background-clip: border-box;
+        .card-title {
+            margin-bottom: 1.25rem;
+            
+        }
+        .card-body {
+            padding: 1.5rem;
+            flex: 1 1 auto;
+            
+        }
+        .icon {
+            width: 3rem;
+            height: 3rem;
+            i {
+                font-size: 2.25rem;
+            }
+            //Shapes
+            &.icon-shape {
+                display: inline-flex;   
+                padding: 12px;
+                text-align: center;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                i {
+                    font-size: 1.25rem;
+                }
+            }
+            &.rounded-circle {
+                border-radius: 50% !important;
+            }
+            //Background of icons:
+            &.bg-info {
+                background-color: #11cdef !important;
+            }
+            &a.bg-info:hover, &a.bg-info:focus, &button.bg-info:hover, &button.bg-info:focus {
+                background-color: #01a3c0 !important;
+            }
+            &.bg-warning {
+                background-color: #fb6340 !important;
+            }
+            &a.bg-warning:hover, &a.bg-warning:focus, &button.bg-warning:hover, &button.bg-warning:focus {
+                background-color: #fa3a0e !important;
+            }
+            &.bg-danger {
+                background-color: #f5365c !important;
+            }
+            &a.bg-danger:hover, &a.bg-danger:focus, &button.bg-danger:hover, &button.bg-danger:focus {
+                background-color: #ec0c38 !important;
+            }
+            &.bg-default {
+                background-color: #172b4d !important;
+            }
+            &a.bg-default:hover, &a.bg-default:focus, &button.bg-default:hover, &button.bg-default:focus {
+                background-color: #0b1526 !important;
+            }
+            &.bg-yellow {
+                background-color: #ffd600 !important;
+            }
+            &a.bg-yellow:hover, &a.bg-yellow:focus, &button.bg-yellow:hover, &button.bg-yellow:focus {
+                background-color: #ccab00 !important;
+            }
+
+
+        }
+        .text-nowrap {
+            white-space: nowrap !important;
+        }
+        .text-center {
+            text-align: center !important;
+        }
+        .text-uppercase {
+            text-transform: uppercase !important;
+        }
+        
+        .font-weight-bold {
+            font-weight: 600 !important;
+        }
+        .text-white {
+            color: #fff !important;
+            &a.text-white:hover, &a.text-white:focus {
+                color: #e6e6e6 !important;
+            }
+        }
+        .text-muted {
+            color: #fff !important;
+            &a.text-muted:hover, &a.text-muted:focus {
+                color: #ffffff !important;
+            }
+        }
+        .text-success {
+            color: #2dce89 !important;
+            &a.text-success:hover, &a.text-success:focus {
+                color: #24a46d !important;
+            }
+        }
+        .text-warning {
+            color: #fb6340 !important;
+            &a.text-warning:hover, &a.text-warning:focus {
+                color: #fa3a0e !important;
+            }
+        }
+        .text-danger {
+            color: #f5365c !important;
+            &a.text-danger:hover, &a.text-danger:focus {
+                color: #ec0c38 !important;
+            }
+        }
+        .text-yellow {
+            color: #ffd600 !important;
+            &a.text-yellow:hover, &a.text-yellow:focus {
+                color: #ceab00 !important;
+            }
+        }
+        .shadow {
+            box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important;
+        }
+        [class*='shadow'] {
+            transition: all .15s ease;
+        }
+        .align-items-center {
+            align-items: center !important;
+        }
+        
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .card-stats .justify-content-xl-between {
+        justify-content: space-between !important;
+    }
+}
+
+
+
