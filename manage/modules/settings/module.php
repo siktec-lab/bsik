@@ -24,45 +24,68 @@ $ModuleBlockRender = function(APage $APage, Admin $Admin = null, BsikModule &$Mo
 
     /******************************  Overview Content  *****************************/
     $Module->view("modules", function (APage $APage, Admin $Admin = null) {
-    
         
-    $count_installed    = $APage::$db->getValue("admin_modules", "count(*)");
-    $count_activated    = $APage::$db->where("status", 1)->getValue("admin_modules", "count(*)");
-    $count_notactive    = $APage::$db->where("status", 0)->getValue("admin_modules", "count(*)");
-    $count_hasupdate    = $APage::$db->where("status", 2)->getValue("admin_modules", "count(*)");
-
-    $stat_installed     = APageComponents::stat_card("Installed", $count_installed, "fas fa-gem", "yellow");
-    $stat_activated     = APageComponents::stat_card("Activated",    $count_activated, "fas fa-store", "info");
-    $stat_notactive     = APageComponents::stat_card("Disabled", $count_notactive, "fas fa-store-slash", "warning");
-    $stat_hasupdate     = APageComponents::stat_card("Has Updates", $count_hasupdate, "fas fa-history", "danger");
-
-    //Controls:
-    $stats = <<<HTML
-        <div class="container pt-3 pb-3">
-            <div class="row">
-                <div class="col-xl-3 col-lg-6">
-                    {$stat_installed}
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    {$stat_activated}
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    {$stat_notactive}
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    {$stat_hasupdate}
+        ////////////////////////////////////////
+        // Stats:
+        ////////////////////////////////////////
+        $count_installed    = $APage::$db->getValue("admin_modules", "count(*)");
+        $count_activated    = $APage::$db->where("status", 1)->getValue("admin_modules", "count(*)");
+        $count_notactive    = $APage::$db->where("status", 0)->getValue("admin_modules", "count(*)");
+        $count_hasupdate    = $APage::$db->where("status", 2)->getValue("admin_modules", "count(*)");
+        $stat_installed     = APageComponents::stat_card("Installed", $count_installed, "fas fa-gem", "yellow");
+        $stat_activated     = APageComponents::stat_card("Activated", $count_activated, "fas fa-store", "info");
+        $stat_notactive     = APageComponents::stat_card("Disabled", $count_notactive, "fas fa-store-slash", "warning");
+        $stat_hasupdate     = APageComponents::stat_card("Has Updates", $count_hasupdate, "fas fa-history", "danger");
+        //Controls:
+        $stats = <<<HTML
+            <div class="container pt-3 pb-3 module-settings-stats-container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6">
+                        {$stat_installed}
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        {$stat_activated}
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        {$stat_notactive}
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        {$stat_hasupdate}
+                    </div>
                 </div>
             </div>
-        </div>
-    HTML;
+        HTML;
 
-    //Template:
-        return <<<HTML
-        <div class='container'>
-            {$stats}
-        </div>
+        ////////////////////////////////////////
+        // install new:
+        ////////////////////////////////////////
+        $install_title = APageComponents::title("Install Modules");
+        $upload_field  = APageForms::file("input-manual-module", "input-manual-module", "", "sm");
+        $upload_button = APageButtons::button("upload-module-btn", "Upload & Install", "primary", "md", "button", ["data-action" => "upload-module-btn"], [], "border-sm");
 
-    HTML;
+        $install = <<<HTML
+            <div class="container pt-3 pb-3 module-settings-install-container sik-form-init">
+                <div class="row">
+                    {$install_title}
+                    <div class="col">
+                        {$upload_field}
+                    </div>
+                    <div class="col">
+                        {$upload_button}
+                    </div>
+                </div>
+            </div>
+        HTML;
+
+
+        //Template:
+            return <<<HTML
+            <div class='container'>
+                {$stats}
+                {$install}
+            </div>
+
+        HTML;
     });
 
 

@@ -7,6 +7,7 @@ version:
 /** Bootstraps Base: ****************************************/
 /** List group: ****************************************/
 /** Modals: ****************************************/
+/** Spinners: ****************************************/
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/manage\/lib\/themes\/bootstrap\/_root\.scss}line{font-family:\000031}}
 :root {
   --bs-blue: #0d6efd;
@@ -9544,6 +9545,11 @@ version:
 .show > .btn-secondary.dropdown-toggle {
   background-color: #353535;
   border-color: #5b5b5b; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/manage\/lib\/themes\/base-dark\/scss\/_theme-buttons\.scss}line{font-family:\0000356}}
+.btn span.spinner-border,
+.btn span.spinner-grow {
+  vertical-align: middle; }
 
 /******************************************************************************/
 /******************************************************************************/

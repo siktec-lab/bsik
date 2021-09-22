@@ -83,13 +83,13 @@ let SikNotify = {
         $$.slideDown(bubble, 300);
         window.setTimeout(() => { bubble.click(); }, timer);
     },
-    info : (mes, bubble = false) => {
+    info : function(mes, bubble = false) {
         this.message("info", mes, bubble);
     },
-    error : (mes, bubble = false) => {
+    error : function(mes, bubble = false) {
         this.message("error", mes, bubble);
     },
-    warn : (mes, bubble = false) => {
+    warn : function(mes, bubble = false) {
         this.message("warn", mes, bubble);
     },
     message: function(type, mes, bubble = false) {

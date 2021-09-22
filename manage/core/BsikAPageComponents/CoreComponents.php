@@ -43,6 +43,18 @@ APageComponents::register("html_ele", function(string $selector = "div", array $
     return $ele;
 });
 
+
+/**
+ * title - Builds an basic title element.
+ * @param string    $text  => element text.
+ * @param int       $size  => 1 - 7 the H ele size
+ * @param string    $attrs => optional attributes to add.
+ * @return array [string openTag, string content, string closingTag]
+ */
+APageComponents::register("title", function(string $text, int $size = 2, array $attrs = []) {
+        return implode(APageComponents::html_ele("h{$size}", $attrs, $text));
+});
+
 /** Modal Component.
  *  @param string $id => the modal unique id
  *  @param string $title => the modal title - can be HTML too.

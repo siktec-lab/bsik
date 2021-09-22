@@ -1,4 +1,5 @@
 <?php
+
 namespace Bsik\Forms;
 
 # load the remaining default classes

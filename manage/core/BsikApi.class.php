@@ -50,7 +50,6 @@ class BsikApi extends Base {
     //Logger:
     public Logger $logger;
     public static $user_string;
-
     //Data:
     private $csrf  = "";    //System token supplied
     private $debug = false; //debug mode adds data to the result
@@ -124,6 +123,13 @@ class BsikApi extends Base {
     }
     public function set_user_string(string $str) {
         self::$user_string = empty(trim($str)) ? "unknown" : trim($str);
+    }
+    public function get_user(string $part = "str") {
+        switch ($part) {
+            case "id": return explode(":", self::$user_string)[0] ?? null;
+            case "email": return explode(":", self::$user_string)[1] ?? null;
+        }
+        return self::$user_string;
     }
     public function register_endpoint(BsikApiEndPoint $end_point) : bool{
         if (property_exists($this->endpoints, $end_point->name)) return false;
@@ -243,6 +249,65 @@ class BsikApi extends Base {
         if ($print) 
             print $response;
         return $response;
+    }
+    public function file(string $name, string $to, int $max_bytes = -1, array $mime = []) : array {
+        // Undefined | Multiple Files | $_FILES Corruption Attack
+        // If this request falls under any of them, treat it invalid.
+        if (
+            !isset($_FILES[$name]) ||
+            !isset($_FILES[$name]['error']) ||
+            is_array($_FILES[$name]['error'])
+        ) {
+            return [false, 'invalid parameters'];
+        }
+        // Check $_FILES['file']['error'] value.
+        switch ($_FILES[$name]['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                return [false, 'no file sent'];
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return [false, 'form exceeded filesize limit'];
+            default:
+                return [false, 'unknown errors'];
+        }
+        // You should also check filesize here.
+        if ($max_bytes > -1 && $_FILES[$name]['size'] > $max_bytes) {
+            return [false, 'exceeded filesize limit'];
+        }
+        // DO NOT TRUST $_FILES['file']['mime'] VALUE !!
+        // Check MIME Type by yourself.
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $got_mime = $finfo->file($_FILES[$name]['tmp_name']);
+        $allowed_mime = self::$std::fs_get_mimetypes(...$mime);
+        $ext = array_search($got_mime, $allowed_mime, true);
+        if (!empty($mime) && !is_string($ext) ) {
+            return [false, 'invalid file format'];
+        }
+
+        // You should name it uniquely.
+        // DO NOT USE $_FILES['file']['name'] WITHOUT ANY VALIDATION !!
+        // On this example, obtain safe unique name from its binary data.
+        $to = sprintf('%s/%s.%s', 
+            trim($to, "/\\"),
+            self::$std::str_filter_string(
+                pathinfo($_FILES[$name]['name'], PATHINFO_FILENAME), 
+                ["A-Z","a-z","0-9","_","."]
+            ),
+            $ext
+        );
+        try {
+            if (!move_uploaded_file(
+                $_FILES[$name]['tmp_name'],
+                $to
+            )) {
+                return [false, 'failed to move file'];
+            }
+        } catch (Exception $e) {
+            return [false, 'failed to move file'];
+        }
+        return [true, $to];
     }
     
 }

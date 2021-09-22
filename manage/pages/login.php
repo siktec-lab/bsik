@@ -18,6 +18,7 @@ $APage->store("form-user-label", "USERNAME");
 $APage->store("form-user-pass", "PASSWORD");
 $APage->store("form-btn-login", "LOGIN");
 $APage->store("login-message", "", false);
+
 //Add a message if exists?
 if (!empty($Admin->errors["login"] ?? "")) {
     switch ($Admin->errors["login"]) {

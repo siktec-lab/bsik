@@ -18,18 +18,31 @@ export { helpers };
  * @param {String} HTML representing a single element
  * @return {Element}
  */
-export function apiRequest(url, req, _data, handlers) {
+export function apiRequest(url, req, _data, handlers, formData = false) {
     //Set url:
     url = url ? url : document.querySelector("meta[name='api']").getAttribute("content");
+    //Tokenize the request:
     let data = {
         'request_token': document.querySelector("meta[name='csrf-token']").getAttribute('content'),
         'request_type': req,
     };
+    //Prep the data - normal object or formData:
+    let prepData;
+    if (formData) {
+        prepData = new FormData();
+        prepData.append('request_token', data.request_token);
+        prepData.append('request_type',  data.request_type);
+        for (const key in _data) {
+            prepData.append(key,  _data[key]);
+        }
+    } else {
+        prepData = $.extend(data, _data);
+    }
     //Build request:
     let ajaxSet = {
         type: 'POST',
         dataType: 'json',
-        data: $.extend(data, _data),
+        data: prepData,
         success: function(data) {},
         error: function(jqXhr, textStatus, errorMessage) {
             console.log("ERROR on AJAX", errorMessage);
@@ -40,6 +53,12 @@ export function apiRequest(url, req, _data, handlers) {
             //console.log(data);
         },
     };
+    //If formdata add some settings:
+    if (formData) {
+        ajaxSet.contentType = false;
+        ajaxSet.enctype     = 'multipart/form-data';
+        ajaxSet.processData = false;
+    }
     //Extend settings & handlers:
     $.extend(ajaxSet, handlers);
     //Execute:

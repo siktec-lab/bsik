@@ -17,7 +17,7 @@ define("ROOT_PATH", dirname(__FILE__).DS.".." );
 /******************************  Requires       *****************************/
 
 require_once ROOT_PATH.DS.'conf.php';
-require_once PLAT_PATH_VENDOR.DS.'autoload.php';
+require_once PLAT_PATH_AUTOLOAD;
 require_once PLAT_PATH_CORE.DS.'Base.class.php';
 require_once PLAT_PATH_CORE.DS.'Admin.class.php';
 require_once PLAT_PATH_MANAGE.DS.'core'.DS.'AdminPage.class.php';

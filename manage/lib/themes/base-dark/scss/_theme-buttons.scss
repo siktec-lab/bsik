@@ -49,3 +49,12 @@ version:
     background-color: $secondary;
     border-color: lighten($secondary, 15%);
 }
+
+
+//Spinner in button
+.btn {
+    span.spinner-border,
+    span.spinner-grow {
+        vertical-align: middle;
+    }
+}

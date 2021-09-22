@@ -190,7 +190,7 @@ class SikInstall {
         $dir->close();
         return true;
     }
-    function hash_directory($directory){
+    function hash_directory($directory) {
         if (!is_dir($directory)){ return false; }
         $files = array();
         $dir = dir($directory);

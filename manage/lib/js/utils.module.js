@@ -2,7 +2,7 @@
 export function onActions(actions = "click", data = "action", events) {
     //Register events:
     $(document).on(actions, `[${data}]`, function(ev) {
-        let operation = $(this).data("action");
+        let operation = $(this).attr(data);
         let eventtype = ev.type;    
         console.log(operation);
         if (events.hasOwnProperty(`${eventtype} ${operation}`)) {

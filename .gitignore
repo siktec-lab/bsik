@@ -13,7 +13,8 @@ manage/spsapi.php
 /logs/
 /test.php
 bsik_m_temp*
-
+uploaded/
+!keepin
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

@@ -1,4 +1,5 @@
 <?php
+
 namespace Bsik\Forms;
 
 class Forms

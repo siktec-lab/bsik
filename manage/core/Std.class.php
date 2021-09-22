@@ -224,6 +224,88 @@ class BsikCoreStd {
         }
         return false;
     }
+    final public static function fs_format_size_to_readable($size, $precision = 2) {
+        $unit = ['Byte','KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+        for($i = 0; $size >= 1024 && $i < count($unit)-1; $i++){
+            $size /= 1024;
+        }
+        return round($size, $precision).' '.$unit[$i];
+    }
+    final public static function fs_format_size_to($size, string $from = "B", string $to = "KB", int $percision = 2) {
+        $from = strtoupper($from);
+        $to   = strtoupper($to);
+        switch ($from) {
+            case "KB": $size = $size * 1024; break;
+            case "MB": $size = $size * 1048576; break;
+            case "GB": $size = $size * 1073741824; break;
+        }
+        switch ($to) {
+            case "B": return intval(number_format($size, 0, ".", ''));
+            case "KB": return floatval(number_format($size / 1024, $percision, ".", ''));
+            case "MB": return floatval(number_format($size / 1048576, $percision, ".", ''));
+            case "GB": return floatval(number_format($size / 1073741824, $percision, ".", ''));
+        }
+        return $size;
+    }
+    private static $mime_types = [
+        'txt' => 'text/plain',
+        'htm' => 'text/html',
+        'html' => 'text/html',
+        'php' => 'text/html',
+        'css' => 'text/css',
+        'js' => 'application/javascript',
+        'json' => 'application/json',
+        'xml' => 'application/xml',
+        'swf' => 'application/x-shockwave-flash',
+        'flv' => 'video/x-flv',
+        // images
+        'png' => 'image/png',
+        'jpe' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'jpg' => 'image/jpeg',
+        'gif' => 'image/gif',
+        'bmp' => 'image/bmp',
+        'ico' => 'image/vnd.microsoft.icon',
+        'tiff' => 'image/tiff',
+        'tif' => 'image/tiff',
+        'svg' => 'image/svg+xml',
+        'svgz' => 'image/svg+xml',
+        // archives
+        'zip' => 'application/zip',
+        'rar' => 'application/x-rar-compressed',
+        'exe' => 'application/x-msdownload',
+        'msi' => 'application/x-msdownload',
+        'cab' => 'application/vnd.ms-cab-compressed',
+        // audio/video
+        'mp3' => 'audio/mpeg',
+        'qt' => 'video/quicktime',
+        'mov' => 'video/quicktime',
+        // adobe
+        'pdf' => 'application/pdf',
+        'psd' => 'image/vnd.adobe.photoshop',
+        'ai' => 'application/postscript',
+        'eps' => 'application/postscript',
+        'ps' => 'application/postscript',
+        // ms office
+        'doc' => 'application/msword',
+        'rtf' => 'application/rtf',
+        'xls' => 'application/vnd.ms-excel',
+        'ppt' => 'application/vnd.ms-powerpoint',
+        // open office
+        'odt' => 'application/vnd.oasis.opendocument.text',
+        'ods' => 'application/vnd.oasis.opendocument.spreadsheet'
+    ];
+    final public static function fs_get_mimetypes(...$types) : array {
+        if (in_array("*", $types)) return self::$mime_types;
+        $ret = [];
+        foreach ($types as $type) {
+            if (self::$mime_types[$type] ?? false) {
+                $ret[$type] = self::$mime_types[$type];
+            }
+        }
+        return $ret;
+    }
+
 }
 
 //Reflect the std -> will be usefull for Base inheritance:
