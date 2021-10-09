@@ -47,6 +47,10 @@ class BsikModule extends BsikStd
     }
 
     public function render(string $which, ...$args) : string {
+        if ($which === "default") {
+            $this->module_which = $this->view_default;
+            $which = $this->view_default;
+        }
         if (!isset($this->views[$which]) || !is_callable($this->views[$which])) {
             throw new Exception("Trying to render undefined view in module", E_PLAT_ERROR);
         }

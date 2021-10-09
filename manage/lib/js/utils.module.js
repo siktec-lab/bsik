@@ -11,6 +11,24 @@ export function onActions(actions = "click", data = "action", events) {
     });
 }
 
+export function getConfirmation(confirmed = function(){}, rejected = function(){}, withmodal = null) {
+    let modal = withmodal ? withmodal : Bsik.modals.confirm;
+    if (!modal) {
+        console.log("confiramtion modal not available");
+        return;
+    }
+    let $modal = $(modal._element);
+    let $confirm = $modal.find(`button.confirm-action-modal`).eq(0);
+    let $reject = $modal.find(`button.reject-action-modal`).eq(0);
+    if ($confirm.length && $reject.length) {
+        $confirm.unbind("click.confirmation").bind("click.confirmation", { modal: modal }, confirmed);
+        $reject.unbind("click.confirmation").bind("click.confirmation", { modal: modal }, rejected);
+        modal.show();
+    } else {
+        console.log("confiramtion modal buttons not available");
+    }
+}
+
 export function isVisible(ele) {
     var style = window.getComputedStyle(ele);
     return style.width !== "0" &&
@@ -109,3 +127,54 @@ export function createElements(html) {
     template.innerHTML = html;
     return template.content.childNodes;
 }
+
+
+function normalizeData(val) {
+    if (val === 'true') return true;
+    if (val === 'false') return false;
+    if (val === Number(val).toString())
+        return Number(val);
+    if (val === '' || val === 'null')
+        return null;
+    return val;
+}
+function normalizeDataKey(key) {
+    return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
+}
+export const objAttr = {
+    setDataAttribute(element, key, value, pref = 'bs') {
+        element.setAttribute(`data-${pref}-${normalizeDataKey(key)}`, value);
+    },
+    removeDataAttribute(element, key, pref = 'bs') {
+        element.removeAttribute(`data-${pref}-${normalizeDataKey(key)}`);
+    },
+    getDataAttributes(element, pref = 'bs') {
+        element = $(element);
+        if (!element.length) { return {}; }
+        element = $(element)[0];
+        const attributes = {};
+        const regexp = new RegExp(`^${pref}`, 'i')
+        Object.keys(element.dataset).filter(key => key.startsWith(pref)).forEach(key => {
+        let pureKey = key.replace(regexp, '');
+        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+        attributes[pureKey] = normalizeData(element.dataset[key]);
+        });
+        return attributes;
+    },
+    getDataAttribute(element, key, pref = 'bs') {
+        return normalizeData(element.getAttribute(`data-${pref}-${normalizeDataKey(key)}`));
+    },
+    offset(element) {
+        const rect = element.getBoundingClientRect();
+        return {
+        top: rect.top + document.body.scrollTop,
+        left: rect.left + document.body.scrollLeft
+        };
+    },
+    position(element) {
+        return {
+        top: element.offsetTop,
+        left: element.offsetLeft
+        };
+    }
+};

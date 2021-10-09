@@ -55,6 +55,39 @@ APageComponents::register("title", function(string $text, int $size = 2, array $
         return implode(APageComponents::html_ele("h{$size}", $attrs, $text));
 });
 
+
+/** Alert Component html renderer.
+ *  @param string $text     => any string to be added - will not escape HTML
+ *  @param string $color    => color of the modal use naming convention.
+ *  @param string $icon     => icon classes such as 'fas fa-user'.
+ *  @param bool $dismiss    => dismissible alert?.
+ *  @param array $classes   => array of class names to append to the alert DIV element.
+ *  @return string          => HTML of the dropdown
+*/
+APageComponents::register("alert", function(
+    string $text = "alert message", 
+    string $color = "",
+    string $icon = "",
+    bool $dismiss = false,
+    array  $classes = [],
+) {
+    $tmpl = '<div class="alert %s" role="alert">
+                <span class="bg-icon">%s</span>
+                %s
+                %s
+            </div>';
+    if (!empty($icon))  array_unshift($classes, "add-icon");
+    if ($dismiss)       array_unshift($classes, "alert-dismissible");
+    array_unshift($classes, "alert-".(!empty($color) ? trim($color) : "light"));
+    
+    return sprintf($tmpl,
+        implode(" ", $classes),
+        !empty($icon) ? '<i class="'.$icon.'"></i>' : "", 
+        $text,
+        $dismiss ? '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' : "",
+    );
+});
+
 /** Modal Component.
  *  @param string $id => the modal unique id
  *  @param string $title => the modal title - can be HTML too.
@@ -84,17 +117,17 @@ APageComponents::register("modal", function(string $id, string $title = "Modal",
     if (isset($set["backdrop"])) {
         $backdrop = "data-bs-backdrop='{$set["backdrop"]}'";
     }
-    //Backdrop:
+    //keyboard:
     $keyboard = "";
     if (isset($set["keyboard"])) {
-        $backdrop = "data-bs-keyboard='{$set["keyboard"]}'";
+        $keyboard = "data-bs-keyboard='{$set["keyboard"]}'";
     }
-    //Backdrop:
+    //close:
     $close = "";
     if ($set["close"] ?? false) {
         $close = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
     }
-    //Backdrop:
+    //size:
     $size = "";
     if ($set["size"] ?? false) {
         $size = "modal-{$set["size"]}";
@@ -120,6 +153,25 @@ APageComponents::register("modal", function(string $id, string $title = "Modal",
     HTML;
 });
 
+APageComponents::register("confirm", function(){
+    $confirm_modal = APageComponents::modal(
+        "bsik-confirm-modal", 
+        "Confirmation required",
+        "Confirmation body",
+        "",
+        [
+            ["button.confirm-action-modal.btn.btn-secondary",    [],     "Confirm", false],
+            ["button.reject-action-modal.btn.btn-primary",      [],     "Cancel", false],
+        ],
+        [
+            "close"    => false,
+            "size"     => "md",
+            "backdrop" => "static",
+            "keyboard" => "false",
+        ]
+    );
+    return $confirm_modal;
+});
 
 /** Global dynamic table options.
 */

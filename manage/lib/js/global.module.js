@@ -15,7 +15,7 @@ window.Bsik["core"] = SikCore;
 window.Bsik["loaded"] = SikLoaded;
 window.Bsik["dataTables"] = SikDataTables;
 window.Bsik["userEvents"] = {};
-window.Bsik["modals"] = {};
+window.Bsik["modals"] = { confirm :  null };
 window.Bsik["module"] = {};
 
 /*****************************  BASIC CORE EVENTS *********************************************/
@@ -23,6 +23,13 @@ window.Bsik["module"] = {};
 //The meta will always be visible because scripts are added after them:
 window.Bsik.loaded.module.name = $("meta[name='module']").attr("content");
 window.Bsik.loaded.module.sub = $("meta[name='module-sub']").attr("content");
+
+//Register confirmation if its set:
+if (document.getElementById('bsik-confirm-modal'))
+    Bsik.modals.confirm = new bootstrap.Modal(
+        document.getElementById('bsik-confirm-modal'),
+        Bsik.core.helpers.objAttr.getDataAttributes("#bsik-confirm-modal")
+    );
 
 //Create module space:
 window.Bsik["module"][window.Bsik.loaded.module.name] = {};

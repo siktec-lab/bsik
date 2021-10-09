@@ -1,7 +1,9 @@
 <?php
-define("E_PLAT_NOTICE", E_USER_NOTICE);
-define("E_PLAT_WARNING", E_USER_WARNING);
-define("E_PLAT_ERROR", E_USER_ERROR);
+
+if (!defined("USE_BSIK_ERROR_HANDLERS")) define("USE_BSIK_ERROR_HANDLERS", false);
+if (!defined("E_PLAT_NOTICE")) define("E_PLAT_NOTICE", E_USER_NOTICE);
+if (!defined("E_PLAT_WARNING")) define("E_PLAT_WARNING", E_USER_WARNING);
+if (!defined("E_PLAT_ERROR")) define("E_PLAT_ERROR", E_USER_ERROR);
 
 class SIKErrorStruct {
     private $obj;
@@ -149,9 +151,11 @@ class FrameWorkExcepHandler
     }
 }
 
-set_exception_handler(array("FrameWorkExcepHandler", "handleException"));
-set_error_handler(array("FrameWorkExcepHandler", "handleError"), E_ALL);
-
+//Register:
+if (USE_BSIK_ERROR_HANDLERS && !defined('PREVENT_BSIK_ERROR_HANDLERS')) {
+    set_exception_handler(array("FrameWorkExcepHandler", "handleException"));
+    set_error_handler(array("FrameWorkExcepHandler", "handleError"), E_ALL);
+}
 class SIKErrorPage {
     public $name;
     public $code;

@@ -65,7 +65,8 @@ class APage extends Base
     );
     public $additional_meta = array();
     private $custom_body_tag = "";
-    
+    //Additional globally assigned html:
+    public $html_container = [];
     //Menu:
     public $menu = [];
     //Page loaded values:
@@ -88,7 +89,7 @@ class APage extends Base
         
         $this->request["type"]      = $this->request_type(); //Get the request 
         $this->request["module"]    = $this->request_module($this::$conf["default-module"] ?? "");
-        $this->request["which"]     = $this->request_module_which($this::$conf["default-module-sub-entry"] ?? "");
+        $this->request["which"]     = $this->request_module_which("default");
         $this::$index_page_url      = $this->parse_slash_url_with($this::$conf["path"]["site_admin_url"]);
 
         //Extend metas
@@ -263,7 +264,9 @@ class APage extends Base
         $this->token["meta"] = "<meta name='csrf-token' content=".$this->token["csrf"].">";
     }
 
-
+    public function additional_html(string $html) {
+        $this->html_container[] = $html;
+    }
     /**
      * include - used by system and also by user for loading libs after parsed:
      *

@@ -14,15 +14,20 @@ import * as SikCore from './core.module.js';
 export var formatters = {};
 
 export function get(url, req, params) {
-    console.log(params);
+    //console.log(params);
     return SikCore.apiRequest(
         url,
         req,
         params.data, {
-            error: params.error,
+            error: function(xhr, status, message) {
+                //console.log(arguments);
+                if (typeof params.error == 'function')
+                    params.error(xhr, status, message);
+            },
             success: function(res) {
-                console.log("shlomi", res);
-                params.success(res.data);
+                //console.log(res);
+                if (typeof params.success == 'function')
+                    params.success(res.data);
             }
         }
     );

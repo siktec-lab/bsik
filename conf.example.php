@@ -21,6 +21,8 @@ define('PLAT_HASH_SALT',                    'ssaltSh');
 define('EXPOSE_OP_TRACE',                   false);
 define('PLAT_ADMIN_PANEL_API_DEBUG_MODE',   true);
 define('PLAT_SESSION_LIFETIME',             86400);
+if (!defined('USE_BSIK_ERROR_HANDLERS'))
+    define('USE_BSIK_ERROR_HANDLERS',       true);
 define('PLAT_EXPOSE_PHP_ERRORS',            true);
 define('ERROR_METHOD',                      'inline'); // inline | redirect | hide
 define('PLAT_LOG_DIRECTORY',                ROOT_PATH.DS."logs".DS);
@@ -66,7 +68,6 @@ $conf["path"]["site_base_url"]      = $conf["path"]["domain"].$conf["path"]["bas
 /* SH: added - 2021-03-03 => extend from db */
 $conf["default-page"]   = "home";   // Default for web
 $conf["default-module"] = "dashboard";  // For admin panel
-$conf["default-module-sub-entry"] = "default";  // For admin panel
 
 /******************************  PATH CONSTANTS  *****************************/
 define('PLAT_URL_DOMAIN',           $conf["path"]["domain"]);

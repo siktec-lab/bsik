@@ -88,6 +88,7 @@ $AApi->register_endpoint(new BsikApiEndPoint(
         "table_name" => null,
         "order"     => null, //null indicates no default.
         "search"    => "",
+        "searchable" => [],
         "sort"      => null,
         "fields"    => ["*"],
         "limit"     => 10,
@@ -95,23 +96,26 @@ $AApi->register_endpoint(new BsikApiEndPoint(
     ],
     $filters = [ // Defines filters to apply -> this will modify the params.
         "table_name" => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9","_")::create_filter(),
-        "search"    => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9","_")::create_filter(),
+        "search"    => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9", "_", " ")::create_filter(),
         "fields"    => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9","_")::create_filter(),
         "order"     => BsikValidate::add_procedure("type", "string")::add_procedure("trim")::create_filter(),
         "sort"      => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9","_")::create_filter(),
         "limit"     => BsikValidate::add_procedure("type", "number")::create_filter(),
-        "offset"    => BsikValidate::add_procedure("type", "number")::create_filter()
+        "offset"     => BsikValidate::add_procedure("type", "number")::create_filter(),
+        "searchable" => BsikValidate::add_procedure("trim")::add_procedure("strchars","A-Z","a-z","0-9","_")::create_filter()
     ],
     $validation = [ // Defines Validation rules of this endpoint.
-        "table_name" => BsikValidate::add_cond("required")::add_cond("type","string")::create_rule(),
-        "search" => BsikValidate::add_cond("type","string")::create_rule(),
-        "fields" => BsikValidate::add_cond("type","array")::create_rule()
+        "table_name"    => BsikValidate::add_cond("required")::add_cond("type","string")::create_rule(),
+        "search"        => BsikValidate::add_cond("type","string")::create_rule(),
+        "fields"        => BsikValidate::add_cond("type","array")::create_rule(),
+        "searchable"    => BsikValidate::add_cond("type","array")::create_rule()
     ],
     //The method to execute -> has Access to BsikApi
     function(BsikApi $Api, array $args) {
         $data = [];
         $table  = $args["table_name"];
         $search = $args["search"];
+        $searchable = $args["searchable"];
         $fields = $args["fields"];
         $sort   = $args["sort"];
         $order  = $args["order"];
@@ -122,7 +126,12 @@ $AApi->register_endpoint(new BsikApiEndPoint(
         $offset = $offset !== 0 ? ($offset / $limit) + 1 : 1;
         
         //Set search term:
-        $search = !empty($search) ? ["term" => "%".$search."%", "in-columns" => $fields] : [];
+        //$search = !empty($search) && !empty($fields) ? ["term" => "%".$search."%", "in-columns" => $fields] : [];
+        $search = !empty($search) && !empty($searchable) ? 
+            [   
+                "term" => "%".$search."%", 
+                "in-columns" => array_filter(array_intersect($searchable, $fields), fn($col) => $col !== "NULL" && $col !== "null" && !empty($col))
+            ] : [];
         if (!empty($search)) {
             $where = [];
             $params = [];
@@ -144,7 +153,7 @@ $AApi->register_endpoint(new BsikApiEndPoint(
         }
         try {
             $data = $Api::$db->paginate($table, $offset, $fields);
-            $Api->update_answer_status(200, $Api::$db->getLastQuery());
+            $Api->update_answer_status(200);
         } catch (Exception $e) {
             $data = ["query" => $Api::$db->getLastQuery(), "parsed" => $args];
             $Api->update_answer_status(500, $e->getMessage());
@@ -152,6 +161,7 @@ $AApi->register_endpoint(new BsikApiEndPoint(
         $Api->request->answer->data = [
             "rows"  => $data,
             "total" => $Api::$db->totalPages * $limit,
+            "search" => $search
         ];
         return true;
     }
