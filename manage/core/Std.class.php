@@ -281,9 +281,9 @@ class Std_Array {
                     (empty($keys) && (in_array("any", $types, true) || in_array(gettype($check[$cur]), $types, true)))
                 )
             ) {
-                if (!empty($keys) && !self::validate([implode(".", $keys) => $type], $check[$cur])) {
+                if (!empty($keys) && !self::validate([implode(".", $keys) => $type], $check[$cur], $fn)) {
                     return false;
-                } else {
+                } elseif (empty($keys)) {
                     for ($i = 1; $i < count($cond); $i++) {
                         if (
                             (
