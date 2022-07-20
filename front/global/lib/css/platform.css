@@ -1,0 +1,826 @@
+/********************************************************
+* Import:
+*********************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+/********************************************************
+* Variables:
+*********************************************************/
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+/********************************************************
+* Base:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\0000369}}
+html {
+  font-size: 14px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\0000372}}
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #FFFFFF;
+  width: 100%;
+  overflow-x: hidden;
+  background-repeat: repeat;
+  background-size: 170px, cover;
+  background-image: url(../img/general/tombet-bg.svg), linear-gradient(138deg, #484856 0%, #1A1C23 100%); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\0000391}}
+.force-bold {
+  font-weight: 600 !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\0000394}}
+.short-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\0000399}}
+.drop-shadow {
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7); }
+
+/********************************************************
+* Material Icons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003107}}
+.material-icons,
+.material-icons-outlined {
+  font-size: inherit;
+  margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003111}}
+  .material-icons.sm,
+  .material-icons-outlined.sm {
+    font-size: 0.875rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003114}}
+  .material-icons.md,
+  .material-icons-outlined.md {
+    font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003117}}
+  .material-icons.lg,
+  .material-icons-outlined.lg {
+    font-size: 1.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003120}}
+  .material-icons.xlg,
+  .material-icons-outlined.xlg {
+    font-size: 1.8125rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003123}}
+  .material-icons.a-middle,
+  .material-icons-outlined.a-middle {
+    vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003126}}
+  .material-icons.a-bottom,
+  .material-icons-outlined.a-bottom {
+    vertical-align: bottom; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003129}}
+  .material-icons.a-top,
+  .material-icons-outlined.a-top {
+    vertical-align: top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003132}}
+  .material-icons.space-1,
+  .material-icons-outlined.space-1 {
+    margin-right: 1px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003135}}
+  .material-icons.space-2,
+  .material-icons-outlined.space-2 {
+    margin-right: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003138}}
+  .material-icons.space-3,
+  .material-icons-outlined.space-3 {
+    margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003141}}
+  .material-icons.space-4,
+  .material-icons-outlined.space-4 {
+    margin-right: 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003144}}
+  .material-icons.space-5,
+  .material-icons-outlined.space-5 {
+    margin-right: 10px; }
+
+/********************************************************
+* More Icons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003152}}
+a > i.icon-discord,
+i.icon-discord {
+  color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003155}}
+  a > i.icon-discord:hover,
+  i.icon-discord:hover {
+    color: #7289DA; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003159}}
+a:hover > .icon-discord {
+  color: #7289DA; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003162}}
+a > i.icon-bitcoin,
+i.icon-bitcoin {
+  color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003165}}
+  a > i.icon-bitcoin:hover,
+  i.icon-bitcoin:hover {
+    color: #f7931a; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003169}}
+a:hover > .icon-bitcoin {
+  color: #f7931a; }
+
+/********************************************************
+ * PerfectScrollbar 
+ ********************************************************/
+/******************************  SCROLLBARS  *****************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\000037}}
+.ps .ps__rail-y:hover, .ps .ps__rail-y:focus, .ps .ps__rail-y.ps--clicking,
+.ps .ps__rail-x:hover,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-x.ps--clicking {
+  background-color: transparent;
+  opacity: 0.9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000314}}
+.ps .ps__thumb-y,
+.ps .ps__thumb-x {
+  background-color: #aaa;
+  border-radius: 6px;
+  transition: background-color .2s linear, height .2s ease-in-out;
+  -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+  position: absolute; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000322}}
+.ps .ps__thumb-y {
+  width: 6px;
+  right: 0px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000326}}
+.ps .ps__thumb-x {
+  height: 6px;
+  bottom: 2px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000330}}
+.ps.ps--active-y {
+  padding-right: 18px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000333}}
+.ps.ps--active-x {
+  padding-bottom: 18px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000336}}
+.ps .ps__rail-y:hover > .ps__thumb-y,
+.ps .ps__rail-y:focus > .ps__thumb-y,
+.ps .ps__rail-y.ps--clicking .ps__thumb-y {
+  background-color: #999;
+  width: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000342}}
+.ps .ps__rail-x:hover > .ps__thumb-x,
+.ps .ps__rail-x:focus > .ps__thumb-x,
+.ps .ps__rail-x.ps--clicking .ps__thumb-x {
+  background-color: #999;
+  height: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000349}}
+.ps.ps-left.ps--active-y {
+  padding-right: unset;
+  padding-left: 18px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000353}}
+.ps.ps-left .ps__rail-y {
+  width: 15px;
+  right: unset !important;
+  left: 0 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_scrollbars\.scss}line{font-family:\0000357}}
+  .ps.ps-left .ps__rail-y .ps__thumb-y {
+    right: unset;
+    left: 0px; }
+
+/********************************************************
+ * SikDropdown 
+ ********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\000032}}
+.sik-dropdown > button.dropdown-toggle {
+  position: relative;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2ch;
+  text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\0000310}}
+  .sik-dropdown > button.dropdown-toggle::after {
+    position: absolute;
+    right: 1ch;
+    top: calc(50% - 0.2ch); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\0000316}}
+.sik-dropdown .dropdown-item {
+  cursor: pointer; }
+
+/********************************************************
+* Page structure: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003194}}
+section.tb-main-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0px 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003203}}
+  section.tb-main-wrapper section.nav {
+    position: relative;
+    height: 85px;
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003213}}
+  section.tb-main-wrapper section.controls {
+    position: relative;
+    height: 30px;
+    flex-shrink: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003220}}
+  section.tb-main-wrapper section.odds {
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+    height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003228}}
+  section.tb-main-wrapper section.panel {
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    height: 30px;
+    transition: height ease .6s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003234}}
+    section.tb-main-wrapper section.panel.expanded {
+      height: 250px !important; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003194}}
+    section.tb-main-wrapper {
+      padding: 0px 15px; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003194}}
+    section.tb-main-wrapper {
+      padding: 0px 30px; } }
+
+/********************************************************
+* sports menu: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003256}}
+section.nav > div.sports-menu {
+  width: 60%;
+  display: flex;
+  align-items: end; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003262}}
+  section.nav > div.sports-menu .menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003269}}
+  section.nav > div.sports-menu li.item {
+    display: inline-block;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    opacity: 0.7;
+    text-align: center;
+    padding: 0 0.25rem 0.25rem 0.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003276}}
+    section.nav > div.sports-menu li.item i {
+      font-size: 1.8rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003279}}
+    section.nav > div.sports-menu li.item span.text {
+      display: block;
+      font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003283}}
+    section.nav > div.sports-menu li.item.selected {
+      border-bottom-color: #FBB823;
+      opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003286}}
+      section.nav > div.sports-menu li.item.selected i {
+        color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003290}}
+    section.nav > div.sports-menu li.item:hover {
+      opacity: 1; }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003256}}
+    section.nav > div.sports-menu {
+      width: 40%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003303}}
+      section.nav > div.sports-menu li.item {
+        padding: 0 0.7rem 0.25rem 0.7rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003305}}
+        section.nav > div.sports-menu li.item i {
+          font-size: 2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003308}}
+        section.nav > div.sports-menu li.item span.text {
+          font-size: 1rem; } }
+
+ /********************************************************
+* server menu: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003324}}
+section.nav > div.server-menu {
+  display: none;
+  text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003329}}
+  section.nav > div.server-menu .app-tag {
+    display: inline-block;
+    width: 100%;
+    max-width: 210px;
+    background-color: #3d3e47;
+    border: 1px solid #46BF9F;
+    border-top: 0;
+    border-radius: 0 0 1rem 1rem;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 6px 10px -7px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003345}}
+    section.nav > div.server-menu .app-tag em {
+      font-size: 0.6em;
+      font-weight: 300; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003350}}
+  section.nav > div.server-menu .server-time {
+    text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003352}}
+    section.nav > div.server-menu .server-time .hour {
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003357}}
+    section.nav > div.server-menu .server-time .date {
+      font-size: 0.9rem;
+      color: #ababab; }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003324}}
+    section.nav > div.server-menu {
+      display: block;
+      flex-grow: 1;
+      max-width: 220px; } }
+
+/********************************************************
+* user nav: 
+********************************************************/
+/*********************************************
+Floating Menu:
+**********************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000324}}
+ul.fmenu {
+  color: #FFFFFF;
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000331}}
+  ul.fmenu > li.fmenu-item {
+    display: inline-block;
+    margin-right: 1rem;
+    position: relative; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000336}}
+  ul.fmenu .trigger-menu {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: 3rem;
+    max-width: 3rem;
+    height: 3rem;
+    border: 0.45rem solid transparent;
+    border-radius: 3rem;
+    overflow: hidden;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.07);
+    cursor: pointer;
+    transition: max-width ease 0.4s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000356}}
+    ul.fmenu .trigger-menu i {
+      display: block;
+      margin: 0 0.2925rem;
+      color: white;
+      font-size: 1.5rem;
+      transition: color ease 0.3s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000363}}
+    ul.fmenu .trigger-menu span {
+      display: block;
+      font-size: 1rem;
+      padding: 0 1ch; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000368}}
+    ul.fmenu .trigger-menu.expanded {
+      max-width: unset !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000372}}
+    ul.fmenu .trigger-menu.open i {
+      color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000377}}
+    ul.fmenu .trigger-menu:hover:not(.expanded) i {
+      color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000382}}
+  ul.fmenu .floating-menu {
+    display: block;
+    position: absolute;
+    top: 3.75rem;
+    min-width: 100%;
+    max-width: 250px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #1C1E24;
+    border-radius: 0.65rem;
+    overflow: hidden;
+    max-height: 0px;
+    z-index: 100;
+    opacity: 0;
+    transition: max-height ease 0.6s, opacity ease 0.3s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\0000399}}
+    ul.fmenu .floating-menu > li {
+      padding: 0 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\00003101}}
+      ul.fmenu .floating-menu > li a {
+        color: #FFFFFF;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: block;
+        padding: 0.75rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\00003107}}
+        ul.fmenu .floating-menu > li a i {
+          margin-right: 1ch; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\00003110}}
+        ul.fmenu .floating-menu > li a:hover {
+          color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_floating-menu\.scss}line{font-family:\00003116}}
+    ul.fmenu .floating-menu > li:not(:last-child) a {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003396}}
+section.nav > div.user-menu-wrapper {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: row-reverse; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003407}}
+  section.nav > div.user-menu-wrapper ul.floating-menu > li > div.form-check label {
+    font-size: 0.9rem;
+    padding: 0.55rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003411}}
+  section.nav > div.user-menu-wrapper ul.floating-menu > li > div.form-check input[type='checkbox'] {
+    font-size: 1rem; }
+
+/********************************************************
+* Application Filters: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003434}}
+section.controls {
+  text-align: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003436}}
+  section.controls ul.app-controls {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003440}}
+    section.controls ul.app-controls li.control-item {
+      display: inline-block;
+      padding: 0.3rem 0.6rem;
+      background-color: rgba(255, 255, 255, 0.07);
+      min-width: 100px;
+      text-align: center;
+      border-radius: 0.25rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003450}}
+      section.controls ul.app-controls li.control-item i {
+        margin-right: 0.3ch; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003453}}
+      section.controls ul.app-controls li.control-item.active, section.controls ul.app-controls li.control-item:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003458}}
+      section.controls ul.app-controls li.control-item.active i {
+        color: #FBB823; }
+
+/********************************************************
+* Application Filters: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003473}}
+section.panel {
+  box-shadow: 0px 1px 11px -3px rgba(0, 0, 0, 0.8); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003475}}
+  section.panel.expanded {
+    box-shadow: 0px 1px 11px -3px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003479}}
+  section.panel > .tab-header {
+    height: 30px;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #3d3e47;
+    border-radius: 0.25rem 0.25rem 0 0;
+    cursor: pointer;
+    overflow: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003490}}
+    section.panel > .tab-header > li {
+      display: inline-block;
+      font-size: 0.9rem;
+      border-bottom: 2px solid transparent;
+      line-height: 28px;
+      padding: 0 1.5rem;
+      opacity: 0.7;
+      cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003498}}
+      section.panel > .tab-header > li:hover:not(.selected) {
+        background-color: rgba(255, 255, 255, 0.08);
+        opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003502}}
+      section.panel > .tab-header > li.selected {
+        opacity: 1;
+        border-bottom-color: #FBB823;
+        cursor: default; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003509}}
+  section.panel .sik-slider {
+    height: calc(100% - 30px); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003511}}
+    section.panel .sik-slider ul.sik-slides {
+      box-sizing: border-box;
+      background-color: #27272F; }
+
+/********************************************************
+* Odds table: 
+********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003535}}
+table.odds-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: relative; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003539}}
+  table.odds-table thead > tr {
+    position: relative;
+    background-color: #72727a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003543}}
+  table.odds-table th.odds-th {
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    font-weight: 500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003548}}
+    table.odds-table th.odds-th:not(:last-child) {
+      border-right: 2px solid #595960; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003551}}
+    table.odds-table th.odds-th:last-child {
+      border-radius: 0 0.25rem 0.25rem 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003554}}
+    table.odds-table th.odds-th:first-child {
+      border-radius: 0.25rem 0 0 0.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003557}}
+    table.odds-table th.odds-th.sortable, table.odds-table th.odds-th.filters {
+      position: relative;
+      cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003561}}
+      table.odds-table th.odds-th.sortable::after, table.odds-table th.odds-th.filters::after {
+        position: absolute;
+        font-family: 'tombet';
+        font-size: 0.5rem;
+        top: 0;
+        right: 5px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003574}}
+    table.odds-table th.odds-th.filters::after {
+      content: '\e991'; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003579}}
+    table.odds-table th.odds-th.filters.open::after {
+      content: '\e992'; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003584}}
+    table.odds-table th.odds-th.sortable::after {
+      font-size: 0.75rem;
+      content: '\e981'; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003590}}
+    table.odds-table th.odds-th.sortable.desc::after {
+      content: '\e982'; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003594}}
+    table.odds-table th.odds-th.th-sized {
+      width: 90px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003598}}
+  table.odds-table tr.row-sep {
+    height: 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003602}}
+  table.odds-table tr.game-row td.lbl-league,
+  table.odds-table tr.game-row td.lbl-time,
+  table.odds-table tr.game-row td.lbl-period {
+    background-color: #262930;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.65rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003610}}
+    table.odds-table tr.game-row td.lbl-league > span,
+    table.odds-table tr.game-row td.lbl-time > span,
+    table.odds-table tr.game-row td.lbl-period > span {
+      display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003612}}
+      table.odds-table tr.game-row td.lbl-league > span.time-date,
+      table.odds-table tr.game-row td.lbl-time > span.time-date,
+      table.odds-table tr.game-row td.lbl-period > span.time-date {
+        border: 1px solid #0EC460;
+        border-radius: 0.25rem;
+        font-weight: 400;
+        margin-bottom: 0.45rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003623}}
+  table.odds-table tr.game-row td.lbl-league {
+    border-radius: 0.45rem 0 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003626}}
+  table.odds-table tr.game-row td.lbl-game-general {
+    background-color: #2e2f3a;
+    border-radius: 0 0 0 0.45rem;
+    position: relative; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003630}}
+    table.odds-table tr.game-row td.lbl-game-general span {
+      display: block;
+      text-align: left;
+      padding-left: 50px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003634}}
+      table.odds-table tr.game-row td.lbl-game-general span.home-team {
+        margin-top: 6px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003636}}
+        table.odds-table tr.game-row td.lbl-game-general span.home-team i {
+          font-size: 0.9em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003641}}
+    table.odds-table tr.game-row td.lbl-game-general span.fav-game-tag,
+    table.odds-table tr.game-row td.lbl-game-general span.focus-game-tag {
+      position: absolute;
+      font-size: 0.95rem;
+      top: 4px;
+      left: 4px;
+      padding-left: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      background-color: #787881;
+      color: #2e2f3a;
+      border-radius: 0.25rem;
+      cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003657}}
+      table.odds-table tr.game-row td.lbl-game-general span.fav-game-tag:hover,
+      table.odds-table tr.game-row td.lbl-game-general span.focus-game-tag:hover {
+        background-color: #b9b9c1;
+        box-shadow: 1px 1px 5px -1px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003662}}
+    table.odds-table tr.game-row td.lbl-game-general span.focus-game-tag {
+      top: unset;
+      bottom: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003668}}
+  table.odds-table tr.game-row.is-fav span.fav-game-tag {
+    background-color: #FBB823 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003670}}
+    table.odds-table tr.game-row.is-fav span.fav-game-tag:hover {
+      background-color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003676}}
+  table.odds-table tr.game-row.row-start td.data-bookmaker:last-child {
+    border-radius: 0 0.45rem 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003682}}
+  table.odds-table tr.game-row.row-end td.data-bookmaker:last-child {
+    border-radius: 0 0 0.45rem 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003687}}
+  table.odds-table tr.game-row td.lbl-moneyline,
+  table.odds-table tr.game-row td.lbl-overunder,
+  table.odds-table tr.game-row td.lbl-handicap {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 1.2rem;
+    height: 60px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003697}}
+  table.odds-table tr.game-row:not(.row-end) td.lbl-moneyline,
+  table.odds-table tr.game-row:not(.row-end) td.lbl-overunder,
+  table.odds-table tr.game-row:not(.row-end) td.data-bookmaker {
+    border-bottom: 1px solid #494a50; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003703}}
+  table.odds-table tr.game-row td.lbl-moneyline,
+  table.odds-table tr.game-row td.lbl-overunder,
+  table.odds-table tr.game-row td.lbl-handicap,
+  table.odds-table tr.game-row td.data-bookmaker {
+    background-color: #31323e;
+    border-right: 2px solid #494a50; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003710}}
+  table.odds-table tr.game-row td.data-bookmaker:last-child {
+    border-right: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003725}}
+table.odds-table th.filters {
+  position: relative; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003727}}
+  table.odds-table th.filters ul.filter-select {
+    z-index: 15;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    background-color: #1C1E24;
+    border-radius: 0.25rem;
+    box-shadow: 3px 3px 15px -1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    cursor: pointer;
+    display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003743}}
+    table.odds-table th.filters ul.filter-select li {
+      color: #FFFFFF;
+      flex-basis: content;
+      flex-shrink: 0;
+      white-space: nowrap;
+      display: block;
+      padding: 0.3rem 0.75rem;
+      cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003751}}
+      table.odds-table th.filters ul.filter-select li:hover {
+        background-color: rgba(255, 255, 255, 0.05); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003754}}
+      table.odds-table th.filters ul.filter-select li label {
+        cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003759}}
+  table.odds-table th.filters.open {
+    color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003761}}
+    table.odds-table th.filters.open ul.filter-select {
+      display: block; }
+
+/********************************************************
+ * Loading animation: 
+ ********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003772}}
+.odds-loading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -10;
+  background-color: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity ease 0.8s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003780}}
+  .odds-loading .loader {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    margin: -90px 0 0 -90px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003786}}
+    .odds-loading .loader .circle {
+      position: absolute;
+      border: 3px solid transparent;
+      border-top-color: #FBB823;
+      border-radius: 50%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003791}}
+      .odds-loading .loader .circle.one {
+        height: 50px;
+        width: 50px;
+        left: 50px;
+        top: 50px;
+        -webkit-animation-duration: 0.85s;
+        animation-duration: 0.85s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003799}}
+      .odds-loading .loader .circle.two {
+        height: 75px;
+        width: 75px;
+        top: 38px;
+        left: 38px;
+        border-top-color: #FFFFFF;
+        -webkit-animation-duration: 0.95s;
+        animation-duration: 0.95s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003808}}
+      .odds-loading .loader .circle.three {
+        height: 100px;
+        width: 100px;
+        top: 25px;
+        left: 25px;
+        -webkit-animation-duration: 1.05s;
+        animation-duration: 1.05s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003818}}
+  .odds-loading.active {
+    z-index: 90;
+    opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/platform\.scss}line{font-family:\00003821}}
+    .odds-loading.active .circle {
+      -webkit-animation: rotate linear infinite;
+      animation: rotate linear infinite; }
+
+@-webkit-keyframes rotate {
+  from {
+    transform: rotateZ(360deg); }
+  to {
+    transform: rotateZ(0deg); } }
+@keyframes rotate {
+  from {
+    transform: rotateZ(360deg); }
+  to {
+    transform: rotateZ(0deg); } }
+
+/*# sourceMappingURL=platform.css.map */

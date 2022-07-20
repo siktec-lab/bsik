@@ -2,11 +2,13 @@
 
 namespace Bsik\Forms;
 
+use Bsik\Formr\GenerateForm;
+
 # load the remaining default classes
-require_once PLAT_PATH_VENDOR.DS.'autoload.php';
+require_once PLAT_PATH_AUTOLOAD;
 
 
-class BootstrapForms extends SikForm
+class BootstrapForms extends GenerateForm
 {
     public $container;
     public static $instance;
@@ -47,6 +49,7 @@ class BootstrapForms extends SikForm
         //formatting: inserts a tab (\t)
         $this->t = $this->_t(1);
     }
+
     # bootstrap 4 field wrapper
     public function wrapper($element = '', $data = '')
     {

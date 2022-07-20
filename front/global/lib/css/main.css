@@ -1,0 +1,2035 @@
+/********************************************************
+* Import:
+*********************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+/********************************************************
+* Variables:
+*********************************************************/
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+/********************************************************
+* Base:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\0000369}}
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #FFFFFF;
+  width: 100%;
+  background-repeat: repeat;
+  background-size: 170px, cover;
+  background-image: url(../img/general/tombet-bg.svg), linear-gradient(138deg, #484856 0%, #1A1C23 100%); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\0000388}}
+section.tb-main-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0px 5px; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\0000388}}
+    section.tb-main-wrapper {
+      padding: 0px 15px; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\0000388}}
+    section.tb-main-wrapper {
+      padding: 0px 30px; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003107}}
+.force-bold {
+  font-weight: 600 !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003110}}
+.short-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+/********************************************************
+* Material Icons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003121}}
+.material-icons,
+.material-icons-outlined {
+  font-size: inherit;
+  margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003125}}
+  .material-icons.sm,
+  .material-icons-outlined.sm {
+    font-size: 0.875rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003128}}
+  .material-icons.md,
+  .material-icons-outlined.md {
+    font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003131}}
+  .material-icons.lg,
+  .material-icons-outlined.lg {
+    font-size: 1.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003134}}
+  .material-icons.xlg,
+  .material-icons-outlined.xlg {
+    font-size: 1.8125rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003137}}
+  .material-icons.a-middle,
+  .material-icons-outlined.a-middle {
+    vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003140}}
+  .material-icons.a-bottom,
+  .material-icons-outlined.a-bottom {
+    vertical-align: bottom; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003143}}
+  .material-icons.a-top,
+  .material-icons-outlined.a-top {
+    vertical-align: top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003146}}
+  .material-icons.space-1,
+  .material-icons-outlined.space-1 {
+    margin-right: 1px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003149}}
+  .material-icons.space-2,
+  .material-icons-outlined.space-2 {
+    margin-right: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003152}}
+  .material-icons.space-3,
+  .material-icons-outlined.space-3 {
+    margin-right: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003155}}
+  .material-icons.space-4,
+  .material-icons-outlined.space-4 {
+    margin-right: 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003158}}
+  .material-icons.space-5,
+  .material-icons-outlined.space-5 {
+    margin-right: 10px; }
+
+/********************************************************
+* Buttons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003167}}
+.btn-full-white {
+  color: #000;
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 0.375rem 1.5rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\0000397}}
+  .btn-full-white:hover {
+    color: #000;
+    background-color: #cccccc;
+    border-color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003103}}
+  .btn-check:focus + .btn-full-white, .btn-full-white:focus {
+    color: #000;
+    background-color: #cccccc;
+    border-color: white;
+    box-shadow: 0 0 0 0.2rem rgba(217, 217, 217, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003111}}
+  .btn-check:checked + .btn-full-white, .btn-check:active + .btn-full-white, .btn-full-white:active, .btn-full-white.active, .show > .btn-full-white.dropdown-toggle {
+    color: #000;
+    background-color: white;
+    border-color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003122}}
+    .btn-check:checked + .btn-full-white:focus, .btn-check:active + .btn-full-white:focus, .btn-full-white:active:focus, .btn-full-white.active:focus, .show > .btn-full-white.dropdown-toggle:focus {
+      box-shadow: 0 0 0 0.2rem rgba(217, 217, 217, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003127}}
+  .btn-full-white:disabled, .btn-full-white.disabled {
+    color: #000;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003174}}
+.btn-outline-white {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  border-width: 2px;
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.375rem 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003155}}
+  .btn-outline-white:hover {
+    color: #000;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003161}}
+  .btn-check:focus + .btn-outline-white, .btn-outline-white:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003166}}
+  .btn-check:checked + .btn-outline-white, .btn-check:active + .btn-outline-white, .btn-outline-white:active, .btn-outline-white.active, .btn-outline-white.dropdown-toggle.show {
+    color: #000;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003174}}
+    .btn-check:checked + .btn-outline-white:focus, .btn-check:active + .btn-outline-white:focus, .btn-outline-white:active:focus, .btn-outline-white.active:focus, .btn-outline-white.dropdown-toggle.show:focus {
+      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003178}}
+  .btn-outline-white:disabled, .btn-outline-white.disabled {
+    color: #FFFFFF;
+    background-color: transparent; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003177}}
+.btn-outline-orange {
+  color: #FBB823;
+  border-color: #FBB823;
+  border-width: 2px;
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.375rem 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003155}}
+  .btn-outline-orange:hover {
+    color: #000;
+    background-color: #FBB823;
+    border-color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003161}}
+  .btn-check:focus + .btn-outline-orange, .btn-outline-orange:focus {
+    box-shadow: 0 0 0 0.2rem rgba(251, 184, 35, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003166}}
+  .btn-check:checked + .btn-outline-orange, .btn-check:active + .btn-outline-orange, .btn-outline-orange:active, .btn-outline-orange.active, .btn-outline-orange.dropdown-toggle.show {
+    color: #000;
+    background-color: #FBB823;
+    border-color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003174}}
+    .btn-check:checked + .btn-outline-orange:focus, .btn-check:active + .btn-outline-orange:focus, .btn-outline-orange:active:focus, .btn-outline-orange.active:focus, .btn-outline-orange.dropdown-toggle.show:focus {
+      box-shadow: 0 0 0 0.25rem rgba(251, 184, 35, 0.5); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003178}}
+  .btn-outline-orange:disabled, .btn-outline-orange.disabled {
+    color: #FBB823;
+    background-color: transparent; }
+
+/********************************************************
+* Icons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003184}}
+a > i.icon-discord,
+i.icon-discord {
+  color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003187}}
+  a > i.icon-discord:hover,
+  i.icon-discord:hover {
+    color: #7289DA; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003191}}
+a:hover > .icon-discord {
+  color: #7289DA; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003194}}
+a > i.icon-bitcoin,
+i.icon-bitcoin {
+  color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003197}}
+  a > i.icon-bitcoin:hover,
+  i.icon-bitcoin:hover {
+    color: #f7931a; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003201}}
+a:hover > .icon-bitcoin {
+  color: #f7931a; }
+
+/********************************************************
+* Smart Forms:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000314}}
+form.smart-form .general-feedback {
+  display: none;
+  width: 100%;
+  margin: 0 0 1rem 0;
+  font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000319}}
+  form.smart-form .general-feedback .show-valid,
+  form.smart-form .general-feedback .show-invalid {
+    display: none;
+    font-size: 1.4em;
+    vertical-align: text-bottom; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000328}}
+  form.smart-form .general-feedback.is-invalid {
+    display: block;
+    color: #dc3545; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000331}}
+    form.smart-form .general-feedback.is-invalid .show-invalid {
+      display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000335}}
+  form.smart-form .general-feedback.is-valid {
+    display: block;
+    color: #198754; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_smart-forms\.scss}line{font-family:\0000338}}
+    form.smart-form .general-feedback.is-valid .show-valid {
+      display: inline-block; }
+
+/********************************************************
+* Ribbons:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003194}}
+.ribbon-primary {
+  z-index: 1;
+  overflow: hidden;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  /* corner-ribbon styles, left-top */ }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003200}}
+  .ribbon-primary:before, .ribbon-primary::after {
+    content: "";
+    display: block;
+    z-index: -1;
+    position: absolute;
+    border-width: 0px;
+    border-style: solid; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003209}}
+  .ribbon-primary span {
+    display: block;
+    text-align: center;
+    line-height: 18px;
+    height: 18px;
+    width: 150px;
+    position: absolute;
+    color: #1A1C23;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 0 7px rgba(35, 46, 57, 0.8);
+    background-color: #FBB823;
+    text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003224}}
+  .ribbon-primary.ribbon-left-top {
+    margin-left: -0px;
+    margin-top: -0px;
+    left: 0;
+    top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003229}}
+    .ribbon-primary.ribbon-left-top:before {
+      right: 35px;
+      top: 0;
+      border-left-color: transparent;
+      border-right-color: #fbb00a;
+      border-top-color: transparent;
+      border-bottom-color: #fbb00a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003237}}
+    .ribbon-primary.ribbon-left-top:after {
+      left: 0;
+      bottom: 35px;
+      border-left-color: transparent;
+      border-right-color: #fbb00a;
+      border-top-color: transparent;
+      border-bottom-color: #fbb00a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003245}}
+    .ribbon-primary.ribbon-left-top span {
+      right: -5%;
+      top: 22%;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003252}}
+  .ribbon-primary.ribbon-right-top {
+    margin-right: -0px;
+    margin-top: -0px;
+    right: 0;
+    top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003257}}
+    .ribbon-primary.ribbon-right-top:before {
+      left: 36px;
+      top: 0;
+      border-left-color: #fbb00a;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-bottom-color: #fbb00a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003265}}
+    .ribbon-primary.ribbon-right-top:after {
+      right: 0;
+      bottom: 36px;
+      border-left-color: #fbb00a;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-bottom-color: #fbb00a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003273}}
+    .ribbon-primary.ribbon-right-top span {
+      left: -5%;
+      top: 22%;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003280}}
+  .ribbon-primary.ribbon-left-bottom {
+    margin-left: -0px;
+    margin-bottom: -0px;
+    left: 0;
+    bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003285}}
+    .ribbon-primary.ribbon-left-bottom:before {
+      left: 0;
+      top: 36px;
+      border-left-color: transparent;
+      border-right-color: #fbb00a;
+      border-top-color: #fbb00a;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003293}}
+    .ribbon-primary.ribbon-left-bottom:after {
+      right: 36px;
+      bottom: 0;
+      border-left-color: transparent;
+      border-right-color: #fbb00a;
+      border-top-color: #fbb00a;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003301}}
+    .ribbon-primary.ribbon-left-bottom span {
+      right: -5%;
+      bottom: 22%;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003308}}
+  .ribbon-primary.ribbon-right-bottom {
+    margin-right: -0px;
+    margin-bottom: -0px;
+    right: 0;
+    bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003313}}
+    .ribbon-primary.ribbon-right-bottom:before {
+      right: 0;
+      top: 36px;
+      border-left-color: #fbb00a;
+      border-right-color: transparent;
+      border-top-color: #fbb00a;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003321}}
+    .ribbon-primary.ribbon-right-bottom:after {
+      left: 36px;
+      bottom: 0;
+      border-left-color: #fbb00a;
+      border-right-color: transparent;
+      border-top-color: #fbb00a;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003329}}
+    .ribbon-primary.ribbon-right-bottom span {
+      left: -5%;
+      bottom: 22%;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003194}}
+.ribbon-secondary {
+  z-index: 1;
+  overflow: hidden;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  /* corner-ribbon styles, left-top */ }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003200}}
+  .ribbon-secondary:before, .ribbon-secondary::after {
+    content: "";
+    display: block;
+    z-index: -1;
+    position: absolute;
+    border-width: 0px;
+    border-style: solid; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003209}}
+  .ribbon-secondary span {
+    display: block;
+    text-align: center;
+    line-height: 18px;
+    height: 18px;
+    width: 150px;
+    position: absolute;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 0 7px rgba(35, 46, 57, 0.8);
+    background-color: #484856;
+    text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003224}}
+  .ribbon-secondary.ribbon-left-top {
+    margin-left: -0px;
+    margin-top: -0px;
+    left: 0;
+    top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003229}}
+    .ribbon-secondary.ribbon-left-top:before {
+      right: 35px;
+      top: 0;
+      border-left-color: transparent;
+      border-right-color: #3c3c48;
+      border-top-color: transparent;
+      border-bottom-color: #3c3c48; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003237}}
+    .ribbon-secondary.ribbon-left-top:after {
+      left: 0;
+      bottom: 35px;
+      border-left-color: transparent;
+      border-right-color: #3c3c48;
+      border-top-color: transparent;
+      border-bottom-color: #3c3c48; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003245}}
+    .ribbon-secondary.ribbon-left-top span {
+      right: -5%;
+      top: 22%;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003252}}
+  .ribbon-secondary.ribbon-right-top {
+    margin-right: -0px;
+    margin-top: -0px;
+    right: 0;
+    top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003257}}
+    .ribbon-secondary.ribbon-right-top:before {
+      left: 36px;
+      top: 0;
+      border-left-color: #3c3c48;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-bottom-color: #3c3c48; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003265}}
+    .ribbon-secondary.ribbon-right-top:after {
+      right: 0;
+      bottom: 36px;
+      border-left-color: #3c3c48;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-bottom-color: #3c3c48; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003273}}
+    .ribbon-secondary.ribbon-right-top span {
+      left: -5%;
+      top: 22%;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003280}}
+  .ribbon-secondary.ribbon-left-bottom {
+    margin-left: -0px;
+    margin-bottom: -0px;
+    left: 0;
+    bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003285}}
+    .ribbon-secondary.ribbon-left-bottom:before {
+      left: 0;
+      top: 36px;
+      border-left-color: transparent;
+      border-right-color: #3c3c48;
+      border-top-color: #3c3c48;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003293}}
+    .ribbon-secondary.ribbon-left-bottom:after {
+      right: 36px;
+      bottom: 0;
+      border-left-color: transparent;
+      border-right-color: #3c3c48;
+      border-top-color: #3c3c48;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003301}}
+    .ribbon-secondary.ribbon-left-bottom span {
+      right: -5%;
+      bottom: 22%;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003308}}
+  .ribbon-secondary.ribbon-right-bottom {
+    margin-right: -0px;
+    margin-bottom: -0px;
+    right: 0;
+    bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003313}}
+    .ribbon-secondary.ribbon-right-bottom:before {
+      right: 0;
+      top: 36px;
+      border-left-color: #3c3c48;
+      border-right-color: transparent;
+      border-top-color: #3c3c48;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003321}}
+    .ribbon-secondary.ribbon-right-bottom:after {
+      left: 36px;
+      bottom: 0;
+      border-left-color: #3c3c48;
+      border-right-color: transparent;
+      border-top-color: #3c3c48;
+      border-bottom-color: transparent; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_mixins\.scss}line{font-family:\00003329}}
+    .ribbon-secondary.ribbon-right-bottom span {
+      left: -5%;
+      bottom: 22%;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+
+/********************************************************
+* Slick:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003230}}
+.slick-slide {
+  margin: 10px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003236}}
+.slick-dots li button:before {
+  font-size: 20px;
+  color: white; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003240}}
+.slick-dots li.slick-active button:before {
+  color: #FBB823; }
+
+/********************************************************
+ * SikDropdown 
+ ********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\000032}}
+.sik-dropdown > button.dropdown-toggle {
+  position: relative;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2ch;
+  text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\0000310}}
+  .sik-dropdown > button.dropdown-toggle::after {
+    position: absolute;
+    right: 1ch;
+    top: calc(50% - 0.2ch); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_sik-dropdown\.scss}line{font-family:\0000316}}
+.sik-dropdown .dropdown-item {
+  cursor: pointer; }
+
+/********************************************************
+* Tombet Form-dark:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003256}}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: all 5000s ease-in-out 0s;
+  transition-property: background-color, color; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003263}}
+input[data-autocompleted] {
+  background-color: black !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003267}}
+form.form-dark .form-control:-webkit-autofill ~ label {
+  opacity: .8;
+  color: #fbb00a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003271}}
+form.form-dark .form-control {
+  font-weight: 400;
+  line-height: 1.5;
+  color: white;
+  background-color: #1C1E24;
+  border: 1px solid #424347;
+  border-radius: 0.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003278}}
+  form.form-dark .form-control:focus:not(.is-invalid):not(.is-valid) {
+    box-shadow: 0 0 0 0.25rem rgba(189, 189, 189, 0.25); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003282}}
+form.form-dark .form-check-input {
+  background-color: #1C1E24;
+  border-color: #424347; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003285}}
+  form.form-dark .form-check-input:checked {
+    background-color: #1C1E24;
+    border-color: #424347; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003289}}
+  form.form-dark .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(189, 189, 189, 0.25); }
+
+/********************************************************
+* Tombet Modals:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003300}}
+.modal-backdrop.show {
+  opacity: .6; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003304}}
+.modal.tombet-modal .login-bg {
+  background-image: url(../img/general/login-img.png);
+  background-clip: border-box;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003311}}
+.modal.tombet-modal .modal-header {
+  border-bottom: 0;
+  height: 0;
+  padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003315}}
+  .modal.tombet-modal .modal-header .btn-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003321}}
+    .modal.tombet-modal .modal-header .btn-close:hover {
+      opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003326}}
+.modal.tombet-modal .modal-footer {
+  border-top: 0;
+  height: 0;
+  padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003331}}
+.modal.tombet-modal .modal-dialog {
+  cursor: initial; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003334}}
+.modal.tombet-modal .modal-body {
+  padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003337}}
+.modal.tombet-modal .modal-content {
+  background-color: #1E2026;
+  box-shadow: 0px 4px 15px -2px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003340}}
+  .modal.tombet-modal .modal-content .content-layout {
+    display: flex;
+    flex-wrap: wrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003343}}
+    .modal.tombet-modal .modal-content .content-layout .modal-left-content {
+      padding: 2.5rem;
+      flex-grow: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003347}}
+    .modal.tombet-modal .modal-content .content-layout .modal-right-content {
+      padding: 2.5rem;
+      flex-grow: 1;
+      width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003352}}
+    .modal.tombet-modal .modal-content .content-layout h2 {
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+      text-align: left;
+      font-size: 2.2rem;
+      text-decoration: underline;
+      text-decoration-color: #FBB823;
+      margin-bottom: 1.75rem;
+      font-weight: 600; }
+@media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003380}}
+  .modal.tombet-modal .modal-content .content-layout {
+    flex-wrap: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003385}}
+    .modal.tombet-modal .modal-content .content-layout .modal-right-content {
+      width: unset; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003398}}
+#user-login .modal-left-content .btn-full-white {
+  margin: 0 auto;
+  display: block;
+  padding: 0.5rem 2.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003404}}
+#user-login .modal-right-content {
+  height: 300px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003407}}
+#user-login h2 {
+  font-size: 1.5rem; }
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003411}}
+  #user-login h2 {
+    font-size: 1.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003417}}
+  #user-login .modal-right-content {
+    height: 450px; } }
+@media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003422}}
+  #user-login h2 {
+    font-size: 2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003428}}
+  #user-login .modal-right-content {
+    flex-grow: 0;
+    height: 500px;
+    width: 540px; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003442}}
+#user-register .nav-tabs {
+  border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003445}}
+  #user-register .nav-tabs .nav-item button.nav-link {
+    border: 0;
+    background-color: transparent !important;
+    font-weight: 500;
+    color: #484856;
+    font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003451}}
+    #user-register .nav-tabs .nav-item button.nav-link.active {
+      color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003459}}
+#user-register .tab-content {
+  padding: 1rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003461}}
+  #user-register .tab-content h2.tab-title {
+    font-size: 1.2rem;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+    margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003469}}
+  #user-register .tab-content label {
+    font-size: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003472}}
+  #user-register .tab-content .tab-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.67); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003477}}
+  #user-register .tab-content .tab-pane .inner-tab {
+    display: flex;
+    flex-wrap: wrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003480}}
+    #user-register .tab-content .tab-pane .inner-tab .inner-col {
+      width: 100%; }
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003490}}
+  #user-register .nav-tabs .nav-item button.nav-link {
+    font-size: 1.2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003495}}
+  #user-register .tab-content {
+    padding: 1rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003497}}
+    #user-register .tab-content h2.tab-title {
+      font-size: 1.35rem;
+      text-align: center;
+      margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003502}}
+    #user-register .tab-content label {
+      font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003505}}
+    #user-register .tab-content .tab-description {
+      font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003509}}
+    #user-register .tab-content .tab-pane .inner-tab {
+      display: flex;
+      flex-wrap: wrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003512}}
+      #user-register .tab-content .tab-pane .inner-tab .inner-col {
+        width: 100%; } }
+@media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003522}}
+  #user-register .nav-tabs .nav-item button.nav-link {
+    font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003527}}
+  #user-register .tab-content {
+    padding: 0.75rem 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003529}}
+    #user-register .tab-content h2.tab-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003534}}
+    #user-register .tab-content .tab-pane .inner-tab {
+      flex-wrap: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003536}}
+      #user-register .tab-content .tab-pane .inner-tab .inner-col.col-left {
+        width: 50%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003539}}
+      #user-register .tab-content .tab-pane .inner-tab .inner-col.col-right {
+        width: unset;
+        flex-grow: 1; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000320}}
+#user-register .tab-content #proc-payment {
+  padding: 1rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000322}}
+  #user-register .tab-content #proc-payment h2.tab-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000327}}
+  #user-register .tab-content #proc-payment .tab-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.67); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000332}}
+  #user-register .tab-content #proc-payment .payment-methods-select > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000337}}
+    #user-register .tab-content #proc-payment .payment-methods-select > ul li {
+      display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000339}}
+      #user-register .tab-content #proc-payment .payment-methods-select > ul li button {
+        padding: 0.5rem 0.5rem;
+        min-width: 130px;
+        background-color: #1C1E24;
+        border: 2px solid #424347;
+        border-radius: 1rem;
+        color: rgba(255, 255, 255, 0.67);
+        font-size: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000347}}
+        #user-register .tab-content #proc-payment .payment-methods-select > ul li button i {
+          opacity: 0.45;
+          vertical-align: sub;
+          font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000351}}
+          #user-register .tab-content #proc-payment .payment-methods-select > ul li button i.icon-paypal {
+            color: #0079C1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000354}}
+          #user-register .tab-content #proc-payment .payment-methods-select > ul li button i.icon-bitcoin {
+            color: #f7931a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000358}}
+        #user-register .tab-content #proc-payment .payment-methods-select > ul li button:hover:not(.selected) {
+          background-color: #1C1E24;
+          color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000361}}
+          #user-register .tab-content #proc-payment .payment-methods-select > ul li button:hover:not(.selected) i {
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000365}}
+        #user-register .tab-content #proc-payment .payment-methods-select > ul li button.selected {
+          background-color: #1C1E24;
+          color: white;
+          border: 2px solid #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000369}}
+          #user-register .tab-content #proc-payment .payment-methods-select > ul li button.selected i {
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000377}}
+  #user-register .tab-content #proc-payment .sik-dropdown {
+    float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000379}}
+    #user-register .tab-content #proc-payment .sik-dropdown > button.btn {
+      background-color: #1C1E24;
+      border: 1px solid #424347;
+      font-size: 0.85em;
+      width: 120px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000385}}
+    #user-register .tab-content #proc-payment .sik-dropdown .dropdown-menu {
+      font-size: 0.85em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000388}}
+    #user-register .tab-content #proc-payment .sik-dropdown .crypto-icon {
+      height: 1em;
+      vertical-align: baseline;
+      margin-bottom: -0.1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000395}}
+  #user-register .tab-content #proc-payment .payment-forms {
+    margin: 1rem 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000397}}
+    #user-register .tab-content #proc-payment .payment-forms > div {
+      display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\0000399}}
+      #user-register .tab-content #proc-payment .payment-forms > div.active {
+        display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003103}}
+    #user-register .tab-content #proc-payment .payment-forms .form-check {
+      margin: 1rem 0.25rem 0rem 0.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003105}}
+      #user-register .tab-content #proc-payment .payment-forms .form-check label.form-check-label {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.67); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003111}}
+    #user-register .tab-content #proc-payment .payment-forms .checkout-btn {
+      margin: 1.5rem auto 1.5rem auto;
+      display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003117}}
+  #user-register .tab-content #proc-payment .payment-summary {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003121}}
+    #user-register .tab-content #proc-payment .payment-summary > li {
+      width: 100%;
+      border-bottom: 1px solid rgba(66, 67, 71, 0.5);
+      padding: 0.75rem 0.2rem;
+      text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003127}}
+    #user-register .tab-content #proc-payment .payment-summary .line-text {
+      font-size: 0.9rem;
+      font-weight: 300; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003130}}
+      #user-register .tab-content #proc-payment .payment-summary .line-text.text-bold {
+        font-weight: 600; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003134}}
+    #user-register .tab-content #proc-payment .payment-summary .line-total {
+      font-size: 0.9rem;
+      font-weight: 200;
+      float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003138}}
+      #user-register .tab-content #proc-payment .payment-summary .line-total.text-bold {
+        font-weight: 600; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003145}}
+    #user-register .tab-content #proc-payment .payment-summary .plan-crypto {
+      line-height: 2rem; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003150}}
+    #user-register .tab-content #proc-payment h2.tab-title {
+      font-size: 1.35rem;
+      text-align: center;
+      margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003155}}
+    #user-register .tab-content #proc-payment .tab-description {
+      font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003159}}
+    #user-register .tab-content #proc-payment .sik-dropdown > button.btn {
+      font-size: 0.85em;
+      width: 160px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003163}}
+    #user-register .tab-content #proc-payment .sik-dropdown .dropdown-menu {
+      font-size: 0.85em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003168}}
+    #user-register .tab-content #proc-payment.tab-pane .inner-tab {
+      display: flex;
+      flex-wrap: wrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003171}}
+      #user-register .tab-content #proc-payment.tab-pane .inner-tab .inner-col {
+        width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003179}}
+    #user-register .tab-content #proc-payment .payment-methods-select > ul li button {
+      padding: 0.5rem 1rem;
+      min-width: 200px;
+      font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003183}}
+      #user-register .tab-content #proc-payment .payment-methods-select > ul li button i {
+        opacity: 0.45;
+        vertical-align: sub;
+        font-size: 1.35rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003192}}
+    #user-register .tab-content #proc-payment .payment-forms {
+      margin: 1rem 2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003194}}
+      #user-register .tab-content #proc-payment .payment-forms .form-check {
+        margin: 1rem 0.25rem 0rem 0.25rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003196}}
+        #user-register .tab-content #proc-payment .payment-forms .form-check label.form-check-label {
+          font-size: 0.8rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003200}}
+      #user-register .tab-content #proc-payment .payment-forms .checkout-btn {
+        margin: 1.5rem auto 0rem auto; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003206}}
+    #user-register .tab-content #proc-payment h2.tab-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003211}}
+    #user-register .tab-content #proc-payment .sik-dropdown > button.btn {
+      font-size: 0.85em;
+      width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003215}}
+    #user-register .tab-content #proc-payment .sik-dropdown .dropdown-menu {
+      font-size: 0.85em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003220}}
+    #user-register .tab-content #proc-payment.tab-pane .inner-tab {
+      flex-wrap: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003222}}
+      #user-register .tab-content #proc-payment.tab-pane .inner-tab .inner-col.col-left {
+        width: 50%;
+        flex-grow: 0;
+        flex-shrink: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-forms\.scss}line{font-family:\00003227}}
+      #user-register .tab-content #proc-payment.tab-pane .inner-tab .inner-col.col-right {
+        width: unset;
+        flex-grow: 1; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\000039}}
+#user-register .tab-content #proc-success {
+  padding: 1rem 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000311}}
+  #user-register .tab-content #proc-success h2.tab-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 auto 0.85rem auto;
+    border-bottom: 2px solid #FBB823;
+    display: inline-block;
+    padding: .3rem 1rem;
+    text-shadow: 2px 2px 3px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000320}}
+  #user-register .tab-content #proc-success .tab-description {
+    font-size: 0.9rem;
+    margin: 0 0 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000324}}
+  #user-register .tab-content #proc-success .confiramtion-icon {
+    display: block;
+    font-size: 7rem;
+    color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000329}}
+  #user-register .tab-content #proc-success button[data-action="open-platform-app"] {
+    margin: 1.5rem 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000331}}
+    #user-register .tab-content #proc-success button[data-action="open-platform-app"] i {
+      margin-right: 0.4rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000335}}
+  #user-register .tab-content #proc-success .reach-out-discord {
+    display: block;
+    margin: 1rem 0rem 0rem 0rem;
+    font-size: 4rem;
+    text-decoration: none;
+    color: #7289DA !important;
+    transition: all ease .3s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000342}}
+    #user-register .tab-content #proc-success .reach-out-discord i {
+      color: #7289DA !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000345}}
+    #user-register .tab-content #proc-success .reach-out-discord:hover {
+      text-shadow: 2px 2px 3px black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000350}}
+  #user-register .tab-content #proc-success.tab-pane .inner-tab {
+    display: flex;
+    flex-wrap: wrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000353}}
+    #user-register .tab-content #proc-success.tab-pane .inner-tab .inner-col {
+      width: 100%;
+      text-align: center; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000360}}
+    #user-register .tab-content #proc-success h2.tab-title {
+      font-size: 1.75rem;
+      margin: 0 auto 1.25rem auto;
+      border-bottom: 3px solid #FBB823;
+      padding: .4rem 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000366}}
+    #user-register .tab-content #proc-success .tab-description {
+      font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000369}}
+    #user-register .tab-content #proc-success .confiramtion-icon {
+      font-size: 9rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000372}}
+    #user-register .tab-content #proc-success button[data-action="open-platform-app"] {
+      margin: 1.5rem 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/_payment-success\.scss}line{font-family:\0000375}}
+    #user-register .tab-content #proc-success .reach-out-discord {
+      margin: 1rem 0rem;
+      font-size: 4.5rem; } }
+
+/********************************************************
+* Nav Bar:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003559}}
+section.tb-top-nav {
+  width: 100%;
+  padding-top: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003563}}
+  section.tb-top-nav .row.tb-nav {
+    height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003566}}
+  section.tb-top-nav .logo-wrapper {
+    flex-grow: 0;
+    text-align: center;
+    padding-bottom: 0.8rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003570}}
+    section.tb-top-nav .logo-wrapper .main-logo {
+      width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003574}}
+  section.tb-top-nav .tabs-wrapper {
+    flex-grow: 1;
+    padding: 0px 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003577}}
+    section.tb-top-nav .tabs-wrapper .pages-tabs {
+      padding: 0;
+      padding-top: 5px;
+      border-top: 2px solid #ffffff40;
+      margin-top: 1rem;
+      margin-bottom: 0;
+      display: flex; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003584}}
+      section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab {
+        margin: 0;
+        flex-grow: 1;
+        text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003588}}
+        section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a {
+          color: #FFFFFF;
+          font-weight: 400;
+          padding: 0.25rem 0.3rem;
+          font-size: 0.75rem;
+          text-decoration: none;
+          display: inline-block;
+          text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003596}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a:visited {
+            color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003599}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a:hover {
+            color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003602}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a:active {
+            color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003605}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a i {
+            font-size: 1.3rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003608}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a span {
+            display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003613}}
+        section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab.tab-selected > a {
+          border-bottom: 4px solid #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003621}}
+  section.tb-top-nav .button-wrapper {
+    flex-basis: content;
+    flex-grow: 1;
+    text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003625}}
+    section.tb-top-nav .button-wrapper > button {
+      box-sizing: border-box;
+      font-size: 0.8rem;
+      min-width: 135px; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003632}}
+    section.tb-top-nav .row.tb-nav {
+      padding-top: 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003635}}
+    section.tb-top-nav .logo-wrapper {
+      width: 275px;
+      padding-bottom: 0;
+      text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003639}}
+      section.tb-top-nav .logo-wrapper .main-logo {
+        width: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003644}}
+    section.tb-top-nav .tabs-wrapper .pages-tabs {
+      padding-top: 0.65rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003646}}
+      section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab {
+        margin: 0;
+        text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003649}}
+        section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a {
+          font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003655}}
+    section.tb-top-nav .button-wrapper {
+      text-align: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003657}}
+      section.tb-top-nav .button-wrapper > button {
+        font-size: 0.95rem;
+        min-width: 150px; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003664}}
+    section.tb-top-nav .row.tb-nav {
+      align-items: center !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003667}}
+    section.tb-top-nav .logo-wrapper {
+      width: 275px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003670}}
+    section.tb-top-nav .tabs-wrapper {
+      order: 2;
+      flex-grow: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003673}}
+      section.tb-top-nav .tabs-wrapper .pages-tabs {
+        padding-top: 0;
+        border-top: 0;
+        display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003677}}
+        section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab {
+          flex-grow: unset; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003679}}
+          section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a {
+            padding: 0.5rem 0.55rem 0.25rem 0.55rem;
+            font-size: 0.9rem;
+            text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003683}}
+            section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a i {
+              font-size: 1.15rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003686}}
+            section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a span {
+              display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003693}}
+    section.tb-top-nav .button-wrapper {
+      order: 3;
+      flex-grow: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003696}}
+      section.tb-top-nav .button-wrapper > button {
+        font-size: 1rem; } }
+  @media (min-width: 1400px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003705}}
+    section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a {
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      margin-left: 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003710}}
+      section.tb-top-nav .tabs-wrapper .pages-tabs .page-tab > a i {
+        font-size: 1.15rem;
+        margin-right: 4px; } }
+
+/********************************************************
+* Content:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003724}}
+section.tb-content {
+  width: 100%;
+  flex-grow: 1;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003731}}
+  section.tb-content .tb-content-tab {
+    display: none;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    padding-top: 1.5rem;
+    height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003733}}
+    section.tb-content .tb-content-tab.current {
+      display: flex; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003740}}
+    section.tb-content .tb-content-tab .tb-tab-left {
+      flex-grow: 0;
+      text-align: center;
+      padding-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003744}}
+      section.tb-content .tb-content-tab .tb-tab-left h1 {
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+        text-align: center;
+        font-size: 1.75rem;
+        text-decoration: underline;
+        text-decoration-color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003751}}
+      section.tb-content .tb-content-tab .tb-tab-left p {
+        color: rgba(255, 255, 255, 0.67);
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-weight: 300;
+        font-size: 0.9rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003759}}
+    section.tb-content .tb-content-tab .tb-tab-right {
+      flex-grow: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003761}}
+      section.tb-content .tb-content-tab .tb-tab-right .application-slider {
+        background-color: transparent;
+        max-height: 85%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003764}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider img {
+          width: 100%;
+          margin: 0 auto;
+          image-rendering: -moz-crisp-edges;
+          image-rendering: -o-crisp-edges;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
+          -ms-interpolation-mode: nearest-neighbor; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003773}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider h2 {
+          text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+          font-weight: 700;
+          font-size: 1.25rem;
+          text-align: center;
+          text-transform: capitalize;
+          margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003781}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider p {
+          color: rgba(255, 255, 255, 0.67);
+          text-align: center;
+          font-size: 0.9rem;
+          font-weight: 300; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003791}}
+    section.tb-content .tb-content-tab {
+      padding: 1rem 1.5rem;
+      padding-top: 3rem;
+      overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003796}}
+      section.tb-content .tb-content-tab .tb-tab-left {
+        padding-bottom: 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003798}}
+        section.tb-content .tb-content-tab .tb-tab-left h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003802}}
+        section.tb-content .tb-content-tab .tb-tab-left p {
+          font-size: 1.15rem;
+          margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003808}}
+      section.tb-content .tb-content-tab .tb-tab-right .application-slider {
+        max-height: 92%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003810}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider img {
+          width: 90%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003813}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider h2 {
+          font-size: 1.65rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003816}}
+        section.tb-content .tb-content-tab .tb-tab-right .application-slider p {
+          font-size: 1.15rem; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003824}}
+    section.tb-content .tb-content-tab {
+      flex-direction: row;
+      overflow-y: hidden;
+      width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003828}}
+      section.tb-content .tb-content-tab .tb-tab-left {
+        flex-basis: unset;
+        flex-grow: unset;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 25px;
+        padding: 0 1rem;
+        transform: translate3d(0px, -90px, 0px); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003839}}
+        section.tb-content .tb-content-tab .tb-tab-left h1 {
+          font-size: 2.75rem;
+          font-weight: 600;
+          margin: 0;
+          text-align: left;
+          display: block;
+          width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003847}}
+        section.tb-content .tb-content-tab .tb-tab-left p {
+          font-size: 1.2rem;
+          margin: 0;
+          text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003853}}
+      section.tb-content .tb-content-tab .tb-tab-right {
+        flex-basis: unset;
+        flex-grow: unset;
+        padding: 0 1rem;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; } }
+
+/********************************************************
+* Bottom Bar:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003880}}
+section.tb-bottom-bar {
+  width: 100%;
+  padding: 0px 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003884}}
+  section.tb-bottom-bar .footer-logo {
+    display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003887}}
+  section.tb-bottom-bar .footer-powered {
+    display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003890}}
+  section.tb-bottom-bar .footer-links {
+    padding: 0;
+    padding-top: 10px;
+    border-top: 2px solid #ffffff40; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003894}}
+    section.tb-bottom-bar .footer-links ul.list-links {
+      display: flex;
+      justify-content: flex-end; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003897}}
+      section.tb-bottom-bar .footer-links ul.list-links li {
+        flex-grow: 0;
+        border-left: 2px solid #ffffff40;
+        margin: 0;
+        padding: 0 0.9rem;
+        padding-top: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003903}}
+        section.tb-bottom-bar .footer-links ul.list-links li:first-of-type {
+          flex-grow: 1;
+          text-align: left;
+          border-left: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003908}}
+        section.tb-bottom-bar .footer-links ul.list-links li > a {
+          color: #FFFFFF;
+          font-size: 0.85rem;
+          font-weight: 400;
+          text-decoration: none;
+          display: inline-block;
+          opacity: .6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003915}}
+          section.tb-bottom-bar .footer-links ul.list-links li > a:visited {
+            color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003918}}
+          section.tb-bottom-bar .footer-links ul.list-links li > a:hover {
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003921}}
+          section.tb-bottom-bar .footer-links ul.list-links li > a:active {
+            color: #FFFFFF;
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003925}}
+          section.tb-bottom-bar .footer-links ul.list-links li > a i {
+            font-size: 1.3rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003927}}
+            section.tb-bottom-bar .footer-links ul.list-links li > a i.icon-bitcoin {
+              font-size: 1.2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003930}}
+            section.tb-bottom-bar .footer-links ul.list-links li > a i.icon-discord {
+              margin-left: 0.6rem; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003880}}
+    section.tb-bottom-bar {
+      padding-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003941}}
+      section.tb-bottom-bar .col {
+        height: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003943}}
+        section.tb-bottom-bar .col span {
+          display: inline-block;
+          vertical-align: bottom;
+          height: 30px;
+          line-height: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003949}}
+        section.tb-bottom-bar .col a {
+          height: 30px;
+          line-height: 30px;
+          display: inline-block;
+          vertical-align: bottom; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003956}}
+      section.tb-bottom-bar .footer-logo {
+        display: block;
+        flex-grow: 0;
+        opacity: .4;
+        font-weight: 800;
+        padding-right: 0;
+        font-size: 1.2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003964}}
+      section.tb-bottom-bar .footer-powered {
+        display: block;
+        flex-grow: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003967}}
+        section.tb-bottom-bar .footer-powered > a {
+          color: #FFFFFF;
+          font-size: 0.75rem;
+          font-weight: 400;
+          text-decoration: none;
+          opacity: .4; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003973}}
+          section.tb-bottom-bar .footer-powered > a:visited {
+            color: #FFFFFF; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003976}}
+          section.tb-bottom-bar .footer-powered > a:hover {
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003979}}
+          section.tb-bottom-bar .footer-powered > a:active {
+            color: #FFFFFF;
+            opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003983}}
+          section.tb-bottom-bar .footer-powered > a img {
+            height: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003986}}
+          section.tb-bottom-bar .footer-powered > a span {
+            vertical-align: sub; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003991}}
+      section.tb-bottom-bar .footer-links {
+        flex-grow: 0;
+        padding: 0;
+        border-top: 0;
+        white-space: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003996}}
+        section.tb-bottom-bar .footer-links ul.list-links {
+          margin: 0;
+          display: flex; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\00003999}}
+          section.tb-bottom-bar .footer-links ul.list-links li {
+            padding: 0 1rem;
+            height: 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031002}}
+            section.tb-bottom-bar .footer-links ul.list-links li:first-of-type {
+              flex-grow: 1;
+              text-align: left;
+              border-left: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031007}}
+            section.tb-bottom-bar .footer-links ul.list-links li > a {
+              opacity: .4;
+              vertical-align: baseline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031010}}
+              section.tb-bottom-bar .footer-links ul.list-links li > a:hover {
+                opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031012}}
+                section.tb-bottom-bar .footer-links ul.list-links li > a:hover i.icon-bitcoin {
+                  color: #f7931a; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031016}}
+              section.tb-bottom-bar .footer-links ul.list-links li > a i {
+                font-size: 1.3rem;
+                line-height: unset; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031021}}
+                section.tb-bottom-bar .footer-links ul.list-links li > a i.icon-discord {
+                  margin-left: 0.6rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031025}}
+              section.tb-bottom-bar .footer-links ul.list-links li > a span {
+                display: unset;
+                vertical-align: top; } }
+
+/********************************************************
+* Sports Tabs:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031066}}
+.sport-cards-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031076}}
+  .sport-cards-container .sport-card {
+    padding: 1rem;
+    background: rgba(24, 26, 31, 0.44) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 50px 99px rgba(55, 43, 123, 0.14);
+    border: 2px solid #7b7b7b;
+    border-radius: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031084}}
+    .sport-cards-container .sport-card i {
+      margin-right: 0.5rem;
+      font-size: 1.15rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031088}}
+    .sport-cards-container .sport-card h2 {
+      display: inline-block;
+      font-size: 1.25rem;
+      text-decoration: underline;
+      text-decoration-color: #FBB823;
+      margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031095}}
+    .sport-cards-container .sport-card ul.card-leagues {
+      display: block;
+      list-style: none;
+      padding: 0px 0px 0px 0.4rem;
+      margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031100}}
+      .sport-cards-container .sport-card ul.card-leagues li.league-row {
+        margin-bottom: 0.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031102}}
+        .sport-cards-container .sport-card ul.card-leagues li.league-row img.league-logo {
+          max-height: 1.75rem;
+          max-width: 1.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031106}}
+        .sport-cards-container .sport-card ul.card-leagues li.league-row span.league-name {
+          font-weight: 600;
+          font-size: 0.9rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031110}}
+        .sport-cards-container .sport-card ul.card-leagues li.league-row span.league-description {
+          color: rgba(255, 255, 255, 0.67);
+          font-weight: 300;
+          font-size: 0.8em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031115}}
+        .sport-cards-container .sport-card ul.card-leagues li.league-row:last-child {
+          margin-bottom: 0; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031066}}
+    .sport-cards-container {
+      height: unset;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031127}}
+      .sport-cards-container .sport-card {
+        padding: 1.25rem 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031129}}
+        .sport-cards-container .sport-card i {
+          margin-right: 0.5rem;
+          font-size: 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031133}}
+        .sport-cards-container .sport-card h2 {
+          font-weight: 600;
+          font-size: 1.5rem;
+          margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031138}}
+        .sport-cards-container .sport-card ul.card-leagues {
+          padding: 0px 0px 0px 0.6rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031140}}
+          .sport-cards-container .sport-card ul.card-leagues li.league-row {
+            margin-bottom: 0.9rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031142}}
+            .sport-cards-container .sport-card ul.card-leagues li.league-row img.league-logo {
+              max-height: 1.95rem;
+              max-width: 1.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031146}}
+            .sport-cards-container .sport-card ul.card-leagues li.league-row span.league-name {
+              font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031149}}
+            .sport-cards-container .sport-card ul.card-leagues li.league-row span.league-description {
+              font-size: 0.9em; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031159}}
+    .sport-cards-container ul.card-leagues li.league-row {
+      margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031161}}
+      .sport-cards-container ul.card-leagues li.league-row img.league-logo {
+        max-height: 1.95rem;
+        max-width: 1.95rem;
+        margin-right: 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031166}}
+      .sport-cards-container ul.card-leagues li.league-row span.league-name {
+        font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031169}}
+      .sport-cards-container ul.card-leagues li.league-row span.league-description {
+        font-size: 0.9em; } }
+
+/********************************************************
+* Pricing Plans View specific:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031182}}
+.plans-wrapper {
+  padding-top: 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031186}}
+  .plans-wrapper > h2 {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    font-size: 1.35rem;
+    text-decoration: underline;
+    text-decoration-color: #FBB823;
+    margin-bottom: 0.75rem; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031196}}
+    .plans-wrapper > h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.85rem; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031182}}
+    .plans-wrapper {
+      height: 90%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031203}}
+      .plans-wrapper > h2 {
+        font-size: 2rem;
+        margin-bottom: 0.85rem;
+        text-decoration: none;
+        font-weight: 700; } }
+
+/********************************************************
+* Pricing Plans TOGGLER:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031217}}
+.toggle-monthly {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031225}}
+  .toggle-monthly .toggle-plans {
+    text-align: center;
+    width: 30%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031228}}
+    .toggle-monthly .toggle-plans .form-check {
+      display: inline-block;
+      transform: scale(1.3) translate(0px, 15%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031232}}
+      .toggle-monthly .toggle-plans .form-check.form-switch .form-check-input {
+        border: 2px solid #FBB823;
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='rgb(251, 184, 35)'/></svg>"); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031236}}
+        .toggle-monthly .toggle-plans .form-check.form-switch .form-check-input:focus {
+          border-color: #FBB823;
+          outline: 0;
+          box-shadow: 0px 0px 7px 2px rgba(251, 184, 35, 0.3); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031241}}
+        .toggle-monthly .toggle-plans .form-check.form-switch .form-check-input:checked {
+          background-color: transparent;
+          border-color: #FBB823;
+          background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='rgb(251, 184, 35)'/></svg>"); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031252}}
+  .toggle-monthly .toggle-label {
+    flex: 1;
+    text-align: right;
+    font-weight: 300; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031256}}
+    .toggle-monthly .toggle-label:last-child {
+      text-align: left; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031217}}
+    .toggle-monthly {
+      margin-bottom: 1rem; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031267}}
+    .toggle-monthly .toggle-plans {
+      width: 20%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031269}}
+      .toggle-monthly .toggle-plans .form-check {
+        display: inline-block;
+        transform: scale(1.5) translate(0px, 15%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031274}}
+    .toggle-monthly .toggle-label {
+      font-size: 1.25rem; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031279}}
+.toggle-monthly.in-modal {
+  margin-bottom: 0.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031282}}
+  .toggle-monthly.in-modal .toggle-plans {
+    width: 30%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031284}}
+    .toggle-monthly.in-modal .toggle-plans .form-check {
+      transform: scale(1.3) translate(0px, 15%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031287}}
+      .toggle-monthly.in-modal .toggle-plans .form-check.form-switch .form-check-input {
+        border: 2px solid #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031289}}
+        .toggle-monthly.in-modal .toggle-plans .form-check.form-switch .form-check-input:focus {
+          box-shadow: 0px 0px 7px 2px rgba(251, 184, 35, 0.3); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031297}}
+  .toggle-monthly.in-modal .toggle-label {
+    text-align: right;
+    font-weight: 300; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031300}}
+    .toggle-monthly.in-modal .toggle-label:last-child {
+      text-align: left; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031279}}
+    .toggle-monthly.in-modal {
+      margin-bottom: 1rem; } }
+  @media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031308}}
+    .toggle-monthly.in-modal .toggle-plans {
+      width: 20%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031310}}
+      .toggle-monthly.in-modal .toggle-plans .form-check {
+        transform: scale(1.2) translate(0px, 15%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031314}}
+    .toggle-monthly.in-modal .toggle-label {
+      font-size: 1rem; } }
+
+/********************************************************
+* Pricing Plans:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031328}}
+.plans-container {
+  padding-bottom: 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031332}}
+  .plans-container ul.plans-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031339}}
+    .plans-container ul.plans-list > li {
+      position: relative;
+      background: rgba(24, 26, 31, 0.44) 0% 0% no-repeat padding-box;
+      box-shadow: 0px 50px 99px rgba(55, 43, 123, 0.14);
+      border: 2px solid #7b7b7b;
+      border-radius: 0.65rem;
+      padding: .75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031346}}
+      .plans-container ul.plans-list > li h3.plan-title {
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+        font-weight: 500;
+        font-size: 1.15rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 3px solid #FBB823;
+        margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031354}}
+      .plans-container ul.plans-list > li p.plan-description {
+        position: absolute;
+        margin: 0;
+        top: 13px;
+        right: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031360}}
+      .plans-container ul.plans-list > li span.plan-line {
+        display: block;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.67);
+        padding-left: 1ch;
+        margin-bottom: 0.35rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031366}}
+        .plans-container ul.plans-list > li span.plan-line i {
+          color: #FBB823;
+          font-size: 1em;
+          vertical-align: baseline;
+          margin: 0 1px 0 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031371}}
+          .plans-container ul.plans-list > li span.plan-line i.icon-check-round-round {
+            font-size: 1.4em;
+            vertical-align: text-bottom;
+            margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031378}}
+      .plans-container ul.plans-list > li p.select-plan-wrapper {
+        padding: 0;
+        margin: 0;
+        margin-top: 0.8rem;
+        text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031384}}
+      .plans-container ul.plans-list > li .form-check {
+        display: none; }
+  @media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031391}}
+    .plans-container ul.plans-list {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem; } }
+  @media (min-width: 1400px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031402}}
+    .plans-container:not(.in-modal) ul.plans-list {
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031405}}
+      .plans-container:not(.in-modal) ul.plans-list > li {
+        padding: .75rem;
+        text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031408}}
+        .plans-container:not(.in-modal) ul.plans-list > li h3.plan-title {
+          display: inline-block;
+          font-size: 1.4rem;
+          padding: 1.75rem 0.75rem 0.75rem 0.75rem;
+          border-bottom: 3px solid #FBB823;
+          margin-bottom: 1rem;
+          font-weight: 600; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031416}}
+        .plans-container:not(.in-modal) ul.plans-list > li p.plan-description {
+          position: unset;
+          display: block;
+          margin-bottom: 2rem;
+          top: unset;
+          right: unset;
+          font-size: 1.2rem;
+          font-weight: 500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031425}}
+        .plans-container:not(.in-modal) ul.plans-list > li span.plan-line {
+          text-align: left;
+          padding-left: 0;
+          font-size: 0.9rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-bottom: 1.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031433}}
+        .plans-container:not(.in-modal) ul.plans-list > li p.select-plan-wrapper {
+          margin-top: 2.5rem;
+          margin-bottom: 1.5rem; } }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031443}}
+.plans-container.in-modal ul.plans-list {
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031446}}
+  .plans-container.in-modal ul.plans-list > li {
+    padding: .5rem .5rem .5rem 1.5rem;
+    border: 1px solid #424347;
+    border-radius: 0.25rem;
+    cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031451}}
+    .plans-container.in-modal ul.plans-list > li:hover {
+      border-color: #FBB823;
+      box-shadow: 0 0 0 3px rgba(251, 184, 35, 0.15); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031455}}
+    .plans-container.in-modal ul.plans-list > li h3.plan-title {
+      border-bottom: 2px solid rgba(251, 184, 35, 0.3);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031460}}
+    .plans-container.in-modal ul.plans-list > li p.plan-description {
+      top: 8px;
+      right: 20px;
+      font-size: 0.9rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031465}}
+    .plans-container.in-modal ul.plans-list > li span.plan-line {
+      display: inline-block;
+      margin-bottom: 0.2rem;
+      width: 48%;
+      font-size: 0.7rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031471}}
+    .plans-container.in-modal ul.plans-list > li p.select-plan-wrapper {
+      display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031474}}
+    .plans-container.in-modal ul.plans-list > li .form-check {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: scale3d(1, 1, 1) translate(0.2rem, 0.2rem); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031480}}
+      .plans-container.in-modal ul.plans-list > li .form-check .form-check-input {
+        background-color: rgba(24, 26, 31, 0.44);
+        border-color: #424347;
+        box-shadow: none !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031484}}
+        .plans-container.in-modal ul.plans-list > li .form-check .form-check-input:checked {
+          background-color: rgba(24, 26, 31, 0.44);
+          border-color: #FBB823;
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23FBB823'/%3e%3c/svg%3e"); }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031491}}
+    .plans-container.in-modal ul.plans-list > li.selected {
+      border-color: #FBB823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031493}}
+      .plans-container.in-modal ul.plans-list > li.selected h3.plan-title {
+        border-bottom: 2px solid #fbb823; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031498}}
+  .plans-container.in-modal ul.plans-list .ribbon-left-top {
+    display: none !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031501}}
+  .plans-container.in-modal ul.plans-list .ribbon-right-bottom {
+    display: block !important; }
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031442}}
+  .plans-container.in-modal {
+    padding-bottom: 0.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031508}}
+    .plans-container.in-modal ul.plans-list > li {
+      padding: .5rem .5rem .5rem 2.1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031510}}
+      .plans-container.in-modal ul.plans-list > li h3.plan-title {
+        margin-bottom: 0.75rem;
+        font-size: 1.15rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031514}}
+      .plans-container.in-modal ul.plans-list > li p.plan-description {
+        top: 8px;
+        right: 20px;
+        font-size: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031519}}
+      .plans-container.in-modal ul.plans-list > li span.plan-line {
+        margin-bottom: 0.2rem;
+        font-size: 0.85rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031523}}
+      .plans-container.in-modal ul.plans-list > li .form-check {
+        transform: scale3d(1.2, 1.2, 1) translate(0.5rem, 0.3rem); } }
+
+/********************************************************
+* Contact Tab:
+*********************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031541}}
+.tb-content-tab[data-tab-name='contact'] .tb-tab-left {
+  text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031544}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-left ul.contact-channels {
+    list-style: none;
+    padding: 0.5rem 0 0.5rem 2rem;
+    margin: 0;
+    text-align: left;
+    display: block;
+    width: 100%;
+    font-size: 0.85em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031552}}
+    .tb-content-tab[data-tab-name='contact'] .tb-tab-left ul.contact-channels li {
+      position: relative;
+      margin-bottom: 0.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031555}}
+      .tb-content-tab[data-tab-name='contact'] .tb-tab-left ul.contact-channels li::after {
+        content: '';
+        position: absolute;
+        width: 0.8rem;
+        height: 0.8rem;
+        background-color: #FFFFFF;
+        left: -1.35rem;
+        top: 0.25rem;
+        border-radius: 50%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031572}}
+.tb-content-tab[data-tab-name='contact'] .tb-tab-right form {
+  background-color: rgba(24, 26, 31, 0.44);
+  border: 3px solid #7b7b7b;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031578}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form h2 {
+    font-size: 1.35rem;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+    text-decoration: underline;
+    text-decoration-color: #FBB823;
+    margin-bottom: 1.75rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031586}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form button {
+    padding: 0.6rem 2.5rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031588}}
+    .tb-content-tab[data-tab-name='contact'] .tb-tab-right form button span, .tb-content-tab[data-tab-name='contact'] .tb-tab-right form button i {
+      font-size: 1.4rem;
+      vertical-align: sub; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031593}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form #contact-message {
+    font-size: 0.8rem;
+    min-height: 65px;
+    max-height: 270px;
+    height: calc(6 * 1rem); }
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031605}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-left ul.contact-channels {
+    list-style: none;
+    padding: 1rem 0 1rem 3rem;
+    font-size: 1em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031609}}
+    .tb-content-tab[data-tab-name='contact'] .tb-tab-left ul.contact-channels li {
+      margin-bottom: 1rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031619}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form h2 {
+    font-size: 1.85rem;
+    margin-bottom: 1.75rem;
+    text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031624}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form #contact-message {
+    min-height: 65px;
+    max-height: 270px;
+    height: calc(8 * 1rem); } }
+@media (min-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031635}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form h2 {
+    font-size: 2rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/server\/bsik\/front\/global\/lib\/css\/scss\/main\.scss}line{font-family:\000031638}}
+  .tb-content-tab[data-tab-name='contact'] .tb-tab-right form #contact-message {
+    min-height: 65px;
+    max-height: 270px;
+    height: calc(12 * 1rem); } }
+
+/*# sourceMappingURL=main.css.map */

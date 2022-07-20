@@ -1,4 +1,4 @@
-@import "variables.css";
+/* @import "variables.css"; */
 @import "fonts.css";
 html {
     font-family: 'Roboto', sans-serif;
@@ -9,8 +9,9 @@ body {
     font-family: 'Roboto', sans-serif;
     background: var(--admin-base-background);
     color: var(--admin-white-text);
-    /* overflow: hidden; */
+    overflow: hidden;
 }
+
 
 pre {
     color: var(--admin-white-text);
@@ -18,15 +19,6 @@ pre {
 
 
 /******************************  STRUCTURE  *****************************/
-
-.container-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: var(--top-admin-bar-height);
-    width: 100vw;
-    border-bottom: 1px solid var(--grid-border-spacer-color);
-}
 
 .content-wrapper {
     display: flex;
@@ -155,24 +147,6 @@ ul.admin-menu li.menu-entry:hover:not(.has-submenu.open-menu) {
 }
 
 
-/******************************  TOP BAR  *****************************/
-
- :root {
-    --logo-height: calc(0.6 * var(--top-admin-bar-height));
-}
-
-.container-bar .admin-logo {
-    padding-top: calc((var(--top-admin-bar-height) - var(--logo-height)) / 2);
-}
-
-.container-bar .admin-logo>img {
-    height: var(--logo-height);
-}
-
-.container-bar .admin-notification {
-    background-color: rgb(77, 87, 83);
-    float: right;
-}
 
 
 /******************************  FOOTER  *****************************/

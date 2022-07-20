@@ -1,0 +1,87 @@
+//-------------------------------------------------------------------------------------------------------
+// Variables:
+//-------------------------------------------------------------------------------------------------------
+//$tb-payment-form-btn-border: 2px solid $tb-form-input-border-color !default;
+
+//-------------------------------------------------------------------------------------------------------
+// Style:
+//-------------------------------------------------------------------------------------------------------
+#user-register .tab-content #proc-success {
+    padding: 1rem 0.5rem;
+    h2.tab-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 0 auto 0.85rem auto;
+        border-bottom: 2px solid $tb-color-orange;
+        display: inline-block;
+        padding: .3rem 1rem;
+        text-shadow: 2px 2px 3px rgba(0,0,0,35%);
+    }
+    .tab-description {
+        font-size: 0.9rem;
+        margin: 0 0 0 0 ;
+    }
+    .confiramtion-icon {
+        display: block;
+        font-size: 7rem;
+        color: $tb-color-orange;
+    }
+    button[data-action="open-platform-app"] {
+        margin: 1.5rem 0;
+        i {
+            margin-right: 0.4rem;
+        }
+    }
+    .reach-out-discord {
+        display: block;
+        margin: 1rem 0rem 0rem 0rem;
+        font-size: 4rem;
+        text-decoration: none;
+        color: $tb-color-discord !important;
+        transition: all ease .3s;
+        i {
+            color: $tb-color-discord !important;
+        }
+        &:hover {
+            text-shadow: 2px 2px 3px rgba(0,0,0,35%);
+        }
+    }
+    &.tab-pane {
+        .inner-tab {
+            display: flex;
+            flex-wrap: wrap;
+            .inner-col {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+    @include breakpoint-up(tablet) {
+        h2.tab-title {
+            font-size: 1.75rem;
+            margin: 0 auto 1.25rem auto;
+            border-bottom: 3px solid $tb-color-orange;
+            padding: .4rem 1rem;
+        }
+        .tab-description {
+            font-size: 1rem;
+        }
+        .confiramtion-icon {
+            font-size: 9rem;
+        }
+        button[data-action="open-platform-app"] {
+            margin: 1.5rem 0;
+        }
+        .reach-out-discord {
+            margin: 1rem 0rem;
+            font-size: 4.5rem;
+        }
+    }
+    @include breakpoint-up(pc) {
+
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+
+}

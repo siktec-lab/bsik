@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://localhost/bsik/manage/lib/required/zingtouch/dist/zingtouch.min.js"></script>
+        <style>
+            body {
+                width: 100%;
+                height: 100%;
+              }
+              
+              .container {
+                background-color: yellow;
+                width: 80%;
+                height: 800px;
+              }
+              
+              .sik-slider {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+              }
+              .sik-slider ul.sik-slides {
+                box-sizing: border-box;
+                background-color: rgba(0, 0, 255, 0.75);
+                padding: 0;
+                margin: 0;
+                border: 0;
+                display: block;
+                list-style: none;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+              }
+              .sik-slider ul.sik-slides > li {
+                box-sizing: border-box;
+                display: block;
+                /* display: none !important; */
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                opacity: 0;
+              }
+        </style>
+    </head>
+    <body>
+        <h1>Not really A slider - but really easy to use</h1>
+        <div class="container">
+            <div class="sik-slider" id="sik-slider">
+                <ul class="sik-slides">
+                    <li slide-name='slide1'>
+                        <h2>Slide 1</h2>
+                        <p>Nam finibus magna at dui tristique consectetur. Integer a pulvinar justo. Morbi sit amet turpis bibendum, feugiat sapien sit amet, rhoncus purus. Vestibulum in convallis urna. Fusce nec tincidunt ante. Aliquam id dolor massa. Nam efficitur, magna sed gravida blandit, justo nulla pretium elit, eu auctor quam metus non diam.</p>
+                    </li>
+                    <li slide-name='slide2'>
+                        <h2>Slide 2</h2>
+                        <p>Nam finibus magna at dui tristique consectetur. Integer a pulvinar justo. Morbi sit amet turpis bibendum, feugiat sapien sit amet, rhoncus purus. Vestibulum in convallis urna. Fusce nec tincidunt ante. Aliquam id dolor massa. Nam efficitur, magna sed gravida blandit, justo nulla pretium elit, eu auctor quam metus non diam.</p>
+                    </li>
+                    <li>
+                        <h2>Slide 3</h2>
+                        <p>Nam finibus magna at dui tristique consectetur. Integer a pulvinar justo. Morbi sit amet turpis bibendum, feugiat sapien sit amet, rhoncus purus. Vestibulum in convallis urna. Fusce nec tincidunt ante. Aliquam id dolor massa. Nam efficitur, magna sed gravida blandit, justo nulla pretium elit, eu auctor quam metus non diam.</p>
+                    </li>
+                    <li>
+                        <h2>Slide 4</h2>
+                        <p>Nam finibus magna at dui tristique consectetur. Integer a pulvinar justo. Morbi sit amet turpis bibendum, feugiat sapien sit amet, rhoncus purus. Vestibulum in convallis urna. Fusce nec tincidunt ante. Aliquam id dolor massa. Nam efficitur, magna sed gravida blandit, justo nulla pretium elit, eu auctor quam metus non diam.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2>
+        <h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2>
+        <h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2><h2>Slide 4</h2>
+        <script type="module">
+            import { SikSlider } from "./front/global/lib/js/SikSlider.module.js";
+
+            document.addEventListener("DOMContentLoaded", function(event) {
+
+
+            var slider = new SikSlider(
+                "#sik-slider", 
+                {
+                    animations : {
+                        "anim1" : function(slide, show) {
+                            console.log("anim1", slide, show);
+                        },
+                        "anim2" : function(slide, show) {
+                            console.log("anim2", slide, show);
+                        }
+                    },
+                    defaultAnimation : {
+                        show : "slide",
+                        hide : "slide",
+                        duration : 350 
+                    },
+                    slides : { // must use a slide name:
+                        "slide1"  : {
+                            show  : "slide", // array means random effect
+                            hide  : "slide",
+                            duration : 600,
+                            after : function(slide ,show) { console.log("after anim slide 1", show); },
+                            before : function(slide ,show) { console.log("before anim slide 1", show); }
+                        },
+                        "slide2"  : {
+                            show  : "slide", // array means random effect
+                            hide  : "slide",
+                            after : function(slide ,show) { console.log("after anim slide 2", show); },
+                            before : function(slide ,show) { console.log("before anim slide 2", show); }
+                        },
+                    }
+                }
+            );
+            console.log(slider);
+
+            });
+        </script>
+    </body>
+</html>

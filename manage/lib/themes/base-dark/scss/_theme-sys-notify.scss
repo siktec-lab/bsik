@@ -1,8 +1,8 @@
 //Variables:
-$sys-notify-console-background: $admin-base-background !default;
-$sys-notify-console-left-border: $secondary !default;
+$sys-notify-console-background: $secondary !default;
+$sys-notify-console-left-border: hsla(0,0%,100%,.1) !default;
 $sys-notify-console-max-width: 300px !default;
-$sys-notify-console-hover-color: $admin-base-text-main !default;
+$sys-notify-console-hover-color: $text-main-color !default;
 $sys-notify-console-hover-carret-color:$primary !default;
 $sys-notify-console-badge-color: darken($info, 60%) !default;
 $sys-notify-console-badge-bg: $info !default;

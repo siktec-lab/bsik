@@ -13,6 +13,23 @@ version:
     -> initial.
 *******************************************************************************/
 
+$dyn-table-border-color:        hsla(0,0%,100%,.1) !default;
+$dyn-table-background:          bsik-colors("secondary", "darken-1") !default;
+$dyn-table-hover-bg:            darken($dyn-table-background, 2%) !default;
+$dyn-table-header-background:   lighten($dyn-table-background, 2%) !default;
+$dyn-table-body-color:          $text-main-color;
+$dyn-table-header-color:        $text-main-color-s1;
+$dyn-table-body-font-size:      0.95em;
+$dyn-table-header-font-size:    $font-size-root;
+
+$dyn-table-dark-border-color: #4c4c4c !default;
+$dyn-table-toolbar-btn-bg: $primary !default;
+$dyn-table-toolbar-btn-color: $secondary !default;
+$dyn-table-actions-color: bsik-colors("blue", "accent-2") !default;
+$dyn-table-pager-bg: bsik-colors("secondary", "darken-1") !default;
+$dyn-table-pager-border: transparent !default;
+$dyn-table-pager-focus: 0 0 1px 0.1rem rgba($primary, .7) !default;
+
 
 /******************************  BOOTSTRAP TABLE  *****************************/
 
@@ -29,6 +46,9 @@ version:
             position: relative;
             margin-top: 10px;
             margin-bottom: 10px;
+        }
+        .search-input {
+            padding: 0.6375rem 0.75rem;
         }
         .columns {
             >.btn,
@@ -95,16 +115,17 @@ version:
             width: 100%;
             margin-bottom: 0 !important;
             border-color: $dyn-table-border-color;
-            color: $dyn-table-color;
+            color: $dyn-table-body-color;
             th,
             td {
                 vertical-align: middle;
                 box-sizing: border-box;
-                color: $dyn-table-color;
+                color: $dyn-table-body-color;
+                font-size: $dyn-table-body-font-size;
             }
             td>a {
                 font-size: 1.15rem;
-                color: $dyn-table-color;
+                color: $dyn-table-body-color;
                 &:hover {
                     color: $dyn-table-actions-color;
                 }
@@ -116,6 +137,10 @@ version:
                 vertical-align: bottom;
                 padding: 0;
                 margin: 0;
+                background-color: $dyn-table-header-background;
+                font-weight: 400;
+                color: $dyn-table-header-color;
+                font-size: $dyn-table-header-font-size;
                 &:focus {
                     outline: 0 solid transparent;
                 }
@@ -151,6 +176,9 @@ version:
                 }
                 &.no-records-found td {
                     text-align: center;
+                }
+                &:hover {
+                    background-color: $dyn-table-hover-bg;
                 }
                 .card-view {
                     display: flex;
@@ -248,7 +276,7 @@ version:
                         animation-duration: 1.5s;
                         animation-iteration-count: infinite;
                         animation-name: LOADING;
-                        background: $dyn-table-color;
+                        background: $dyn-table-body-color;
                         border-radius: 50%;
                         display: block;
                         height: 5px;
@@ -265,7 +293,7 @@ version:
                     }
                 }
                 &.table-dark {
-                    background: $dyn-table-color;
+                    background: $dyn-table-body-color;
                     .animation-dot,
                     .animation-wrap::after,
                     .animation-wrap::before {
@@ -290,6 +318,8 @@ version:
             margin-bottom: 10px;
         }
         >.pagination-detail {
+            color: darken($dyn-table-body-color, 45%);
+            font-size: 0.85em;
             .pagination-info {
                 line-height: 34px;
                 margin-right: 5px;
@@ -303,6 +333,9 @@ version:
                     .btn-secondary {
                         background-color: $dyn-table-pager-bg;
                         border-color: $dyn-table-pager-border;
+                        padding: 1px 10px;
+                        font-size: 1em;
+                        margin-right: 5px;
                         &:focus,
                         &.show {
                             box-shadow: $dyn-table-pager-focus;

@@ -16,12 +16,14 @@ class SikInstall {
     public $adjust_root = DS."..".DS;
     public $root = ".";
     public $folders = [];
+
     public function __construct() {
         //Create objects:
         $this->folders= (object)$this->folders;
         //Set root:
         $this->root = __DIR__.$this->adjust_root;
     }
+
     public function set_core_folder(string $name, string $path, bool $clear) {
         $this->folders->{$name} = (object)[
             "path"  => $path,
@@ -29,6 +31,7 @@ class SikInstall {
             "clear" => $clear
         ];
     }
+
     public function add_to_folder(string $folder, string $dir, string $from, string $copy = ".") {
         $this->folders->{$folder}->dirs[] = [
             "name" => $dir,
@@ -51,6 +54,7 @@ class SikInstall {
             }
         }
     }
+
     public function clean_destinations() {
         foreach ($this->folders as $fname => $f) {
             if ($f->clear) {
@@ -67,6 +71,7 @@ class SikInstall {
             }
         }
     }
+
     public function create_destinations() {
         foreach ($this->folders as $fname => $f) {
             $this->message("Working on folder [{$fname}] creating child's...", true);
@@ -76,6 +81,7 @@ class SikInstall {
             }
         }
     }
+
     public function move_destinations() {
         foreach ($this->folders as $fname => $f) {
             $this->message("Working on folder [{$fname}] creating files...", true);
@@ -136,7 +142,10 @@ class SikInstall {
                                 // Skip pointers
                                 if ($entry == '.' || $entry == '..') continue;
                                 if (in_array($entry, $is_str)) {
-                                    $this->xcopy(rtrim($source, DS).DS.ltrim($entry, DS), rtrim($dest, DS).DS.ltrim($entry, DS));
+                                    $this->xcopy(
+                                        rtrim($source, DS).DS.ltrim($entry, DS), 
+                                        rtrim($dest, DS).DS.ltrim($entry, DS)
+                                    );
                                 }
                             }
                         }
@@ -190,6 +199,7 @@ class SikInstall {
         $dir->close();
         return true;
     }
+    
     function hash_directory($directory) {
         if (!is_dir($directory)){ return false; }
         $files = array();

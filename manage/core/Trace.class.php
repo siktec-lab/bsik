@@ -22,6 +22,8 @@
 //      -> fixed bug/Error in reg_var -> changed var to vars.
 /******************************************************************************/
 
+namespace Bsik;
+
 if (!defined('EXPOSE_OP_TRACE')) define('EXPOSE_OP_TRACE', false);
 
 class Trace {
@@ -63,7 +65,7 @@ class Trace {
         self::$queries_used[] = array(
             'query'     => $query, 
             'time'      => $time,
-            'time_str'  => number_format($time,5)." sec",
+            'time_str'  => number_format($time, 5)." sec",
             'info'      => $info
         );
     }
@@ -180,8 +182,8 @@ class Trace {
         foreach (self::$registered_vars as $key => $data) {
             $buildHtml[] = "<tr>";
             $buildHtml[] = "<td ".$styles['td_regs'].">".($key+1)."</td>";
-            $buildHtml[] = "<td ".$styles['td_regs'].">".$data[0]."</td>";
-            $buildHtml[] = "<td ".$styles['td_regs_fixed']."><div ".
+            $buildHtml[] = "<td ".$styles['td_regs_fixed'].">".$data[0]."</td>";
+            $buildHtml[] = "<td ".$styles['td_regs']."><div ".
                             $styles['div_regs_fixed'].">".$data[1]."</div></td>";
             $buildHtml[] = "</tr>";
         }
@@ -241,9 +243,8 @@ class Trace {
     }
     private static function get_expose_styles() {
         return array(
-            'wrapper'       => "style='color: black;background:#F2F2F2; border-top:1px solid #A4A4A4; margin:0; padding:0; display: block; z-index:1000; "
-                              ."position:fixed;left:0;right:0;width:100%; bottom:0; font-size:14px; font-family:arial; -webkit-box-shadow:0px -5px 9px -3px #424242; "
-                              ." -moz-box-shadow:0px -5px 9px -3px #424242; box-shadow: 0px -5px 9px -3px rgba(66,66,66,0.8);direction:ltr;'",
+            'wrapper'       => "style='color: black;background:#F2F2F2; border-top:1px solid #525252; margin:0; padding:0; display: block; z-index:1000; "
+                              ."position:fixed;left:0;right:0;width:100%; bottom:0; font-size:14px; font-family:arial; box-shadow: 0px -5px 9px -3px rgb(0,0,0); direction:ltr;'",
             'remover'       => "style='padding:0px;color:white;float:left;margin-left:10px;cursor:pointer;'",
             'toggle'        => "style='padding:0; margin:0; display:none;'",
             'content'       => "style='max-height: 400px; overflow-y: scroll; overflow-x:auto; padding: 0; margin: 0; display: block; color: #050505;'",
@@ -254,8 +255,8 @@ class Trace {
             'table_regs'    => "style='width:90%; margin-left:50px; border-collapse: collapse;color: black; '",
             'th_regs'       => "style='text-align:center; border:1px solid black; background-color:#E6E0F8; font-size:12px; padding:2px 5px; border-collapse: collapse;'",
             'td_regs'       => "style='text-align:left; border:1px solid black; padding:2px 5px; font-size:11px; border-collapse: collapse;'",
-            'td_regs_fixed' => "style='text-align:left; border:1px solid black; padding:2px 5px; font-size:11px; border-collapse: collapse; width:550px;'",
-            'div_regs_fixed'=> "style='max-height:350px; width:550px; overflow:auto'",
+            'td_regs_fixed' => "style='text-align:left; border:1px solid black; padding:2px 5px; font-size:11px; border-collapse: collapse; width:150px;'",
+            'div_regs_fixed'=> "style='max-height:350px; width:100%; overflow:auto'",
             'table_queries' => "style='width:90%; margin-left:50px; border-collapse: collapse;color: black; '",
             'th_queries'    => "style='text-align:center; border:1px solid black; background-color:#F3E2A9; font-size:12px; padding:2px 5px; border-collapse: collapse;'",
             'td_queries'    => "style='text-align:left; border:1px solid black; padding:2px 5px; font-size:11px; border-collapse: collapse;'",            
@@ -290,7 +291,7 @@ class Trace {
       $retval = '';
       $prefix=str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;', $indent);
       if (is_numeric($data)) { $retval.= "Number: $data"; }
-      elseif (is_string($data)) { $retval.= "String: '$data'"; }
+      elseif (is_string($data)) { $retval.= "String: '".htmlspecialchars($data)."'"; }
       elseif (is_null($data)) { $retval.= "NULL"; }
       elseif ($data===true) { $retval.= "TRUE"; }
       elseif ($data===false) { $retval.= "FALSE"; }

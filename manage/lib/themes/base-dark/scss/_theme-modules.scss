@@ -17,18 +17,11 @@ version:
 /******************************  MODULE CONTENT BASE STYLING  *****************************/
 
 .container-module {
-    .module-title {
-        font-size: $module-title-size;
-        padding: 8px 0px;
-        margin-bottom: 1.5rem;
-        border-bottom: 2px solid $module-title-border-color;
-        color: $module-title-color;
-        box-shadow: 0px 10px 12px -10px $module-title-shadow-color, inset -1px -15px 11px -21px $module-title-inner-shadow-color;
-    }
+
     .module-header {
-        border-bottom: 1px solid $module-header-border-color;
+        border-bottom: 3px solid $module-header-border-color;
         padding-bottom: 10px;
-        margin: 0 !important;
+        margin: 0 0 1rem 0!important;
         .module-title {
             font-size: $module-header-title-size;
             color: $module-header-title-color;
@@ -44,8 +37,16 @@ version:
             }
         }
         .module-desc {
-            color: $module-header-border-color;
+            color: $module-header-subtitle-color;
             clear: left;
         }
     }
+    .module-title {
+        font-size: $module-title-size;
+        padding: 8px 0px;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid $module-title-border-color;
+        color: $module-title-color;
+    }
+
 }

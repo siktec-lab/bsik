@@ -1,0 +1,63 @@
+
+/******************************  SCROLLBARS  *****************************/
+
+.ps {
+    .ps__rail-y,
+    .ps__rail-x {
+        &:hover,
+        &:focus,
+        &.ps--clicking {
+            background-color: transparent;
+            opacity: 0.9;
+        }
+    }
+    .ps__thumb-y,
+    .ps__thumb-x {
+        background-color: #aaa;
+        border-radius: 6px;
+        transition: background-color .2s linear, height .2s ease-in-out;
+        -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+        position: absolute;
+    }
+    .ps__thumb-y {
+        width: 6px;
+        right: 0px;
+    }
+    .ps__thumb-x {
+        height: 6px;
+        bottom: 2px;
+    }
+    &.ps--active-y {
+        padding-right: 18px;
+    }
+    &.ps--active-x {
+        padding-bottom: 18px;
+    }
+    .ps__rail-y:hover > .ps__thumb-y,
+    .ps__rail-y:focus > .ps__thumb-y,
+    .ps__rail-y.ps--clicking .ps__thumb-y {
+        background-color: #999;
+        width: 12px;
+    }
+    .ps__rail-x:hover > .ps__thumb-x,
+    .ps__rail-x:focus > .ps__thumb-x,
+    .ps__rail-x.ps--clicking .ps__thumb-x {
+        background-color: #999;
+        height: 12px;
+    }
+    &.ps-left {
+        &.ps--active-y {
+            padding-right: unset;
+            padding-left: 18px;
+        }
+        .ps__rail-y {
+            width: 15px;
+            right: unset !important;
+            left: 0 !important;
+            .ps__thumb-y {
+                right:unset;
+                left: 0px;
+            }
+        }
+    }
+}

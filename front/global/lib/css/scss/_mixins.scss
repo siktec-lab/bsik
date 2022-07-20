@@ -1,0 +1,339 @@
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+@mixin debug-outline($color:yellow, $size:2px) {
+    @if $debug {
+        outline-offset: -$size;
+        outline: $size solid $color;
+    }
+}
+
+@function path_assets($which, $file, $assets : $assets-folder) {
+    //url(#{$tb-img-assets}/tombet-bg.svg)
+    $path : map-get($assets, $which);
+    @return #{$path + "/" + $file};
+}
+
+@mixin debug-media( $content : 'media', $color:yellow) {
+    @if $debug {
+        body::after {
+            position:absolute;
+            background: $color;
+            color:#1A1C23;
+            font-size: 12px;
+            font-weight: 900;
+            content: "#{$content}";
+            top:0;
+            left:0;
+        }
+    }
+}
+
+@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    @media (min-width: map-get($breakpoints, $name)) {
+        @content;
+    }
+}
+
+@mixin box-shadow($shadow...) {
+    $result: ();
+    @each $value in $shadow {
+            @if $value != null {
+                $result: append($result, $value, "comma");
+            }
+        @if $value == none and length($shadow) > 1 {
+            @warn "The keyword 'none' must be used as a single argument.";
+        }
+    }
+    @if (length($result) > 0) {
+        box-shadow: $result;
+    }
+}
+
+@mixin gradient-bg($color: null) {
+    background-color: $color; 
+    @if $enable-gradients {
+      background-image: var(--#{$variable-prefix}gradient);
+    }
+}
+
+$btn-hover-bg-shade-amount:       15%;
+$btn-hover-bg-tint-amount:        15%;
+$btn-hover-border-shade-amount:   20%;
+$btn-hover-border-tint-amount:    10%;
+$btn-active-bg-shade-amount:      20%;
+$btn-active-bg-tint-amount:       20%;
+$btn-active-border-shade-amount:  25%;
+$btn-active-border-tint-amount:   10%;
+$btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
+
+@mixin button-variant(
+    $background,
+    $border: $background,
+    $weight: 500,
+    $radius: 6px,
+    $color: color-contrast($background),
+    $hover-background: if($color == $color-contrast-light, shade-color($background, $btn-hover-bg-shade-amount), tint-color($background, $btn-hover-bg-tint-amount)),
+    $hover-border: if($color == $color-contrast-light, shade-color($border, $btn-hover-border-shade-amount), tint-color($border, $btn-hover-border-tint-amount)),
+    $hover-color: color-contrast($hover-background),
+    $active-background: if($color == $color-contrast-light, shade-color($background, $btn-active-bg-shade-amount), tint-color($background, $btn-active-bg-tint-amount)),
+    $active-border: if($color == $color-contrast-light, shade-color($border, $btn-active-border-shade-amount), tint-color($border, $btn-active-border-tint-amount)),
+    $active-color: color-contrast($active-background),
+    $disabled-background: $background,
+    $disabled-border: $border,
+    $disabled-color: color-contrast($disabled-background),
+    $pad: null
+) {
+    color: $color;
+    @include gradient-bg($background);
+    border-color: $border;
+    border-radius: $radius;
+    font-weight: $weight;
+    @if $pad != null {
+        padding: $pad;
+    }
+    @include box-shadow($btn-box-shadow);
+
+    &:hover {
+        color: $hover-color;
+        @include gradient-bg($hover-background);
+        border-color: $hover-border;
+    }
+
+    .btn-check:focus + &,
+    &:focus {
+        color: $hover-color;
+        @include gradient-bg($hover-background);
+        border-color: $hover-border;
+        box-shadow: 0 0 0 0.2rem rgba(mix($color, $border, 15%), .5);
+    }
+
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:active,
+    &.active,
+    .show > &.dropdown-toggle {
+        color: $active-color;
+        background-color: $active-background;
+        // Remove CSS gradients if they're enabled
+        background-image: if($enable-gradients, none, null);
+        border-color: $active-border;
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(mix($color, $border, 15%), .5);
+        }
+    }
+
+    &:disabled,
+    &.disabled {
+        color: $disabled-color;
+        background-color: $disabled-background;
+        border-color: $disabled-border;
+    }
+}
+
+@mixin button-outline-variant(
+    $color,
+    $border: 2px,
+    $weight: 500,
+    $radius: 10px,
+    $color-hover: color-contrast($color),
+    $active-background: $color,
+    $active-border: $color,
+    $active-color: color-contrast($active-background),
+    $pad: null
+) {
+
+    color: $color;
+    border-color: $color;
+    border-width: $border;
+    border-radius: $radius;
+    font-weight: $weight;
+    @if $pad != null {
+        padding: $pad;
+    }
+    &:hover {
+        color: $color-hover;
+        background-color: $active-background;
+        border-color: $active-border;
+    }
+
+    .btn-check:focus + &,
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($color, .5);
+    }
+
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:active,
+    &.active,
+    &.dropdown-toggle.show {
+        color: $active-color;
+        background-color: $active-background;
+        border-color: $active-border;
+        &:focus {
+            box-shadow: 0 0 0 .25rem rgba($color, .5);
+        }
+    }
+    &:disabled,
+    &.disabled {
+        color: $color;
+        background-color: transparent;
+    }
+}
+
+
+@mixin ribbon-variant(
+    $name,
+    $background,
+    $color: black,
+    $wrap: 10px
+) {
+    $width: 100px;
+    $height: 18px;
+    .ribbon-#{$name} {
+        z-index: 1;
+        overflow: hidden;
+        position: absolute;
+        width: $width;
+        height: $width;
+        &:before,
+        &::after {
+            content: "";
+            display: block;
+            z-index: -1;
+            position: absolute;
+            border-width: $wrap / 2;
+            border-style: solid;
+        }
+        span {
+            display: block;
+            text-align: center;
+            line-height: $height;
+            height: $height;
+            width: $width * 1.5;
+            position: absolute;
+            color: $color;
+            font-weight: bold;
+            font-size:0.85rem;
+            box-shadow: 0 0 7px rgba(35, 46, 57, 0.8);
+            background-color: $background;
+            text-transform: uppercase;
+        }
+        /* corner-ribbon styles, left-top */
+        &.ribbon-left-top {
+            margin-left: -#{$wrap};
+            margin-top: -#{$wrap};
+            left: 0;
+            top: 0;
+            &:before {
+                right: 35px;
+                top: 0;
+                border-left-color: transparent;
+                border-right-color: darken($background, 5%);
+                border-top-color: transparent;
+                border-bottom-color: darken($background, 5%);
+            }
+            &:after {
+                left: 0;
+                bottom: 35px;
+                border-left-color: transparent;
+                border-right-color: darken($background, 5%);
+                border-top-color: transparent;
+                border-bottom-color: darken($background, 5%);
+            }
+            span {
+                right: -5%;
+                top: 22%;
+                -webkit-transform: rotate(-45deg);
+                        transform: rotate(-45deg);
+            }
+        }
+        &.ribbon-right-top {
+            margin-right: -#{$wrap};
+            margin-top: -#{$wrap};
+            right: 0;
+            top: 0;
+            &:before {
+                left: 36px;
+                top: 0;
+                border-left-color: darken($background, 5%);
+                border-right-color: transparent;
+                border-top-color: transparent;
+                border-bottom-color: darken($background, 5%);
+            }
+            &:after {
+                right: 0;
+                bottom: 36px;
+                border-left-color: darken($background, 5%);
+                border-right-color: transparent;
+                border-top-color: transparent;
+                border-bottom-color: darken($background, 5%);
+            }
+            span {
+                left: -5%;
+                top: 22%;
+                -webkit-transform: rotate(45deg);
+                        transform: rotate(45deg);
+            }
+        }
+        &.ribbon-left-bottom {
+            margin-left: -#{$wrap};
+            margin-bottom: -#{$wrap};
+            left: 0;
+            bottom: 0;
+            &:before {
+                left: 0;
+                top: 36px;
+                border-left-color: transparent;
+                border-right-color: darken($background, 5%);
+                border-top-color: darken($background, 5%);
+                border-bottom-color: transparent;
+            }
+            &:after {
+                right: 36px;
+                bottom: 0;
+                border-left-color: transparent;
+                border-right-color: darken($background, 5%);
+                border-top-color: darken($background, 5%);
+                border-bottom-color: transparent;
+            }
+            span {
+                right: -5%;
+                bottom: 22%;
+                -webkit-transform: rotate(45deg);
+                        transform: rotate(45deg);
+            }
+        }
+        &.ribbon-right-bottom {
+            margin-right: -#{$wrap};
+            margin-bottom: -#{$wrap};
+            right: 0;
+            bottom: 0;
+            &:before {
+                right: 0;
+                top: 36px;
+                border-left-color: darken($background, 5%);
+                border-right-color: transparent;
+                border-top-color: darken($background, 5%);
+                border-bottom-color: transparent;
+            }
+            &:after {
+                left: 36px;
+                bottom: 0;
+                border-left-color: darken($background, 5%);
+                border-right-color: transparent;
+                border-top-color: darken($background, 5%);
+                border-bottom-color: transparent;
+            }
+            span {
+                left: -5%;
+                bottom: 22%;
+                -webkit-transform: rotate(-45deg);
+                        transform: rotate(-45deg);
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,53 @@
+//-------------------------------------------------------------------------------------------------------
+// Variables:
+//-------------------------------------------------------------------------------------------------------
+$plugin-smart-form-font-size: 1rem;
+$plugin-smart-form-invalid-color: #dc3545;
+$plugin-smart-form-valid-color: #198754;
+
+
+//-------------------------------------------------------------------------------------------------------
+// Style:
+//-------------------------------------------------------------------------------------------------------
+form.smart-form {
+
+    .general-feedback {
+        display: none;
+        width: 100%;
+        margin: 0 0 1rem 0;
+        font-size: $plugin-smart-form-font-size;
+        .show-valid,
+        .show-invalid {
+             display: none;
+             font-size: 1.4em;
+             vertical-align: text-bottom;
+        }
+        .message {
+            //padding-left:1ch;
+        }
+        &.is-invalid {
+            display: block;
+            color: $plugin-smart-form-invalid-color;
+            .show-invalid {
+                display: inline-block;   
+            }
+        }
+        &.is-valid {
+            display: block;
+            color: $plugin-smart-form-valid-color;
+            .show-valid {
+                display: inline-block;   
+            }
+        }
+    }
+
+    @include breakpoint-up(tablet) {
+
+    }
+    @include breakpoint-up(pc) {
+
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+}

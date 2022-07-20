@@ -10,12 +10,17 @@ manage/spsapi.php
 /conf.php
 /manage/lib/required/
 /manage/lib/themes/bootstrap/
+/manage/trash/*
+!/manage/trash/.index
 /logs/
-/test.php
 bsik_m_temp*
 uploaded/
+cache/
+/localtesting/
 !keepin
+
 ### VisualStudioCode ###
+.VSCodeCounter
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

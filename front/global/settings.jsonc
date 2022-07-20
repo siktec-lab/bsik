@@ -1,0 +1,25 @@
+
+{
+    "values" : {
+        "lang"          : "en",
+        "charset"       : "utf-8",
+        "viewport"      : "width=device-width, initial-scale=1",
+        "author"        : "SIKTEC",
+        "description"   : "",
+        "title"         : "",
+        "logo"          : "logo-shadows.svg"
+    },
+    "options" : {
+        "lang"          : ["en","he","fr"],
+        "charset"       : ["utf-8", "iso-8859-1"]
+    },
+    "descriptions" : {
+        "lang"          : "Sets the page lang attribute",
+        "charset"       : "Sets the page meta charset",
+        "viewport"      : "Sets the page meta viewport",
+        "author"        : "Sets the page meta author name",
+        "description"   : "The page description",
+        "title"         : "The page (tab) title",
+        "logo"          : "the logo file name to use in pages"
+    }
+}

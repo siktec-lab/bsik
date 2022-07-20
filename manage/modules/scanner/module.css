@@ -1,0 +1,31 @@
+/* 
+ * Settings form / modal:
+ */
+/* #pages-settings-modal .modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+} */
+.modal-body .form-modal-container {
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+
+#create-bookmaker-select-logo-dropdown img.bookmaker-icon {
+    max-width: 16px;
+}
+
+#new-bookmaker-modal h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgb(143, 143, 143);
+    display: inline-block;
+    padding-right: 1ch;
+}
+
+#new-bookmaker-modal .filepond--root {
+    outline: 2px dashed rgba(0, 0, 0, 0.16);
+}
+#new-bookmaker-modal .filepond--root .filepond--drop-label {
+    /* border: 2px dashed rgba(0, 0, 0, 0.16); */
+}

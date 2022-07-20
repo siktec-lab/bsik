@@ -1,0 +1,360 @@
+{
+    "desc": "SIKTEC BSIK Platform",
+    "name": "BSIK",
+    "note": [],
+    "tags": [
+        {
+            "bug": {
+                "desc": "all bugs found"
+            }
+        },
+        {
+            "core": {
+                "desc": "bsik core related tasks"
+            }
+        },
+        {
+            "theme": {
+                "desc": "theme related work"
+            }
+        },
+        {
+            "unittest": {
+                "desc": "stuff related to tests"
+            }
+        },
+        {
+            "idea": {
+                "desc": "ideas stored here"
+            }
+        }
+    ],
+    "tasker": {
+        "allowdelete": true,
+        "created": "18-07-2022 03:15:27",
+        "enableloads": true,
+        "modified": "20-07-2022 14:40:35",
+        "usecolors": true,
+        "used": "20-07-2022 14:40:39",
+        "version": "1.0.4"
+    },
+    "tasks": [
+        {
+            "cancel": false,
+            "created": "18-07-2022 03:23:08",
+            "load": 5,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                },
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [],
+                    "date": "18-07-2022 03:31:54",
+                    "note": "Created basic api endpoints + frontend code to initiate the uninstall proccess",
+                    "status": 0.05000000074505806
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:15:15",
+                    "note": "Implemented trahed zipfolder of the module content.",
+                    "status": 0.15000000596046448
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:52:59",
+                    "note": "Itroduced to uninstall the new system of Module events - read more in module events",
+                    "status": 0.25
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:59:00",
+                    "note": "work: remove DB row and files and log operation",
+                    "status": 0.25
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 05:32:42",
+                    "note": "now removed from DB and files + log and core modules protection",
+                    "status": 0.44999998807907104
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 05:33:18",
+                    "note": "TO-BUILD: what about dependencies check and remove??? only after ref count implementation",
+                    "status": 0.44999998807907104
+                }
+            ],
+            "status": 0.44999998807907104,
+            "tagged": [
+                "core"
+            ],
+            "task": "implement uninstall modules from core module",
+            "updated": "18-07-2022 03:36:14"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 04:08:34",
+            "load": 7,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:09:33",
+                    "note": "Now has Fs tools and Zip tools very basic but its a start",
+                    "status": 0.33000001311302185
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:10:17",
+                    "note": "added unit tests for this section testing Fs and Zip Operations",
+                    "status": 0.4099999964237213
+                }
+            ],
+            "status": 0.4099999964237213,
+            "tagged": [
+                "core"
+            ],
+            "task": "Build core FsTools which will support filesystem op and zip and more",
+            "updated": "18-07-2022 04:08:34"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 04:16:38",
+            "load": 5,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [],
+            "status": 0.0,
+            "tagged": [
+                "idea"
+            ],
+            "task": "Trash system??? maybe its a good Idea - with index locations etc....",
+            "updated": "18-07-2022 04:16:38"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 04:17:59",
+            "load": 4,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:20:31",
+                    "note": "Main module is ready allready loaded by default with the abillity to add, remove menu",
+                    "status": 0.4099999964237213
+                }
+            ],
+            "status": 0.4099999964237213,
+            "tagged": [
+                "theme"
+            ],
+            "task": "Build lib module for controling side menu of the manage platform",
+            "updated": "18-07-2022 04:17:59"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 04:54:55",
+            "load": 8,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:55:28",
+                    "note": "The base is now working Modules has ModuleEvent and register_event methods to register the events",
+                    "status": 0.6100000143051147
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 04:57:00",
+                    "note": "implemented the me-uninstall signal in the core api",
+                    "status": 0.6700000166893005
+                }
+            ],
+            "status": 0.6700000166893005,
+            "tagged": [
+                "core"
+            ],
+            "task": "Module Events System - A way to program routines which are executed based on a system event",
+            "updated": "18-07-2022 04:54:55"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 05:34:57",
+            "load": 7,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 05:35:29",
+                    "note": "The basics are allready here - need to port and improve schema handling",
+                    "status": 0.30000001192092896
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "20-07-2022 14:38:56",
+                    "note": "refactored better layout with dedecated classes",
+                    "status": 0.4000000059604645
+                },
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "20-07-2022 14:39:39",
+                    "note": "Improved the array_validate in Std to support more advanced features used by the installation script when validating scheams",
+                    "status": 0.4300000071525574
+                }
+            ],
+            "status": 0.4300000071525574,
+            "tagged": [
+                "core"
+            ],
+            "task": "Implement install module from ZIP file",
+            "updated": "18-07-2022 05:34:57"
+        },
+        {
+            "cancel": false,
+            "created": "18-07-2022 17:45:12",
+            "load": 3,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [
+                {
+                    "by": [
+                        "shlomi"
+                    ],
+                    "date": "18-07-2022 17:50:48",
+                    "note": "Fixed! was a bug is SikApi answer_message was always returning not defining (!empty instead of empty)",
+                    "status": 1.0
+                }
+            ],
+            "status": 1.0,
+            "tagged": [
+                "bug",
+                "core"
+            ],
+            "task": "Find bug in Api -> when update_answer_status get a message its not set",
+            "updated": "18-07-2022 17:45:12"
+        },
+        {
+            "cancel": false,
+            "created": "20-07-2022 14:34:53",
+            "load": 4,
+            "plan": [
+                {
+                    "date": "",
+                    "user": [
+                        "shlomi"
+                    ],
+                    "v": "1.0.1"
+                }
+            ],
+            "report": [],
+            "status": 0.0,
+            "tagged": [
+                "core"
+            ],
+            "task": "converting defines to const mainly in conf system",
+            "updated": "20-07-2022 14:34:53"
+        }
+    ],
+    "types": [
+        {
+            "desc": "basic task",
+            "name": "task"
+        }
+    ],
+    "users": [
+        {
+            "shlomi": {
+                "desc": "main dev",
+                "mail": ""
+            }
+        }
+    ],
+    "version": [
+        "1.0.1"
+    ]
+}

@@ -9,30 +9,174 @@
 1.0.1:
     ->creation - initial
 *******************************************************************************/
-require_once "Excep.class.php";
-require_once "Std.class.php";
-require_once 'Db.class.php';
 
-class Base extends BsikStd
-{
+namespace Bsik;
 
-    /* Base Static properties:*/
-    public static $conf;
+require_once PLAT_PATH_AUTOLOAD;
+
+use Bsik\Std;
+use Bsik\DB\MysqliDb;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+class Base {
+
+    /**********************************************************************************************************
+    /** GENERIC PAGE:
+     **********************************************************************************************************/
+
+    //page url reference:
     static $index_page_url = "";
-    public static MysqliDb $db;
 
-    /* Get datetime str
-     *  @param $w => String
-     *  @Default-param: "now-str"
-     *  @return String
-     *  @Exmaples:
-     *      > "now-str" => now in 'Y-m-d H:i:s' format
-     *      > "now-mysql" => now in 'Y-m-d H:i:s' format
-     *      > Any => runs date() and pass argument
+    //User String:
+    public static string $user_string;
+
+    //Storage container:
+    public array $storage = [];
+
+    /* Storage used to save data and handle it safely.
+     *  @param $name => String
+     *  @param $data => Mixed
+     *  @param $protect => Boolean
+     *  @Default-params: protect - true
+     *  @return Boolean
+     *  @Examples:
+     *      > $Page->store("test value", "dom.png");
+    */
+    public function store($name, $data, $protect = true) {
+        if ($protect && isset($this->storage[$name])) {
+            trigger_error("'Page->store' you are trying to override a protected storage member", E_PLAT_WARNING);
+            return false;
+        }
+        $this->storage[$name] = $data;
+        if ($data === false || $data === null) return false;
+        return true;
+    }
+
+    /* get method is used to retrieve stored data.
+     *  @param $name => Boolean|String // if True return the entire storage array, otherwise return by name.
+     *  @Default-params: None
+     *  @return Mixed
+     *  @Examples:
+     *      > $Page->get(true);
+     *      > $Page->get("key-name");
+    */
+    public function get($name = true, $default = "") {
+        return $name === true ? $this->storage : $this->storage[$name] ?? $default;
+    }
+
+    //Additional globally assigned html:
+    public $html_container = [];
+    
+    /**
+     * additional_html
+     * - saves html strings for appending at the end of the page
+     * @param  string $html
+     * @return void
      */
+    public function additional_html(string $html) : void {
+        $this->html_container[] = $html;
+    }
+
+     //The token:
+    public static array $token = [
+        "csrf" => "",
+        "meta" => ""
+    ];
+    
+    /**
+     * set_user_string
+     * - sets the user identifier string for logging.
+     * @param  string $str
+     * @return void
+     */
+    final public static function set_user_string(string $str) : void {
+        self::$user_string = empty(trim($str)) ? "unknown" : trim($str);
+    }
+
+    /**
+     * tokenize
+     * - Get and Set the page token If not set create a new one.
+     * @return void
+     */
+    final public static function tokenize() : void {
+        if (empty(self::get_session("csrftoken")))
+            self::create_session(["csrftoken" => bin2hex(random_bytes(32))]);
+        self::$token["csrf"] = self::get_session("csrftoken");
+        self::$token["meta"] = "<meta name='csrf-token' content=".self::$token["csrf"].">";
+    }
+
+    /**
+     * csrf
+     * - convenient method to get the csrf token
+     * @return string
+     */
+    final public static function csrf() : string {
+        return self::$token["csrf"] ?? "";
+    }
+
+
+    /**********************************************************************************************************
+    /** LOGGER:
+     **********************************************************************************************************/
+    //Logger:
+    public static Logger $logger;
+    public static bool   $logger_enabled = true;
+    
+    /**
+     * load_logger
+     * - initialize a logger channel
+     * @param  string $path
+     * @param  string $channel
+     * @return void
+     */
+    final public static function load_logger(string $path, string $channel = "page-general") : void {
+        //Logger:
+        self::$logger = new Logger($channel);
+        self::$logger->pushHandler(new StreamHandler($path.$channel.".log"));
+        self::$logger->pushProcessor(function ($record) {
+            $record['extra']['user'] = self::$user_string;
+            return $record;
+        });
+    }
+    
+    /**
+     * log
+     * - safely logs to platform logs - affected by the enable log flag.
+     * @param  string $type     => one of those types : "notice", "info", "error", "warning"
+     * @param  string $message  => main message to log
+     * @param  array $context   => context array for additional data
+     * @return void
+     */
+    final public static function log(string $type, string $message, array $context) : void {
+        if (
+            in_array($type, ["notice", "info", "error", "warning"]) &&
+            self::$logger_enabled
+        ) {
+            self::$logger->{$type}($message, $context);
+        }
+    }
+
+    /**********************************************************************************************************
+    /** GLOBAL CONFIGURATION:
+     **********************************************************************************************************/
+    public static $conf;
+    //Set configuration object:
     public static function configure( array $_conf) : void {
         self::$conf = $_conf;
     }
+
+
+    /**********************************************************************************************************
+    /** DATABASE:
+     **********************************************************************************************************/    
+    public static MysqliDb $db;
+    /**
+     * connect_db
+     * establish a db connection based on global conf set.
+     * @return void
+     */
     public static function connect_db() : void {
         self::$db = new MysqliDb(
             self::$conf["db"]['host'], 
@@ -41,40 +185,84 @@ class Base extends BsikStd
             self::$conf["db"]['name'], 
             self::$conf["db"]['port']
         );
-    }
+    }    
+    /**
+     * disconnect_db
+     * safely disconnect from db
+     * @return void
+     */
     public static function disconnect_db() : void {
         self::$db->disconnect();
     }
     
+    /**********************************************************************************************************
+    /** SESSIONS:
+     **********************************************************************************************************/
     /**
-     * print_pre
-     * useful print variables in a pre container
-     * @param  mixed $out = packed values
+     * create_session - sets a session value
+     *
+     * @param  array $sessions
      * @return void
      */
-    public static function print_pre(...$out) {
-        print "<pre>";
-        foreach ($out as $value) print_r($value);
-        print "</pre>";
+    public static function create_session(array $sessions) {
+        foreach ($sessions as $key => $session) {
+            $_SESSION[$key] = $session;
+        }
+    }
+    /**
+     * create_session - deletes a session value
+     *
+     * @param  array $sessions
+     * @return void
+     */
+    public static function delete_session(array $sessions) {
+        foreach ($sessions as $session) {
+            if (isset($_SESSION[$session]))
+                unset($_SESSION[$session]);
+        }
+    }
+    /**
+     * get_session - get from session
+     *
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed
+     */
+    public static function get_session(string $key, $default = null) {
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
     }
     
-    
-    /* A Ui based to handle errors that occurred:
-    */
+    /**********************************************************************************************************
+    /** NAVIGATION:
+     **********************************************************************************************************/
+    /**
+     * error_page
+     * A Ui based to handle errors that occurred
+     * @param  mixed $code
+     * @return void
+     */
     public static function error_page($code = 0) {
-        Base::jump_to_page("error",["ername" => $code],true);
+        Base::jump_to_page(
+            "error",
+                [
+                    "page"      => $code,
+                    "code"      => $code,
+                    "request"   => $_SERVER['REQUEST_URI'],
+                    "method"    => $_SERVER['REQUEST_METHOD'],
+                    "remote"    => $_SERVER['REMOTE_ADDR']
+                ], 
+            true
+        );
     }
-    /* Jump to page by redirect if headers were sent will use a javascript method.
-     *  @param $page => String - Page name as used by system
-     *  @param $Qparams => Array - Keys as params names and values as value to attach to the URL query string
-     *  @param $exit => Boolean - whether to kill the page or not
-     *  @Default-params: 
-     *      - String "main", 
-     *      - [{no query String extra params}],
-     *      - Boolean True
-     *  @Examples:
-     *      > jump_to_page("about", ["v" => 10]) => redirects to the about page with v = 10
-    */
+    /**
+     * jump_to_page
+     * Jump to page by redirect if headers were sent will use a javascript method.
+     * @param  mixed $page
+     * @param  mixed $Qparams
+     * @param  mixed $exit
+     * @return void
+     * @usage jump_to_page("about", ["v" => 10]) => redirects to the about page with v = 10
+     */
     public static function jump_to_page($page = "/", $Qparams = [], $exit = true) {
         $url = self::$index_page_url."/".
                 ($page !== "/" ? urlencode($page)."/" : "").
@@ -88,50 +276,4 @@ class Base extends BsikStd
         if ($exit) exit();
     } 
 
-        
-    /**
-     * create_session - sets a session value
-     *
-     * @param  array $sessions
-     * @return void
-     */
-    public static function create_session(array $sessions) {
-        foreach ($sessions as $key => $sess) {
-            $_SESSION[$key] = $sess;
-        }
-    }
-    /**
-     * create_session - deletes a session value
-     *
-     * @param  array $sessions
-     * @return void
-     */
-    public static function delete_session(array $sessions) {
-        foreach ($sessions as $sess) {
-            if (isset($_SESSION[$sess]))
-                unset($_SESSION[$sess]);
-        }
-    }
-    /**
-     * get_session - get from session
-     *
-     * @param  string $key
-     * @param  mixed $default
-     * @return mixed
-     */
-    public static function get_session(string $key, $default = null) {
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
-    }
-    /* Map all files in a folder:
-     *  @param $path => String : the path to the dynamic pages folder.
-     *  @param $ext => String : the extension.
-     *  @return array
-    */
-    protected function list_files_in(string $path, string $ext = ".php") : array {
-        return array_filter(
-            scandir($path), function($k) use($ext) { 
-                return is_string($k) && self::$std::str_ends_with($k, $ext); 
-            }
-        );
-    }
 }

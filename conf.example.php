@@ -53,7 +53,7 @@ $conf["db"] = [
 define("SEND_DB_ERRORS", false);
 define("SEND_ERRORS_TO", "example@gmail.com");
 define("LOG_DB_ERRORS", true);
-define("LOG_DB_TO_TABLE", "db_error_log");
+define("LOG_DB_TO_TABLE", "bsik_db_error_log");
 define("LOG_PLAT_ERRORS", true);
 define("LOG_PLAT_TO_TABLE", "plat_log");
 

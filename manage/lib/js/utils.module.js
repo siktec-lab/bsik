@@ -3,26 +3,27 @@ export function onActions(actions = "click", data = "action", events) {
     //Register events:
     $(document).on(actions, `[${data}]`, function(ev) {
         let operation = $(this).attr(data);
-        let eventtype = ev.type;    
-        console.log(operation);
+        let eventtype = ev.type;
         if (events.hasOwnProperty(`${eventtype} ${operation}`)) {
             events[`${eventtype} ${operation}`].call(this, ev);
         }
     });
 }
 
-export function getConfirmation(confirmed = function(){}, rejected = function(){}, withmodal = null) {
+export function getConfirmation(content = "Please Confirm", confirmed = function(){}, rejected = function(){}, withmodal = null) {
     let modal = withmodal ? withmodal : Bsik.modals.confirm;
     if (!modal) {
         console.log("confiramtion modal not available");
         return;
     }
     let $modal = $(modal._element);
+    let $body    = $modal.find(`div.modal-body`).eq(0);
     let $confirm = $modal.find(`button.confirm-action-modal`).eq(0);
     let $reject = $modal.find(`button.reject-action-modal`).eq(0);
     if ($confirm.length && $reject.length) {
-        $confirm.unbind("click.confirmation").bind("click.confirmation", { modal: modal }, confirmed);
-        $reject.unbind("click.confirmation").bind("click.confirmation", { modal: modal }, rejected);
+        $body.html(content);
+        $confirm.off("click.confirmation").on("click.confirmation", { modal: modal }, confirmed);
+        $reject.off("click.confirmation").on("click.confirmation", { modal: modal }, rejected);
         modal.show();
     } else {
         console.log("confiramtion modal buttons not available");
@@ -178,3 +179,40 @@ export const objAttr = {
         };
     }
 };
+
+export function timeFromNow(date, nowDate = Date.now(), rft = new Intl.RelativeTimeFormat(undefined, { numeric: "auto" })) {
+    const SECOND = 1000;
+    const MINUTE = 60 * SECOND;
+    const HOUR = 60 * MINUTE;
+    const DAY = 24 * HOUR;
+    const WEEK = 7 * DAY;
+    const MONTH = 30 * DAY;
+    const YEAR = 365 * DAY;
+    const intervals = [
+        { ge: YEAR, divisor: YEAR, unit: 'year' },
+        { ge: MONTH, divisor: MONTH, unit: 'month' },
+        { ge: WEEK, divisor: WEEK, unit: 'week' },
+        { ge: DAY, divisor: DAY, unit: 'day' },
+        { ge: HOUR, divisor: HOUR, unit: 'hour' },
+        { ge: MINUTE, divisor: MINUTE, unit: 'minute' },
+        { ge: 30 * SECOND, divisor: SECOND, unit: 'seconds' },
+        { ge: 0, divisor: 1, text: 'just now' },
+    ];
+    const now = typeof nowDate === 'object' ? nowDate.getTime() : new Date(nowDate).getTime();
+    const diff = now - (typeof date === 'object' ? date : new Date(date)).getTime();
+    const diffAbs = Math.abs(diff);
+    for (const interval of intervals) {
+        if (diffAbs >= interval.ge) {
+            const x = Math.round(Math.abs(diff) / interval.divisor);
+            const isFuture = diff < 0;
+            return interval.unit ? rft.format(isFuture ? x : -x, interval.unit) : interval.text;
+        }
+    }
+}
+
+export function trimChars(string, character) {
+    const arr = Array.from(string);
+    const first = arr.findIndex(char => char !== character);
+    const last = arr.reverse().findIndex(char => char !== character);
+    return (first === -1 && last === -1) ? '' : string.substring(first, string.length - last);
+}

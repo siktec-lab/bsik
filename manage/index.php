@@ -13,14 +13,23 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 define("ROOT_PATH", dirname(__FILE__).DS.".." );
+define('USE_BSIK_ERROR_HANDLERS', true);
 
 /******************************  Requires       *****************************/
 
 require_once ROOT_PATH.DS.'conf.php';
 require_once PLAT_PATH_AUTOLOAD;
-require_once PLAT_PATH_CORE.DS.'Base.class.php';
-require_once PLAT_PATH_CORE.DS.'Admin.class.php';
-require_once PLAT_PATH_MANAGE.DS.'core'.DS.'AdminPage.class.php';
+require_once PLAT_PATH_CORE.DS.'Excep.class.php';
+
+use \Bsik\Std;
+use \Bsik\Api\AdminApi;
+use \Bsik\Base;
+use Bsik\Module\Modules;
+use Bsik\Privileges\PrivAccess;
+use Bsik\Privileges\RequiredPrivileges;
+use \Bsik\Trace;
+use \Bsik\Users\User;
+use \Bsik\Render\APage;
 
 Trace::add_step(__FILE__, "Controller - manage index");
 
@@ -33,98 +42,158 @@ Base::connect_db();
 Trace::add_trace("Establish db connection",__FILE__);
 
 /******************************  Load Admin      *****************************/
-$Admin = new Admin();
-Trace::add_trace("Loaded Admin Object", __FILE__);
-Trace::reg_vars(["admin levels" => $Admin->levels]);
+$User = new User();
+Trace::add_trace("Loaded User Object", __FILE__);
 
 /******************************  User login / logout   *****************************/
 //Check user signed or not:
-$Admin->admin_login();
-$Admin->initial_admin_login_status();
-Trace::reg_vars(["Admin signed" => $Admin->is_signed]);
-Trace::add_trace("Admin login status",__FILE__, $Admin->admin_data);
+$User->user_login();
+$User->initial_user_login_status();
+Trace::reg_vars(["User signed" => $User->is_signed]);
+Trace::add_trace("User login status",__FILE__, $User->user_data);
+Trace::reg_vars(["User granted privileges" => $User->priv->all_granted(true)]);
 
+// Trace::expose_trace();
+// exit;
 
-/******************************  Load Modules And Pages *****************************/
+/******************************  Load Modules And Page Controller *****************************/
+APage::set_user_string($User->user_identifier());
+APage::tokenize();
+APage::load_request($_REQUEST ?? []);
+
+//Initialize controller:
 $APage = new APage(
-    $Admin->admin_identifier(), // For logging Admin identifier
-    "bsikrender-manage",        // For the chanel to use  
+    enable_logger       : true, 
+    logger_channel      : APage::$request->type == "api" ? "aapi-manage" : "apage-general",
+    issuer_privileges   : $User->priv
 );
-Trace::add_trace("Loaded AdminPage object", __FILE__, ["request" => $APage->request, "token" => $APage->token]);
-Trace::reg_vars(["Requested module" => $APage->request]);
-Trace::reg_vars(["Available modules" => $APage->modules]);
+
+//Initialize Api:
+$AApi = new AdminApi(
+    csrf                : APage::csrf(),                      // CSRF TOKEN
+    debug               : PLAT_ADMIN_PANEL_API_DEBUG_MODE,    // Operation Mode
+    issuer_privileges   : $User->priv
+);
+
+//------
+
+Trace::add_trace("Loaded AdminPage object", __FILE__, ["token" => APage::$token]);
+Trace::reg_vars(["Request"            => APage::$request->get()]);
+Trace::reg_vars(["Requested module"   => APage::$request->module]);
+Trace::reg_vars(["Requested which"    => APage::$request->which]);
+Trace::reg_vars(["Available modules"  => APage::$modules->get_all_installed()]);
+
+/******************************  Core Includes      *****************************/
+require_once PLAT_ADMIN_COMPONENTS;
+require_once PLAT_ADMIN_API;
+
+/***************************  Required Privileges  *****************************/
+$access_policy = new RequiredPrivileges();
+$access_policy->define(new PrivAccess(
+    manage : true
+));
 
 /******************************  Build Page      *****************************/
 Trace::add_step(__FILE__,"Loading and building page:");
-switch ($APage->request["type"]) {
+switch (APage::$request->type) {
+
     case "module": {
-        //Must be signed in:
+
         Trace::add_trace("Module type detected", __FILE__);
-        if (!$Admin->is_signed) {
-            Trace::add_trace("Module requires Admin to be signed in - redirecting", __FILE__);
+
+        
+        //Must be signed in and have access :
+        if (!$User->is_signed) {
+            Trace::add_trace("Module requires User to be signed in - redirecting", __FILE__);
             require_once PLAT_PATH_MANAGE.DS."pages".DS."login.php";
         }
-        //Make sure Module Exists:
-        elseif (!$APage->isset_module()) {
-            Trace::add_trace("Requested module is not set", __FILE__);
-            //$APage::error_page("module_not_set");
+        elseif (!$User->priv->has_privileges($access_policy)) {
+            Trace::add_trace("No privileges to access manage panel", __FILE__);
+            $User->errors["login"] = "privileges";
+            require_once PLAT_PATH_MANAGE.DS."pages".DS."login.php";
         }
-        //Make sure exists and is allowed?
-        elseif (!$APage->is_allowed_to_use($Admin)) {
-            Trace::add_trace("Module requires privileges that admin does not have", __FILE__);
-            $APage::error_page("admin_is_not_allowed");
-        } else {
-            Trace::add_trace("Admin check successfully - signed, is-set, is-allowed", __FILE__);
-            //Load the platform that will also render the module:
-            $APage->load_module();
-            Trace::add_trace("Module loaded to Apage.", __FILE__);
-            Trace::reg_vars(["Loaded module" => $APage->module]);
-            Trace::reg_vars(["Loaded page settings (extended)" => $APage->settings]);
+
+        //Make sure Module Exists:
+        elseif (!$APage->is_module_installed()) {
+            Trace::add_trace("Requested module is not set", __FILE__);
+            $APage::error_page(404); // No module
+        }
+
+        //Make sure exists and is allowed:
+        //TODO: move this to render block so we can return the good error in body:
+        // elseif (false && !$APage->is_allowed_to_use_module($User)) {
+        //     Trace::add_trace("Module requires privileges that user does not have", __FILE__);
+        //     $APage::error_page(403); // Forbiden
+        
+        //Everything is fine -> render the page:
+        else {
+            Trace::add_trace("User check successfully - signed, is-set, is-allowed", __FILE__);
+
+            //Load global core settings:
+            $APage->load_settings("global", true);
+            
+            //Load requested module:
+            $APage->load_module(Api : $AApi, User: $User);
+
+            //-----
+            Trace::add_trace("Module loaded to APage.", __FILE__);
+            Trace::add_trace("Loaded paths", __FILE__, $APage::$module->paths);
+            Trace::reg_vars(["Loaded module" => $APage::$module]);
+            Trace::reg_vars(["Loaded Page settings (extended)" => $APage::$module->settings]);
+            Trace::reg_var("Loaded Module settings (extended)", $APage::$module->settings->get_all(true));
+            Trace::reg_var("Loaded View settings", $APage::$module->current_view->settings->get_all(true));
+            //-----
+            
             require_once PLAT_PATH_MANAGE.DS."pages".DS."base.php";
         }
         Trace::expose_trace();
     } break;
+
     case "api": {
+
         Trace::add_trace("Api type request detected", __FILE__);
-        //Load core Api end points and Api object:
-        require_once PLAT_PATH_MANAGE.DS."core".DS."AdminApi.class.php";
+        $AApi->set_headers(content : "application/json");
+        
         //Must be signed in:
-        if (!$Admin->is_signed) {
-            $AApi->update_answer_status(403, "You must be registered and signed as an Admin.");
+        if (!$User->is_signed || !$User->priv->has_privileges($access_policy)) {
+            $AApi->request->update_answer_status(403, "You must be registered and signed as an User.");
         }
         //Make sure Module Exists:
-        elseif ($APage->isset_module() && $APage->is_allowed_to_use($Admin)) {
-            Trace::add_trace("Admin check successfully - signed, is-set, is-allowed", __FILE__);
+        elseif ($APage->is_module_installed() /*&& $APage->is_allowed_to_use($User) */) {
+            Trace::add_trace("User check successfully - signed, is-set, is-allowed", __FILE__);
             $APage->load_module();
-            //Load module extenssion:
-            try {
-                require_once PLAT_PATH_MANAGE.DS."modules".DS.$APage->module->name.DS."module-api.php";
-            } catch (Throwable $e) {
-                $AApi->logger->notice("Api extension of module throwed error - ignored.", ["module" => $APage->module->name, "error" => $e->getMessage()]);
-                $AApi->update_answer_status(404, "Api extension of module throwed error - ignored.");
+            Trace::add_trace("Loaded module", __FILE__, $APage::$module);
+            Trace::add_trace("Loaded page paths", __FILE__, $APage::$paths);
+            Trace::add_trace("Loaded module paths", __FILE__, $APage::$module->paths);
+            Trace::add_trace("User check successfully - signed, is-set, is-allowed", __FILE__);
+            //Preloads the module endpoints:
+            if (Std::$fs::file_exists($APage::$module->paths["module-api"])) {
+                include_once($APage::$module->paths["module-api"]);
             }
         }
         //Execute if everything is ok:
-        if ($AApi->request->answer->code === 0) {
+        if ($AApi->request->answer_code() === 0) {
             $AApi->parse_request($_REQUEST);
-            $AApi->execute();
+            $AApi->answer(print : true, execute : true, external : true);
+        } else {
+            $AApi->answer(print : true, execute : false, external : true);
         }
-        $AApi->answer(true);
+
     } break;
     case "error": {
         echo "error";
         var_dump($_REQUEST);
     } break;
     case "logout": {
-        if ($Admin->is_signed) {
-            $Admin->admin_logout();
+        if ($User->is_signed) {
+            $User->user_logout();
         }
         $APage::jump_to_page();
     }
     break;
     default: {
         // Not found page:
-        $APage::error_page("module_type_not_set");
+        $APage::error_page(404);
         Trace::expose_trace();
     }
 }

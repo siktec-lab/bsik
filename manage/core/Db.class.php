@@ -1,6 +1,8 @@
 <?php
 
-require_once "Trace.class.php";
+namespace Bsik\DB;
+
+require_once PLAT_PATH_AUTOLOAD;
 
 /**
  * MysqliDb Class
@@ -16,6 +18,7 @@ require_once "Trace.class.php";
  * @version   2.9.3
  */
 
+use \Bsik\Trace;
 
 class MysqliDb
 {
@@ -239,7 +242,7 @@ class MysqliDb
     public $totalPages = 0;
 
     /**
-     * @var array connections settings [profile_name=>[same_as_contruct_args]]
+     * @var array connections settings [profile_name=>[same_as_construct_args]]
      */
     protected $connectionsSettings = array();
     /**
@@ -302,13 +305,13 @@ class MysqliDb
      *
      * @param null|string $connectionName
      *
-     * @throws Exception
+     * @throws \Exception
      * @return void
      */
     public function connect($connectionName = 'default')
     {
         if(!isset($this->connectionsSettings[$connectionName]))
-            throw new Exception('Connection profile not set');
+            throw new \Exception('Connection profile not set');
         
         $pro = $this->connectionsSettings[$connectionName];
         $params = array_values($pro);
@@ -319,14 +322,14 @@ class MysqliDb
         }
 
         if (empty($pro['host']) && empty($pro['socket'])) {
-            throw new Exception('MySQL host or socket is not set');
+            throw new \Exception('MySQL host or socket is not set');
         }
 
-        $mysqlic = new ReflectionClass('mysqli');
+        $mysqlic = new \ReflectionClass('mysqli');
         $mysqli = $mysqlic->newInstanceArgs($params);
 
         if ($mysqli->connect_error) {
-            throw new Exception('Connect Error ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error, $mysqli->connect_errno);
+            throw new \Exception('Connect Error ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error, $mysqli->connect_errno);
         }
 
         if (!empty($charset)) {
@@ -336,7 +339,7 @@ class MysqliDb
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function disconnectAll()
     {
@@ -351,12 +354,12 @@ class MysqliDb
      * @param string $name
      *
      * @return $this
-     * @throws Exception
+     * @throws \Exception
      */
     public function connection($name)
     {
         if (!isset($this->connectionsSettings[$name]))
-            throw new Exception('Connection ' . $name . ' was not added.');
+            throw new \Exception('Connection ' . $name . ' was not added.');
 
         $this->defConnectionName = $name;
         return $this;
@@ -409,8 +412,8 @@ class MysqliDb
     /**
      * A method to get mysqli object or create it in case needed
      *
-     * @return mysqli
-     * @throws Exception
+     * @return \mysqli
+     * @throws \Exception
      */
     public function mysqli()
     {
@@ -442,7 +445,8 @@ class MysqliDb
     protected function reset()
     {
         if ($this->traceEnabled) {
-            $time = number_format((microtime(true) - $this->traceStartQ),5);
+            //$time = number_format((microtime(true) - $this->traceStartQ),5);
+            $time = (microtime(true) - $this->traceStartQ);
             $this->trace[] = array($this->_lastQuery, $time, $this->_traceGetCaller());
             Trace::add_query_trace($this->_lastQuery, $time, $this->_traceGetCaller());
         }
@@ -527,8 +531,8 @@ class MysqliDb
      *
      * @param  [[Type]] $query [[Description]]
      *
-     * @return bool|mysqli_result
-     * @throws Exception
+     * @return bool|\mysqli_result
+     * @throws \Exception
      */
 	private function queryUnprepared($query)
 	{
@@ -545,7 +549,7 @@ class MysqliDb
             return $this->queryUnprepared($query);
         }
 
-        throw new Exception(sprintf('Unprepared Query Failed, ERRNO: %u (%s)', $this->mysqli()->errno, $this->mysqli()->error), $this->mysqli()->errno);
+        throw new \Exception(sprintf('Unprepared Query Failed, ERRNO: %u (%s)', $this->mysqli()->errno, $this->mysqli()->error), $this->mysqli()->errno);
     }
 
     /**
@@ -556,7 +560,7 @@ class MysqliDb
      * @return string Contains the returned rows from the query.
      */
     public function rawAddPrefix($query){
-        $query = str_replace(PHP_EOL, null, $query);
+        $query = str_replace(PHP_EOL, '', $query);
         $query = preg_replace('/\s+/', ' ', $query);
         preg_match_all("/(from|into|update|join) [\\'\\´]?([a-zA-Z0-9_-]+)[\\'\\´]?/i", $query, $matches);
         list($from_table, $from, $table) = $matches;
@@ -571,7 +575,7 @@ class MysqliDb
      * @param array  $bindParams Variables array to bind to the SQL statement.
      *
      * @return array Contains the returned rows from the query.
-     * @throws Exception
+     * @throws \Exception
      */
     public function rawQuery($query, $bindParams = null)
     {
@@ -607,7 +611,7 @@ class MysqliDb
      * @param array  $bindParams Variables array to bind to the SQL statement.
      *
      * @return array|null Contains the returned row from the query.
-     * @throws Exception
+     * @throws \Exception
      */
     public function rawQueryOne($query, $bindParams = null)
     {
@@ -628,7 +632,7 @@ class MysqliDb
      * @param array  $bindParams Variables array to bind to the SQL statement.
      *
      * @return mixed Contains the returned rows from the query.
-     * @throws Exception
+     * @throws \Exception
      */
     public function rawQueryValue($query, $bindParams = null)
     {
@@ -657,7 +661,7 @@ class MysqliDb
      * @param int|array $numRows Array to define SQL limit in format Array ($offset, $count)
      *
      * @return array Contains the returned rows from the query.
-     * @throws Exception
+     * @throws \Exception
      */
     public function query($query, $numRows = null)
     {
@@ -694,7 +698,7 @@ class MysqliDb
         foreach ($options as $option) {
             $option = strtoupper($option);
             if (!in_array($option, $allowedOptions)) {
-                throw new Exception('Wrong query option: ' . $option);
+                throw new \Exception('Wrong query option: ' . $option);
             }
 
             if ($option == 'MYSQLI_NESTJOIN') {
@@ -1086,7 +1090,7 @@ class MysqliDb
         $joinType = strtoupper(trim($joinType));
 
         if ($joinType && !in_array($joinType, $allowedTypes)) {
-            throw new Exception('Wrong JOIN type: ' . $joinType);
+            throw new \Exception('Wrong JOIN type: ' . $joinType);
         }
 
         if (!is_object($joinTable)) {
@@ -1117,7 +1121,7 @@ class MysqliDb
 		// We have to check if the file exists
 		if (!file_exists($importFile)) {
 			// Throw an exception
-			throw new Exception("importCSV -> importFile " . $importFile . " does not exists!");
+			throw new \Exception("importCSV -> importFile " . $importFile . " does not exists!");
 		}
 
 		// Define the default values
@@ -1184,7 +1188,7 @@ class MysqliDb
 		// We have to check if the file exists
 		if(!file_exists($importFile)) {
 			// Does not exists
-			throw new Exception("loadXml: Import file does not exists");
+			throw new \Exception("loadXml: Import file does not exists");
 			return;
 		}
 
@@ -1214,7 +1218,7 @@ class MysqliDb
 		// IGNORE LINES
 		$sqlSyntax .= sprintf(' IGNORE %d LINES', $settings["linesToIgnore"]);
 
-		// Exceute the query unprepared because LOAD XML only works with unprepared statements.
+		// Execute the query unprepared because LOAD XML only works with unprepared statements.
 		$result = $this->queryUnprepared($sqlSyntax);
 
 		// Are there rows modified?
@@ -1247,7 +1251,7 @@ class MysqliDb
 
 
         if (empty($orderbyDirection) || !in_array($orderbyDirection, $allowedDirection)) {
-            throw new Exception('Wrong order direction: ' . $orderbyDirection);
+            throw new \Exception('Wrong order direction: ' . $orderbyDirection);
         }
 
         if (is_array($customFieldsOrRegExp)) {
@@ -1258,7 +1262,7 @@ class MysqliDb
         }elseif(is_string($customFieldsOrRegExp)){
 	    $orderByField = $orderByField . " REGEXP '" . $customFieldsOrRegExp . "'";
 	}elseif($customFieldsOrRegExp !== null){
-	    throw new Exception('Wrong custom field or Regular Expression: ' . $customFieldsOrRegExp);
+	    throw new \Exception('Wrong custom field or Regular Expression: ' . $customFieldsOrRegExp);
 	}
 
         $this->_orderBy[$orderByField] = $orderbyDirection;
@@ -1304,7 +1308,7 @@ class MysqliDb
 				break;
 			default:
 				// Else throw an exception
-				throw new Exception("Bad lock type: Can be either READ or WRITE");
+				throw new \Exception("Bad lock type: Can be either READ or WRITE");
 				break;
 		}
 		return $this;
@@ -1360,7 +1364,7 @@ class MysqliDb
 		}
 		// Something went wrong
 		else {
-			throw new Exception("Locking of table ".$table." failed", $errno);
+			throw new \Exception("Locking of table ".$table." failed", $errno);
 		}
 
 		// Return the success value
@@ -1394,7 +1398,7 @@ class MysqliDb
 		}
 		// Something went wrong
 		else {
-			throw new Exception("Unlocking of tables failed", $errno);
+			throw new \Exception("Unlocking of tables failed", $errno);
 		}
 
 
@@ -1569,8 +1573,8 @@ class MysqliDb
      *                               or only $count
      * @param array     $tableData   Should contain an array of data for updating the database.
      *
-     * @return mysqli_stmt|bool Returns the $stmt object.
-     * @throws Exception
+     * @return \mysqli_stmt|bool Returns the $stmt object.
+     * @throws \Exception
      */
     protected function _buildQuery($numRows = null, $tableData = null)
     {
@@ -1617,7 +1621,7 @@ class MysqliDb
      * @return array|string The results of the SQL fetch.
      * @throws Exception
      */
-    protected function _dynamicBindResults(mysqli_stmt $stmt)
+    protected function _dynamicBindResults(\mysqli_stmt $stmt)
     {
         $parameters = array();
         $results = array();
@@ -1664,10 +1668,10 @@ class MysqliDb
 
         while ($stmt->fetch()) {
             if ($this->returnType == 'object') {
-                $result = new stdClass ();
+                $result = new \stdClass();
                 foreach ($row as $key => $val) {
                     if (is_array($val)) {
-                        $result->$key = new stdClass ();
+                        $result->$key = new \stdClass();
                         foreach ($val as $k => $v) {
                             $result->$key->$k = $v;
                         }
@@ -1801,7 +1805,7 @@ class MysqliDb
                     }
                     break;
                 default:
-                    throw new Exception("Wrong operation");
+                    throw new \Exception("Wrong operation");
             }
         }
         $this->_query = rtrim($this->_query, ', ');
@@ -1987,8 +1991,8 @@ class MysqliDb
      * Method attempts to prepare the SQL query
      * and throws an error if there was a problem.
      *
-     * @return mysqli_stmt
-     * @throws Exception
+     * @return \mysqli_stmt
+     * @throws \Exception
      */
     protected function _prepareQuery()
     {
@@ -2010,7 +2014,7 @@ class MysqliDb
         $query = $this->_query;
         $errno = $this->mysqli()->errno;
         $this->reset();
-        throw new Exception(sprintf('%s query: %s', $error, $query), $errno);
+        throw new \Exception(sprintf('%s query: %s', $error, $query), $errno);
     }
 
     /**
@@ -2039,21 +2043,21 @@ class MysqliDb
      * Function to replace ? with variables from bind variable
      *
      * @param string $str
-     * @param array  $vals
+     * @param array  $values
      *
      * @return string
      */
-    protected function replacePlaceHolders($str, $vals)
+    protected function replacePlaceHolders($str, $values)
     {
         $i = 1;
         $newStr = "";
 
-        if (empty($vals)) {
+        if (empty($values)) {
             return $str;
         }
 
         while ($pos = strpos($str, "?")) {
-            $val = $vals[$i++];
+            $val = $values[$i++];
             if (is_object($val)) {
                 $val = '[object]';
             }
@@ -2156,7 +2160,7 @@ class MysqliDb
             }
 
             if (!in_array($type, array_keys($types))) {
-                throw new Exception("invalid interval type in '{$diff}'");
+                throw new \Exception("invalid interval type in '{$diff}'");
             }
 
             $func .= " " . $incr . " interval " . $items . " " . $types[$type] . " ";
@@ -2192,7 +2196,7 @@ class MysqliDb
     public function inc($num = 1)
     {
         if (!is_numeric($num)) {
-            throw new Exception('Argument supplied to inc must be a number');
+            throw new \Exception('Argument supplied to inc must be a number');
         }
         return array("[I]" => "+" . $num);
     }
@@ -2208,7 +2212,7 @@ class MysqliDb
     public function dec($num = 1)
     {
         if (!is_numeric($num)) {
-            throw new Exception('Argument supplied to dec must be a number');
+            throw new \Exception('Argument supplied to dec must be a number');
         }
         return array("[I]" => "-" . $num);
     }
@@ -2307,11 +2311,11 @@ class MysqliDb
     }
 
     /**
-     * Shutdown handler to rollback uncommited operations in order to keep
+     * Shutdown handler to rollback un committed operations in order to keep
      * atomic operations sane.
      *
      * @uses mysqli->rollback();
-     * @throws Exception
+     * @throws \Exception
      */
     public function _transaction_status_check()
     {
@@ -2359,7 +2363,7 @@ class MysqliDb
      * @param array $tables Table name or an Array of table names to check
      *
      * @return bool True if table exists
-     * @throws Exception
+     * @throws \Exception
      */
     public function tableExists($tables)
     {
@@ -2403,7 +2407,7 @@ class MysqliDb
      * @param array|string $fields Array or coma separated list of fields to fetch
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function paginate ($table, $page, $fields = null) {
         $offset = $this->pageLimit * ($page - 1);

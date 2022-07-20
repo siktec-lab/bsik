@@ -9,10 +9,12 @@
 1.0.1:
     ->intial, Creation
 *******************************************************************************/
-namespace Bsik\Forms;
 
+namespace Bsik\Formr;
 
-class SikForm
+require_once PLAT_PATH_AUTOLOAD;
+
+class GenerateForm
 {
     # each of these public properties acts as a 'preference' for Formr
     # and can be defined at instantiation. see documentation for more info.

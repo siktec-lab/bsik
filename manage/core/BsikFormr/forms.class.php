@@ -1,6 +1,8 @@
 <?php
 
-namespace Bsik\Forms;
+namespace Bsik\Formr;
+
+require_once PLAT_PATH_AUTOLOAD;
 
 class Forms
 {

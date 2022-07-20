@@ -6,27 +6,108 @@ $input-padding-y-sm: $input-padding-y * 0.75;
 $input-padding-x-sm: $input-padding-x * 0.75;
 $input-padding-y-lg: $input-padding-y * 1.25;
 $input-padding-x-lg: $input-padding-x * 1.25;
-$form-file-button-color: $admin-base-text-sub;
-$form-file-button-bg: lighten($admin-base-background, 10%);
-$form-file-button-hover-bg: lighten($admin-base-background, 20%);
-$sikform-input-color: $admin-base-text-main;
-$sikform-input-placeholder-color: $admin-base-text-sub;
-$sikform-input-bg: lighten($admin-base-background, 5%);
-$sikform-input-bg-focus: lighten($admin-base-background, 5%);
-$sikform-input-border: 2px solid lighten($admin-base-primary-color, 10%);
-$sikform-input-border-focus: 2px solid lighten($admin-base-primary-color, 20%);
-$sikform-input-transition: border-color .15s ease-in-out,
-box-shadow .15s ease-in-out;
-$sikform-input-caret-color: $admin-base-text-main;
-$sikform-input-caret-focus-color: lighten($admin-base-primary-color, 20%);
-$sikform-input-caret-stroke-color: $admin-base-background;
+$form-file-button-color: $text-main-color-f2;
+$form-file-button-bg: bsik-colors("secondary", "base");
+$form-file-button-hover-bg: bsik-colors("secondary", "lighten-1");
+$sikform-input-color: $text-main-color;
+$sikform-input-placeholder-color: hsla(0,0%,100%,.4);
+$sikform-input-bg: bsik-colors("secondary", "darken-1");
+$sikform-input-bg-focus: bsik-colors("secondary", "base");
+$sikform-input-border: 2px solid lighten($primary, 10%);
+$sikform-input-border-focus: 2px solid lighten($primary, 20%);
+$sikform-input-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$sikform-input-caret-color: $text-main-color;
+$sikform-input-caret-focus-color: lighten($primary, 20%);
+$sikform-input-caret-stroke-color: $secondary;
 $sikform-input-caret-stroke-width: 25;
-$sikform-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$admin-base-text-main}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
-$sikform-select-indicator-disabled: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{darken($admin-base-text-main, 30%)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+$sikform-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$text-main-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+$sikform-select-indicator-disabled: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{darken($text-main-color, 30%)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
 $sikform-input-caret-svg: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 700'><path fill='#{$sikform-input-caret-color}' stroke='#{$sikform-input-caret-stroke-color}' stroke-width='#{$sikform-input-caret-stroke-width}' d='M 285.476 377.971 L 91.132 572.314 c -9.373 9.373 -24.569 9.373 -33.941 0 l -22.667 -22.667 c -9.357 -9.357 -9.375 -24.522 -0.04 -33.901 L 188.505 361 L 34.484 206.255 c -9.335 -9.379 -9.317 -24.544 0.04 -33.901 l 22.667 -22.667 c 9.373 -9.373 24.569 -9.373 33.941 0 L 285.475 344.03 c 9.373 9.372 9.373 24.568 0.001 33.941 z'/></svg>";
 $sikform-input-caret-focus-svg: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 700'><path fill='#{$sikform-input-caret-focus-color}' stroke='#{$sikform-input-caret-stroke-color}' stroke-width='#{$sikform-input-caret-stroke-width}' d='M 285.476 377.971 L 91.132 572.314 c -9.373 9.373 -24.569 9.373 -33.941 0 l -22.667 -22.667 c -9.357 -9.357 -9.375 -24.522 -0.04 -33.901 L 188.505 361 L 34.484 206.255 c -9.335 -9.379 -9.317 -24.544 0.04 -33.901 l 22.667 -22.667 c 9.373 -9.373 24.569 -9.373 33.941 0 L 285.475 344.03 c 9.373 9.372 9.373 24.568 0.001 33.941 z'/></svg>";
 $sikform-input-icon-caret: "M 285.476 377.971 L 91.132 572.314 c -9.373 9.373 -24.569 9.373 -33.941 0 l -22.667 -22.667 c -9.357 -9.357 -9.375 -24.522 -0.04 -33.901 L 188.505 361 L 34.484 206.255 c -9.335 -9.379 -9.317 -24.544 0.04 -33.901 l 22.667 -22.667 c 9.373 -9.373 24.569 -9.373 33.941 0 L 285.475 344.03 c 9.373 9.372 9.373 24.568 0.001 33.941 z";
-$sikform-formtext-color: $admin-base-text-sub;
+$sikform-formtext-color: $text-main-color-f2;
+
+// SH: this is a bug fix related to spinners not showing on chrome when  
+::-webkit-inner-spin-button {
+    height: auto;
+    width: 15px;
+}
+
+
+/***************************************************************************/
+/* BSik Dropdown
+/***************************************************************************/
+.sik-dropdown {
+    > button.dropdown-toggle {
+        position: relative;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: calc(3.5rem + 2px);
+        padding: 1rem 0.75rem;
+        padding-right: 2ch;
+        text-align: left;
+        color: $text-negative-color;
+        line-height: 1.5;
+        font-size: 1rem;
+        font-weight: 400;
+        border-radius: 0.25rem;
+        background-color: whitesmoke;
+        border: 1px solid #ced4da;
+        &::after {
+            position: absolute;
+            right: 1ch;
+            top: calc(50% - 0.2ch);
+        }
+    }
+    
+    .dropdown-menu {
+        min-width: 100%;
+        .dropdown-item {
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+    }
+
+    &.color-dark {
+
+    }
+}
+
+/***************************************************************************/
+/* BSik MaxType plugin
+/***************************************************************************/
+textarea + div.max-type-counter,
+input[type]:not([type=search]):not([type=url]):not([type=hidden]):not([type=button]):not([type=submit]) + div.max-type-counter {
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-align: right;
+    float: right;
+    transform: translate(0px, -7px);
+    opacity: 0;
+    transition: all ease .4s;
+    height: 0;
+    line-height: 0;
+    &.is-maxed {
+        color:red;
+    }
+}
+textarea + div.max-type-counter {
+    transform: translate(0px, -10px);
+}
+input[type]:not([type=search]):not([type=url]):not([type=hidden]):not([type=button]):not([type=submit]):focus + div.max-type-counter {
+    transform: translate(-5px, -7px);
+    opacity: 1;
+}
+textarea:focus + div.max-type-counter {
+    transform: translate(-12px, -10px);
+    opacity: 1;
+}
+
+/***************************************************************************/
+/* BSik dark forms
+/***************************************************************************/
 .sik-form-init {
     //
     // Form Control
@@ -37,7 +118,7 @@ $sikform-formtext-color: $admin-base-text-sub;
         background-color: $sikform-input-bg;
         border: 0;
         padding: $input-padding-y $input-padding-x;
-        border-radius: 0.35rem;
+        border-radius: 0.15rem;
         box-shadow: none;
         @include transition($sikform-input-transition);
         &[type="file"] {
@@ -53,7 +134,8 @@ $sikform-formtext-color: $admin-base-text-sub;
             background-color: $sikform-input-bg-focus;
             outline: 0;
             box-shadow: none;
-            box-shadow: 0px 4px 3px -0.2rem lighten($admin-base-primary-color, 20%);
+            // box-shadow: 0px 4px 3px -0.2rem lighten($primary, 20%);
+            outline: 1px solid lighten($sikform-input-bg-focus, 5%);
         }
         // Add some height to date inputs on iOS
         &::-webkit-date-and-time-value {
@@ -88,16 +170,16 @@ $sikform-formtext-color: $admin-base-text-sub;
         }
         &:hover:not(:disabled):not([readonly])::file-selector-button {
             background-color: $form-file-button-hover-bg;
-            color: lighten($admin-base-primary-color, 20%);
+            color: lighten($primary, 20%);
         }
         &::-webkit-file-upload-button {
             padding: $input-padding-y $input-padding-x;
             margin: (-$input-padding-y) (-$input-padding-x);
             margin-inline-end: $input-padding-x;
             color: $form-file-button-color;
-            @include gradient-bg($form-file-button-bg);
+            @include gradient-bg();
             pointer-events: none;
-            border-color: inherit;
+            border-color: lighten($form-file-button-bg, 10%);
             border-style: solid;
             border-width: 0;
             border-inline-end-width: $input-border-width;
@@ -106,7 +188,7 @@ $sikform-formtext-color: $admin-base-text-sub;
         }
         &:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
             background-color: $form-file-button-hover-bg;
-            color: lighten($admin-base-primary-color, 5%);
+            color: lighten($primary, 5%);
         }
     }
     //
@@ -229,5 +311,32 @@ $sikform-formtext-color: $admin-base-text-sub;
     .form-select-lg {
         padding: $input-padding-y-lg $input-padding-x-lg;
         @include font-size($form-select-font-size-lg);
+    }
+
+    //
+    // Form check
+    //
+    .form-check {
+        &.form-switch {
+            .form-check-input {
+                // height: 24px;
+                // width: 48px;
+                background-color: bsik-colors("secondary", "lighten-5");
+                border-color: bsik-colors("secondary", "lighten-5");
+                background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.45)'/></svg>");
+                &:focus {
+                    border-color: bsik-colors("secondary", "base");
+                    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.45)'/></svg>");
+                }
+                &:checked {
+                    border-color: bsik-colors("green", "base");
+                    background-color: bsik-colors("green", "base");
+                    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.45)'/></svg>");
+                }
+            }
+            .form-check-label {
+                font-size: 0.8rem;
+            }
+        }
     }
 }

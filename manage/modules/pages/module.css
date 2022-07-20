@@ -1,0 +1,135 @@
+/* 
+ * Settings form / modal:
+ */
+/* #pages-settings-modal .modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+} */
+.modal-body .form-modal-container {
+    overflow-y: auto;
+    max-height: 600px;
+}
+.form-settings label {
+    
+    border: 1px solid #ced4da;
+    margin: 0;
+    padding: 5px 10px 5px 5px;
+    width:30%;
+    position: relative;
+    
+}
+.form-settings label > strong {
+    color:#1818d1;
+    font-weight: 500;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    display: block;
+    border-bottom: 1px solid #e7e7e7;
+}
+.form-settings label > strong > i {
+    color:#4f4f4f;
+    font-size: 1em;
+}
+.form-settings label > p {
+    color:#8b8b8b;
+    font-size: 0.8em;
+    font-style: italic;
+    margin:0;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.form-settings label.is-inherited {
+    opacity: 0.7;
+}
+.form-settings .form-control {
+    color: #1818d1;
+}
+
+.form-settings .form-select {
+    color: #4f4f4f;
+}
+
+.form-settings .form-select.revised {
+    color: #1818d1;
+}
+
+.form-settings .form-select option {
+    color: #4f4f4f;
+    padding: 8px 15px;
+}
+
+.form-settings .form-select option[selected="selected"] {
+    background-color: #ebebeb;
+    font-weight: 600;
+}
+
+.form-settings .input-group-text {
+    width: 70px;
+    padding: 0.375rem 0.4rem;
+}
+.form-settings .input-group-text span {
+    color: #4f4f4f;
+    font-size: 0.7em;
+    padding-left: 5px;
+    padding-top: 4px;
+}
+.form-settings .form-control::placeholder {
+    color: #b9b9b9;
+    opacity: 1;
+}
+.form-settings .form-control::-webkit-input-placeholder {
+    color: #b9b9b9;
+    opacity: 1;
+}
+.form-settings .form-control::-moz-placeholder {
+    color: #b9b9b9;
+    opacity: 1;
+}
+.form-settings .form-control:-ms-input-placeholder { 
+    color: #b9b9b9;
+    opacity: 1;
+}
+
+.form-settings label > span.set-override,
+.form-settings label > span.set-inherited {
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    padding: 1px 3px;
+    background-color: rgb(255, 230, 230);
+    color: rgb(255, 97, 97);
+    position: absolute;
+    top: 0;
+    right: 0;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+.form-settings label > span.set-inherited {
+    background-color: rgb(230, 230, 230);
+    color: rgb(94, 94, 94);
+}
+
+
+/*
+ * Dynamic table styles
+ */
+ #pages-table .chain-tag {
+    background-color: var(--bs-dark);
+    padding: 3px 8px 1px 8px;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+#pages-table .chain-tag i {
+    font-size: 0.9em;
+}
+#pages-table .chain-tag strong {
+    font-size: 0.8rem;
+    margin-right: 2px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 1px;
+}

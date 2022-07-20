@@ -1,0 +1,46 @@
+{
+    "cSpell.words": [
+        "Bsik",
+        "btns",
+        "csrftoken",
+        "docby",
+        "eles",
+        "FIFA",
+        "HHVM",
+        "msdownload",
+        "mysqlidb",
+        "shlomi",
+        "tbody",
+        "thead",
+        "toload",
+        "UEFA",
+        "uncallable",
+        "xcopy"
+    ],
+    "cSpell.ignoreWords": [
+        "Barascu",
+        "DBNULL",
+        "Emre",
+        "Excep",
+        "INCONS",
+        "INVAL",
+        "NOENT",
+        "NOZIP",
+        "Noneatme",
+        "Qparams",
+        "aapi",
+        "apage",
+        "ername",
+        "fapi",
+        "fpage",
+        "getit",
+        "inpos",
+        "ipdat",
+        "metas",
+        "mysqlic",
+        "svgz"
+    ],
+    "cSpell.enableFiletypes": [
+        "twig"
+    ]
+}

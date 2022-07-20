@@ -1,0 +1,843 @@
+
+//@use "sass:color";
+/********************************************************
+* Import:
+*********************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+/********************************************************
+* Variables:
+*********************************************************/
+$debug                  : false;
+$tb-img-assets          : '../img/'; 
+
+$tb-color-orange        : #FBB823;
+$tb-color-green         : #0EC460;
+$tb-color-red           : #FF5757;
+$tb-color-white         : #FFFFFF;
+$tb-color-grey-light    : #484856;
+$tb-color-grey-dark     : #1A1C23;
+$tb-color-grey-gradient : linear-gradient(138deg, #484856 0%, #1A1C23 100%);
+$tb-text-color-primary  : $tb-color-white;
+$tb-text-color-lighter  : rgba(255,255,255,.67);
+$tb-color-discord       : #7289DA;
+$tb-color-paypal        : #0079C1;
+$tb-color-bitcoin       : #f7931a;
+$tb-text-shadow         : 2px 2px 3px rgba(0, 0, 0, .35);
+
+$tb-form-input-background: #1C1E24;
+$tb-form-input-color: white;
+$tb-form-input-border-color: #424347;
+
+
+$btn-active-box-shadow  : inset 0 3px 5px rgba(#000, .125);
+
+
+$font-size-base     : 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-sm       : $font-size-base * .875 !default;
+$font-size-lg       : $font-size-base * 1.25 !default;
+$font-size-xlg      : $font-size-lg * 1.45 !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  tablet: 768px,
+  lg: 992px,
+  pc: 1200px,
+  lg-pc: 1400px
+);
+
+$assets-folder: (
+  path-img-general   : "../img/general",
+  path-img-carusel   : "../img/carusel",
+  path-img-fav       : "../img/fav",
+  path-img-leagues   : "../img/leagues",
+  path-img-logos     : "../img/logos" 
+);
+
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+@import "functions";
+@import "mixins";
+
+/********************************************************
+* Base:
+*********************************************************/
+html {
+    font-size: 14px;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: $tb-text-color-primary;
+    width: 100%;
+    overflow-x: hidden;
+    background-repeat: repeat;
+    background-size: 170px, cover;
+    background-image: url(path_assets(path-img-general, "tombet-bg.svg")), linear-gradient(138deg, #484856 0%, #1A1C23 100%);
+}
+
+@include debug-media('mobile'); 
+
+@include breakpoint-up(tablet) {
+    @include debug-media('tablet');
+} 
+@include breakpoint-up(pc) {
+    @include debug-media('desktop');
+} 
+
+.force-bold {
+    font-weight: 600 !important;
+}
+.short-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+} 
+.drop-shadow {
+    text-shadow: 1px 2px 3px rgba(0,0,0,.7);
+}
+
+/********************************************************
+* Material Icons:
+*********************************************************/
+
+.material-icons,
+.material-icons-outlined { 
+    font-size: inherit;
+    margin-right:5px;
+    &.sm {
+        font-size: $font-size-sm;
+    }
+    &.md {
+        font-size: $font-size-base;
+    }
+    &.lg {
+        font-size: $font-size-lg;
+    }
+    &.xlg {
+        font-size: $font-size-xlg;
+    }
+    &.a-middle {
+        vertical-align: middle;
+    }
+    &.a-bottom {
+        vertical-align: bottom;
+    }
+    &.a-top {
+        vertical-align: top;
+    }
+    &.space-1 {
+        margin-right:1px;
+    }
+    &.space-2 {
+        margin-right:3px;
+    }
+    &.space-3 {
+        margin-right:5px;
+    }
+    &.space-4 {
+        margin-right:8px;
+    }
+    &.space-5 {
+        margin-right:10px;
+    }
+}
+
+/********************************************************
+* More Icons:
+*********************************************************/ 
+a>i.icon-discord,
+i.icon-discord {
+    color: $tb-color-white;
+    &:hover {
+        color: $tb-color-discord;
+    }
+}
+a:hover>.icon-discord {
+    color: $tb-color-discord;
+}
+a>i.icon-bitcoin,
+i.icon-bitcoin {
+    color: $tb-color-white;
+    &:hover {
+        color: $tb-color-bitcoin;
+    }
+}
+a:hover>.icon-bitcoin {
+    color: $tb-color-bitcoin;
+}
+
+
+/********************************************************
+ * PerfectScrollbar 
+ ********************************************************/
+ @import "scrollbars";
+
+/********************************************************
+ * SikDropdown 
+ ********************************************************/
+ @import "sik-dropdown";
+
+
+ /********************************************************
+ * Page structure: 
+ ********************************************************/
+$tb-platform-nav-base-height : 85px !default;
+$tb-platform-controls-base-height : 30px !default;
+$tb-platform-panel-base-height : 30px !default;
+$tb-platform-panel-expanded-height : 250px !default;
+
+
+section.tb-main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0px 5px;
+
+    section.nav {
+        position: relative;
+        height: $tb-platform-nav-base-height;
+        flex-shrink: 0;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        @include debug-outline();
+    }
+
+    section.controls {
+        position: relative;
+        height: $tb-platform-controls-base-height;
+        flex-shrink: 0;
+        @include debug-outline();
+    }
+
+    section.odds {
+        position: relative;
+        overflow: hidden;
+        flex-grow: 1;
+        height:100%;
+        @include debug-outline();
+    }
+
+    section.panel {
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+        height: $tb-platform-panel-base-height;
+        transition: height ease .6s;
+        &.expanded {
+            height: $tb-platform-panel-expanded-height !important;
+        }
+        @include debug-outline();
+    }
+
+    @include debug-outline();
+
+    @include breakpoint-up(tablet) {
+        padding: 0px 15px;
+    } 
+    @include breakpoint-up(pc) {
+        padding: 0px 30px;
+    }
+
+}
+
+
+ /********************************************************
+ * sports menu: 
+ ********************************************************/
+$tb-platform-sports-menu-hover-border-color : $tb-color-orange !default;
+section.nav  > div.sports-menu {
+    width: 60%;
+    display: flex;
+    align-items: end;
+    @include debug-outline();
+
+    .menu-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    li.item {
+        display: inline-block;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        opacity: 0.7;
+        text-align: center;
+        padding: 0 0.25rem 0.25rem 0.25rem;
+        i {
+            font-size: 1.8rem;
+        }
+        span.text {
+            display: block;
+            font-size: 1rem;
+        }
+        &.selected {
+            border-bottom-color: $tb-platform-sports-menu-hover-border-color;
+            opacity: 1;
+            i {
+                color: $tb-platform-sports-menu-hover-border-color;
+            }
+        }
+        &:hover {
+            opacity: 1;
+        }
+
+    }
+
+    @include breakpoint-up(tablet) {
+
+    }
+
+    @include breakpoint-up(pc) {
+        width: 40%;
+
+        li.item {
+            padding: 0 0.7rem 0.25rem 0.7rem;
+            i {
+                font-size: 2rem;
+            }
+            span.text {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+  /********************************************************
+ * server menu: 
+ ********************************************************/
+$tb-platform-server-menu-hour-color : $tb-color-white !default;
+$tb-platform-server-menu-date-color : #ababab !default;
+$tb-platform-server-tag-background : rgb(61,62,71) !default;
+$tb-platform-server-tag-border : 1px solid #46BF9F !default;
+$tb-platform-server-tag-text-shadow : 0 2px 2px rgba(0, 0, 0, .5) !default;
+$tb-platform-server-tag-box-shadow : 0px 6px 10px -7px black !default;
+section.nav  > div.server-menu {
+    display: none;
+    text-align: center;
+    @include debug-outline();
+
+    .app-tag {
+        display: inline-block;
+        width:100%;
+        max-width: 210px;
+        background-color: $tb-platform-server-tag-background;
+        border: $tb-platform-server-tag-border;
+        border-top: 0;
+        border-radius: 0 0 1rem 1rem;
+        margin-bottom: 1rem;
+        padding:0.25rem 0rem;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        text-shadow: $tb-platform-server-tag-text-shadow;
+        box-shadow: $tb-platform-server-tag-box-shadow;
+        em {
+            font-size: 0.6em;
+            font-weight: 300;
+        }
+    }
+    .server-time {
+        text-align: center;
+        .hour {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: $tb-platform-server-menu-hour-color;
+        }
+        .date {
+            font-size: 0.9rem;
+            color: $tb-platform-server-menu-date-color;
+        }
+    }
+    @include breakpoint-up(tablet) {
+
+    }
+
+    @include breakpoint-up(pc) {
+        display: block;
+        flex-grow: 1;
+        max-width: 220px;
+    }
+}
+
+ /********************************************************
+ * user nav: 
+ ********************************************************/
+$fmenu-size             : 3rem;
+$fmenu-trigger-bg       : rgba(255, 255, 255, .07);
+$fmenu-color-base       : $tb-color-white;
+$fmenu-color-hover      :  $tb-color-orange;
+$fmenu-item-space       : 1rem;
+$fmenu-item-label-size    : 1rem;
+$fmenu-item-expand-speed  : .4s;
+$fmenu-item-color-speed   : .3s;
+
+$fmenu-list-bg          : #1C1E24;
+$fmenu-list-max-width   : 250px;
+$fmenu-list-font-size   : .9rem;
+$fmenu-list-border-sep  : 1px solid rgba(255,255,255,.05);
+$fmenu-list-hover-color   :  $tb-color-orange;
+
+$fmenu-list-expand-speed  : .6s;
+$fmenu-list-opacity-speed : .3s;
+
+@import "floating-menu";
+
+section.nav  > div.user-menu-wrapper {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: row-reverse;
+
+    @include debug-outline();
+    
+    ul.floating-menu {
+        >li>div.form-check {
+            label {
+                font-size: $fmenu-list-font-size;
+                padding: 0.55rem 0.5rem;
+            }
+            input[type='checkbox'] {
+                font-size: 1rem;
+            }
+        }
+    }
+    
+    @include breakpoint-up(tablet) {
+
+    }
+
+    @include breakpoint-up(pc) {
+
+    }
+}
+
+ /********************************************************
+ * Application Filters: 
+ ********************************************************/
+ $tb-platform-controls-bg-base      : rgba(255, 255, 255, .07) !default;
+ $tb-platform-controls-bg-hover     : rgba(255, 255, 255, .15) !default;
+ $tb-platform-controls-color-base   : rgba($tb-color-white, .6) !default;
+ $tb-platform-controls-color-hover  : $tb-color-white !default;
+ $tb-platform-controls-color-active : $tb-color-orange !default;
+section.controls {
+    text-align: right;
+    ul.app-controls {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li.control-item {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background-color: $tb-platform-controls-bg-base;
+            min-width: 100px;
+            text-align: center;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            color:  $tb-platform-controls-color-base;
+            cursor: pointer;
+            i {
+                margin-right: 0.3ch;
+            }
+            &.active,
+            &:hover {
+                background-color: $tb-platform-controls-bg-hover;
+                color:  $tb-platform-controls-color-hover;
+            }
+            &.active i {
+                color: $tb-platform-controls-color-active;
+            }
+        }
+    }
+}
+
+ /********************************************************
+ * Application Filters: 
+ ********************************************************/
+$tb-panel-header-tabs-bg: rgb(61,62,71) !default;
+$tb-panel-header-radius: 0.25rem 0.25rem 0 0 !default;
+$tb-panel-header-font-size: 0.9rem !default;
+$tb-panel-header-tab-selected-color: $tb-color-orange !default;
+$tb-panel-tabs-basebackground: #27272F;
+section.panel {
+    box-shadow: 0px 1px 11px -3px rgba(0,0,0,.8);
+    &.expanded {
+        box-shadow: 0px 1px 11px -3px rgba(0,0,0,1);
+    }
+
+    >.tab-header {
+        height: $tb-platform-panel-base-height;
+        list-style: none;
+        width:100%;
+        padding: 0;
+        margin: 0;
+        background-color: $tb-panel-header-tabs-bg;
+        border-radius: $tb-panel-header-radius;
+        cursor: pointer;
+        overflow: hidden;
+
+        >li {
+            display: inline-block;
+            font-size: $tb-panel-header-font-size;
+            border-bottom:2px solid transparent;
+            line-height: $tb-platform-panel-base-height - 2px;
+            padding: 0 1.5rem;
+            opacity: 0.7;
+            cursor: pointer;
+            &:hover:not(.selected) {
+                background-color: rgba(255, 255, 255, .08);
+                opacity: 1;
+            }
+            &.selected {
+                opacity: 1;
+                border-bottom-color: $tb-panel-header-tab-selected-color;
+                cursor:default;
+            }
+        }
+    }
+    .sik-slider {
+        height: calc(100% - #{$tb-platform-panel-base-height});
+        ul.sik-slides {
+            box-sizing: border-box;
+            background-color: $tb-panel-tabs-basebackground;
+        }
+    }
+
+    @include debug-outline();
+}
+
+
+ /********************************************************
+ * Odds table: 
+ ********************************************************/
+$tb-odds-table-header-bg : #72727a !default;
+$tb-odds-table-header-color : $tb-color-white !default;
+$tb-odds-table-sized-columns-width: 90px !default;
+$tb-odds-table-gamerow-base-bg :#31323e !default;
+$tb-odds-table-gamerow-base-bg-dark : #262930 !default;
+$tb-odds-table-gamerow-base-bg-semi : #2e2f3a !default;
+
+$tb-odds-table-gamerow-outer-border-color :#494a50 !default;
+$tb-odds-table-gamerow-inner-border-color :#494a50 !default;
+
+$tb-odds-table-game-sep-height: 8px;
+table.odds-table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+    thead > tr {
+        position: relative;
+        background-color: $tb-odds-table-header-bg;
+    }
+    th.odds-th {
+        color: $tb-odds-table-header-color;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+        font-weight: 500;
+        &:not(:last-child) {
+            border-right: 2px solid darken($tb-odds-table-header-bg , 10%);
+        }
+        &:last-child {
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+        &:first-child {
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+        &.sortable,
+        &.filters {
+            position: relative;
+            cursor: pointer;
+            &::after {
+                position: absolute;
+                font-family: 'tombet';
+                font-size: 0.5rem;
+                top:0;
+                right: 5px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &.filters {
+            &::after {
+                content: '\e991';
+            }
+        }
+        &.filters.open {
+            &::after {
+                content: '\e992';
+            }
+        }
+        &.sortable {
+            &::after {
+                font-size: 0.75rem;
+                content: '\e981';
+            }
+        }
+        &.sortable.desc {
+            &::after {
+                content: '\e982';
+            }
+        }
+        &.th-sized {
+            width: $tb-odds-table-sized-columns-width;
+        }
+    }
+    tr.row-sep {
+        height: $tb-odds-table-game-sep-height;
+    }
+    tr.game-row {
+        td.lbl-league,
+        td.lbl-time,
+        td.lbl-period {
+            background-color: $tb-odds-table-gamerow-base-bg-dark;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding:0.65rem;
+            > span {
+                display: block;
+                &.time-date {
+                    border: 1px solid $tb-color-green;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
+                    margin-bottom: 0.45rem;
+                }
+                &.time-hour {
+                    
+                }
+            }
+        }
+        td.lbl-league {
+            border-radius: 0.45rem 0 0 0;
+        }
+        td.lbl-game-general {
+            background-color: $tb-odds-table-gamerow-base-bg-semi;
+            border-radius: 0 0 0 0.45rem;
+            position: relative;
+            span {
+                display: block;
+                text-align: left;
+                padding-left: 50px;
+                &.home-team {
+                    margin-top: 6px;
+                    i {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+            span.fav-game-tag, 
+            span.focus-game-tag {
+                position: absolute;
+                font-size: 0.95rem;
+                top:4px;
+                left: 4px;
+                padding-left: unset;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width:25px;
+                height:25px;
+                background-color: #787881;
+                color:$tb-odds-table-gamerow-base-bg-semi;
+                border-radius: 0.25rem;
+                cursor:pointer;
+                &:hover {
+                    background-color: #b9b9c1;
+                    box-shadow: 1px 1px 5px -1px black;
+                }
+            }
+            span.focus-game-tag {
+                top: unset;
+                bottom: 4px;
+            }
+        }
+        &.is-fav {
+            span.fav-game-tag {
+                background-color: $tb-color-orange !important;
+                &:hover {
+                    background-color: $tb-color-orange;
+                }
+            }
+        }
+        &.row-start {
+            td.data-bookmaker:last-child {
+                border-radius: 0 0.45rem 0 0;
+                
+            }
+        }
+        &.row-end {
+            td.data-bookmaker:last-child {
+                border-radius: 0 0 0.45rem 0;
+            }
+        }
+
+        td.lbl-moneyline,
+        td.lbl-overunder,
+        td.lbl-handicap {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            padding-left: 1.2rem;
+            height: 60px;
+        }
+        &:not(.row-end) {
+            td.lbl-moneyline,
+            td.lbl-overunder,
+            td.data-bookmaker {
+                border-bottom: 1px solid $tb-odds-table-gamerow-outer-border-color;
+            }
+        }
+        td.lbl-moneyline,
+        td.lbl-overunder,
+        td.lbl-handicap,
+        td.data-bookmaker {
+            background-color: $tb-odds-table-gamerow-base-bg;
+            border-right: 2px solid $tb-odds-table-gamerow-outer-border-color;
+        }
+        td.data-bookmaker:last-child {
+            border-right: 0;
+        }
+        
+        &.row-start {
+            
+        }
+    }
+}
+
+
+$tb-odds-select-menu-bg     : #1C1E24;
+$tb-odds-select-menu-shadow : 3px 3px 15px -1px rgba(0,0,0,53%);
+
+//Odds filters dropdown select:
+table.odds-table th.filters {
+    position: relative;
+    ul.filter-select {
+        z-index: 15;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        top: calc(100% + 5px);
+        background-color: $tb-odds-select-menu-bg;
+        border-radius: 0.25rem;
+        box-shadow: $tb-odds-select-menu-shadow;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        cursor: pointer;
+        display: none;
+        li {
+            color: $tb-color-white;
+            flex-basis: content;
+            flex-shrink: 0;
+            white-space: nowrap;
+            display: block;
+            padding:0.3rem 0.75rem;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba(255,255,255,0.05);
+            }
+            label {
+                cursor: pointer;
+            }
+        }
+    }
+    &.open {
+        color: $tb-color-orange;
+        ul.filter-select {
+            display: block;
+        }
+    }
+}
+
+/********************************************************
+ * Loading animation: 
+ ********************************************************/
+$tb-loading-color-one: $tb-color-orange !default;
+$tb-loading-color-two: $tb-color-white !default;
+.odds-loading {
+    position: absolute;
+    height:100%;
+    width:100%;
+    z-index: -10;
+    background-color: rgba(0, 0, 0, .35);
+    opacity: 0;
+    transition: opacity ease 0.8s;
+    .loader {
+        position: absolute;
+        //top: 50%;
+        top: 250px;
+        left: 50%;
+        margin: -90px 0 0 -90px;
+        .circle {
+            position: absolute;
+            border: 3px solid transparent;
+            border-top-color: $tb-loading-color-one;
+            border-radius: 50%;
+            &.one {
+                height: 50px;
+                width: 50px;
+                left: 50px;
+                top: 50px;
+                -webkit-animation-duration: 0.85s;
+                    animation-duration: 0.85s;
+            }
+            &.two {
+                height: 75px;
+                width: 75px;
+                top: 38px;
+                left: 38px;
+                border-top-color: $tb-loading-color-two;
+                -webkit-animation-duration: 0.95s;
+                    animation-duration: 0.95s;
+            }
+            &.three {
+                height: 100px;
+                width: 100px;
+                top: 25px;
+                left: 25px;
+                -webkit-animation-duration: 1.05s;
+                    animation-duration: 1.05s;
+            }
+        }
+    }
+    &.active {
+        z-index: 90;
+        opacity: 1;
+        .circle {
+            -webkit-animation: rotate linear infinite;
+                    animation: rotate linear infinite;
+        }
+    }
+}
+@-webkit-keyframes rotate {
+    from {
+        transform: rotateZ(360deg);
+    }
+    to {
+        transform: rotateZ(0deg);
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotateZ(360deg);
+    }
+    to {
+        transform: rotateZ(0deg);
+    }
+}
+  

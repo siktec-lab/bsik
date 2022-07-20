@@ -1,0 +1,238 @@
+//-------------------------------------------------------------------------------------------------------
+// Variables:
+//-------------------------------------------------------------------------------------------------------
+$tb-payment-form-btn-border: 2px solid $tb-form-input-border-color !default;
+$tb-payment-form-btn-background: $tb-form-input-background !default;
+$tb-payment-form-btn-color: $tb-text-color-lighter !default;
+
+
+$tb-payment-form-btn-hover-background: $tb-form-input-background !default;
+$tb-payment-form-btn-hover-color: $tb-text-color-primary !default;
+
+$tb-payment-form-btn-selected-background: $tb-form-input-background !default;
+$tb-payment-form-btn-selected-color: $tb-form-input-color !default;
+$tb-payment-form-btn-selected-border: 2px solid $tb-color-orange !default;
+
+$tb-payment-summary-lines-border:  1px solid rgba($tb-form-input-border-color, .5);
+//-------------------------------------------------------------------------------------------------------
+// Style:
+//-------------------------------------------------------------------------------------------------------
+#user-register .tab-content #proc-payment {
+    padding: 1rem 0.5rem;
+    h2.tab-title {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 0.85rem;
+    }
+    .tab-description {
+        font-size: 0.85rem;
+        color: $tb-text-color-lighter;
+    }
+    .payment-methods-select {
+        >ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            li {
+                display: inline-block;
+                button {
+                    padding: 0.5rem 0.5rem;
+                    min-width: 130px;
+                    background-color: $tb-payment-form-btn-background;
+                    border: $tb-payment-form-btn-border;
+                    border-radius: 1rem;
+                    color: $tb-payment-form-btn-color;
+                    font-size: 0.85rem;
+                    i {
+                        opacity: 0.45;
+                        vertical-align: sub;
+                        font-size: 1rem;
+                        &.icon-paypal {
+                            color: $tb-color-paypal;
+                        }
+                        &.icon-bitcoin {
+                            color: $tb-color-bitcoin;
+                        }
+                    }
+                    &:hover:not(.selected) {
+                        background-color: $tb-payment-form-btn-hover-background;
+                        color: $tb-text-color-primary;
+                        i {
+                            opacity: 1;
+                        }
+                    }
+                    &.selected {
+                        background-color: $tb-payment-form-btn-selected-background;
+                        color: $tb-payment-form-btn-selected-color;
+                        border: $tb-payment-form-btn-selected-border;
+                        i {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .sik-dropdown {
+        float: right;
+        > button.btn {
+            background-color: $tb-form-input-background;
+            border: 1px solid $tb-form-input-border-color;
+            font-size: 0.85em;
+            width: 120px;
+        }
+        .dropdown-menu {
+            font-size: 0.85em;
+        }
+        .crypto-icon {
+            height: 1em;
+            vertical-align: baseline;
+            margin-bottom: -0.1em;
+        }
+    }
+    
+    .payment-forms {
+        margin: 1rem 1rem;
+        >div {
+            display: none;
+            &.active {
+                display:block;
+            }
+        }
+        .form-check {
+            margin: 1rem 0.25rem 0rem 0.25rem;
+            label.form-check-label {
+                font-size: 0.8rem;
+                color: $tb-text-color-lighter;
+                
+            }
+        }
+        .checkout-btn {
+            margin: 1.5rem auto 1.5rem auto;
+            display: block;
+        }
+        
+    }
+    .payment-summary {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        > li {
+            width: 100%;
+            border-bottom: $tb-payment-summary-lines-border;
+            padding: 0.75rem 0.2rem;
+            text-align: left;
+        }
+        .line-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            &.text-bold {
+                font-weight: 600;
+            }
+        }
+        .line-total {
+            font-size: 0.9rem;
+            font-weight: 200;
+            float: right;
+            &.text-bold {
+                font-weight: 600;
+            }
+        }
+        .plan-describe {
+
+        }
+        .plan-crypto {
+            line-height: 2rem;
+        }
+    }
+    @include breakpoint-up(tablet) {
+        h2.tab-title {
+            font-size: 1.35rem;
+            text-align: center;
+            margin-bottom: 0.85rem;
+        }
+        .tab-description {
+            font-size: 0.95rem;
+        }
+        .sik-dropdown {
+            > button.btn {
+                font-size: 0.85em;
+                width: 160px;
+            }
+            .dropdown-menu {
+                font-size: 0.85em;
+            }
+        }
+        &.tab-pane {
+            .inner-tab {
+                display: flex;
+                flex-wrap: wrap;
+                .inner-col {
+                    width: 100%;
+                }
+            }
+        }
+        .payment-methods-select {
+            >ul {
+                li {
+                    button {
+                        padding: 0.5rem 1rem;
+                        min-width: 200px;
+                        font-size: 1rem;
+                        i {
+                            opacity: 0.45;
+                            vertical-align: sub;
+                            font-size: 1.35rem;
+                        }
+                    }
+                }
+            }
+        }
+        .payment-forms {
+            margin: 1rem 2rem;
+            .form-check {
+                margin: 1rem 0.25rem 0rem 0.25rem;
+                label.form-check-label {
+                    font-size: 0.8rem;
+                }
+            }
+            .checkout-btn {
+                margin: 1.5rem auto 0rem auto;
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+        h2.tab-title {
+            font-size: 1.35rem;
+            margin-bottom: 0.85rem;
+        }
+        .sik-dropdown {
+            > button.btn {
+                font-size: 0.85em;
+                width: 200px;
+            }
+            .dropdown-menu {
+                font-size: 0.85em;
+            }
+        }
+        &.tab-pane {
+            .inner-tab {
+                flex-wrap: nowrap;
+                .inner-col.col-left {
+                    width: 50%;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                }
+                .inner-col.col-right {
+                    width: unset;
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+
+}

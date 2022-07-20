@@ -1,0 +1,1649 @@
+
+//@use "sass:color";
+/********************************************************
+* Import:
+*********************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+/********************************************************
+* Variables:
+*********************************************************/
+$debug                  : false;
+$tb-img-assets          : '../img/'; 
+
+$tb-color-orange        : #FBB823;
+$tb-color-green         : #0EC460;
+$tb-color-red           : #FF5757;
+$tb-color-white         : #FFFFFF;
+$tb-color-grey-light    : #484856;
+$tb-color-grey-dark     : #1A1C23;
+$tb-color-grey-gradient : linear-gradient(138deg, #484856 0%, #1A1C23 100%);
+$tb-text-color-primary  : $tb-color-white;
+$tb-text-color-lighter  : rgba(255,255,255,.67);
+$tb-color-discord       : #7289DA;
+$tb-color-paypal        : #0079C1;
+$tb-color-bitcoin       : #f7931a;
+$tb-text-shadow         : 2px 2px 3px rgba(0, 0, 0, .35);
+
+$tb-form-input-background: #1C1E24;
+$tb-form-input-color: white;
+$tb-form-input-border-color: #424347;
+
+
+$btn-active-box-shadow  : inset 0 3px 5px rgba(#000, .125);
+
+
+$font-size-base     : 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-sm       : $font-size-base * .875 !default;
+$font-size-lg       : $font-size-base * 1.25 !default;
+$font-size-xlg      : $font-size-lg * 1.45 !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  tablet: 768px,
+  lg: 992px,
+  pc: 1200px,
+  lg-pc: 1400px
+);
+
+$assets-folder: (
+  path-img-general   : "../img/general",
+  path-img-carusel   : "../img/carusel",
+  path-img-fav       : "../img/fav",
+  path-img-leagues   : "../img/leagues",
+  path-img-logos     : "../img/logos"
+);
+
+/********************************************************
+* MIXINS & FUNCTIONS:
+*********************************************************/
+@import "functions";
+@import "mixins";
+
+/********************************************************
+* Base:
+*********************************************************/
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: $tb-text-color-primary;
+    width: 100%;
+    background-repeat: repeat;
+    background-size: 170px, cover;
+    background-image: url(path_assets(path-img-general, "tombet-bg.svg")), linear-gradient(138deg, #484856 0%, #1A1C23 100%);
+}
+
+@include debug-media('mobile'); 
+
+@include breakpoint-up(tablet) {
+    @include debug-media('tablet');
+} 
+@include breakpoint-up(pc) {
+    @include debug-media('desktop');
+} 
+
+
+section.tb-main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px 5px;
+    @include debug-outline();
+
+    @include breakpoint-up(tablet) {
+        padding: 0px 15px;
+    } 
+    @include breakpoint-up(pc) {
+        padding: 0px 30px;
+    }
+
+}
+
+.force-bold {
+    font-weight: 600 !important;
+}
+.short-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+} 
+
+
+/********************************************************
+* Material Icons:
+*********************************************************/
+
+.material-icons,
+.material-icons-outlined { 
+    font-size: inherit;
+    margin-right:5px;
+    &.sm {
+        font-size: $font-size-sm;
+    }
+    &.md {
+        font-size: $font-size-base;
+    }
+    &.lg {
+        font-size: $font-size-lg;
+    }
+    &.xlg {
+        font-size: $font-size-xlg;
+    }
+    &.a-middle {
+        vertical-align: middle;
+    }
+    &.a-bottom {
+        vertical-align: bottom;
+    }
+    &.a-top {
+        vertical-align: top;
+    }
+    &.space-1 {
+        margin-right:1px;
+    }
+    &.space-2 {
+        margin-right:3px;
+    }
+    &.space-3 {
+        margin-right:5px;
+    }
+    &.space-4 {
+        margin-right:8px;
+    }
+    &.space-5 {
+        margin-right:10px;
+    }
+}
+
+
+/********************************************************
+* Buttons:
+*********************************************************/
+.btn-full-white { 
+    @include button-variant(
+            $tb-color-white, 
+            $hover-background: darken($tb-color-white, 20%),
+            $pad: 0.375rem 1.5rem
+        );
+}
+.btn-outline-white {
+    @include button-outline-variant($tb-color-white, $pad: 0.375rem 1.5rem);
+}
+.btn-outline-orange {
+    @include button-outline-variant($tb-color-orange, $pad: 0.375rem 1.5rem);
+}
+
+/********************************************************
+* Icons:
+*********************************************************/ 
+a>i.icon-discord,
+i.icon-discord {
+    color: $tb-color-white;
+    &:hover {
+        color: $tb-color-discord;
+    }
+}
+a:hover>.icon-discord {
+    color: $tb-color-discord;
+}
+a>i.icon-bitcoin,
+i.icon-bitcoin {
+    color: $tb-color-white;
+    &:hover {
+        color: $tb-color-bitcoin;
+    }
+}
+a:hover>.icon-bitcoin {
+    color: $tb-color-bitcoin;
+}
+
+/********************************************************
+* Smart Forms:
+*********************************************************/
+@import "smart-forms";
+ 
+/********************************************************
+* Ribbons:
+*********************************************************/
+@include ribbon-variant(
+    "primary",
+    $tb-color-orange,
+    $tb-color-grey-dark,
+    0px
+);
+
+@include ribbon-variant(
+    "secondary",
+    $tb-color-grey-light,
+    $tb-color-white,
+    0px
+);
+
+/********************************************************
+* Slick:
+*********************************************************/
+.slick-slide {
+    margin:10px;
+}
+.slick-slide img {
+    // width:100%;
+}
+.slick-dots li button:before {
+    font-size:20px;
+    color:white;
+}
+.slick-dots li.slick-active button:before {
+    color: $tb-color-orange;
+}
+
+/********************************************************
+ * SikDropdown 
+ ********************************************************/
+ @import "sik-dropdown";
+
+/********************************************************
+* Tombet Form-dark:
+*********************************************************/ 
+$tb-form-input-background: #1C1E24 !default;
+$tb-form-input-color: white !default;
+$tb-form-input-border-color: #424347 !default;
+$tb-form-input-focus-outline-color: rgba(189,189,189,.25) !default;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: all 5000s ease-in-out 0s;
+    transition-property: background-color, color;
+}
+input[data-autocompleted] {
+    background-color: black !important;
+}
+form.form-dark {
+    .form-control:-webkit-autofill~label {
+        opacity: .8;
+        color: darken($tb-color-orange, 5%);
+    }
+    .form-control {
+        font-weight: 400;
+        line-height: 1.5;
+        color: $tb-form-input-color;
+        background-color: $tb-form-input-background;
+        border: 1px solid $tb-form-input-border-color;
+        border-radius: 0.25rem;
+        &:focus:not(.is-invalid):not(.is-valid) {
+            box-shadow: 0 0 0 0.25rem $tb-form-input-focus-outline-color;
+        }
+    }
+    .form-check-input {
+        background-color: $tb-form-input-background;
+        border-color: $tb-form-input-border-color;
+        &:checked {
+            background-color: $tb-form-input-background;
+            border-color: $tb-form-input-border-color;
+        }
+        &:focus {
+            box-shadow: 0 0 0 0.25rem $tb-form-input-focus-outline-color;
+        }
+    }
+}
+
+/********************************************************
+* Tombet Modals:
+*********************************************************/ 
+$tb-modal-background: #1E2026;
+$tb-modal-box-shadow: 0px 4px 15px -2px black;
+.modal-backdrop.show {
+    opacity: .6;
+}
+.modal.tombet-modal {
+    .login-bg {
+        background-image: url(path_assets(path-img-general, "login-img.png"));
+        background-clip: border-box;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .modal-header {
+        border-bottom: 0;
+        height: 0;
+        padding: 0;
+        .btn-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1;
+            background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    .modal-footer {
+        border-top: 0;
+        height: 0;
+        padding: 0;
+    }
+    .modal-dialog {
+        cursor: initial;
+    }
+    .modal-body {
+        padding: 0;
+    }
+    .modal-content {
+        background-color: $tb-modal-background;
+        box-shadow: $tb-modal-box-shadow;
+        .content-layout {
+            display: flex;
+            flex-wrap: wrap;
+            .modal-left-content {
+                padding: 2.5rem;
+                flex-grow: 1;
+            }
+            .modal-right-content {
+                padding: 2.5rem;
+                flex-grow: 1;
+                width: 100%;
+            }
+            h2 {
+                text-shadow: $tb-text-shadow;
+                text-align: left;
+                font-size: 2.2rem;
+                text-decoration: underline;
+                text-decoration-color: $tb-color-orange;
+                margin-bottom: 1.75rem;
+                font-weight: 600;
+            }
+        }
+    }
+    
+    @include debug-outline();
+    
+    @include breakpoint-up(tablet) {
+        .modal-content {
+            .content-layout {
+                .modal-left-content {
+
+                }
+                .modal-right-content {
+
+                }
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+        .modal-content {
+            .content-layout {
+                flex-wrap: nowrap;
+                .modal-left-content {
+
+                }
+                .modal-right-content {
+                    width: unset;
+                }
+            }
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+}
+// User login -specific:
+#user-login {
+    .modal-left-content {
+        .btn-full-white {
+            margin: 0 auto;
+            display: block;
+            padding: 0.5rem 2.5rem;
+        }
+    }   
+    .modal-right-content {
+        height: 300px;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    @include breakpoint-up(tablet) {
+        h2 {
+            font-size: 1.85rem;
+        }
+        .modal-left-content {
+
+        }
+        .modal-right-content {
+            height: 450px;
+        }
+    }
+    @include breakpoint-up(pc) {
+        h2 {
+            font-size: 2rem;
+        }
+        .modal-left-content {
+
+        }
+        .modal-right-content {
+            flex-grow: 0;
+            height: 500px;
+            width: 540px;
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+}
+// User Register -specific:
+$tb-register-modal-tab-color: $tb-color-grey-light;
+$tb-register-modal-tab-active-color: $tb-color-orange;
+#user-register {
+    .nav-tabs {
+        border: 0;
+        .nav-item {
+            button.nav-link {
+                border: 0;
+                background-color: transparent !important;
+                font-weight: 500;
+                color: $tb-register-modal-tab-color;
+                font-size:0.95rem;
+                &.active {
+                    color: $tb-register-modal-tab-active-color;
+                    // text-decoration: underline;
+                    // text-decoration-color: $tb-color-white;
+                }
+            }
+        }
+    }
+    .tab-content {
+        padding: 1rem 0.5rem;
+        h2.tab-title {
+            font-size: 1.2rem;
+            text-align: center;
+            text-shadow: $tb-text-shadow;
+            // text-decoration: underline;
+            // text-decoration-color: $tb-color-orange;
+            margin-bottom: 0.85rem;
+        }
+        label {
+            font-size: 0.85rem;
+        }
+        .tab-description {
+            font-size: 0.85rem;
+            color: $tb-text-color-lighter;
+        }
+        .tab-pane {
+            .inner-tab {
+                display: flex;
+                flex-wrap: wrap;
+                .inner-col {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @include breakpoint-up(tablet) {
+        .nav-tabs {
+            .nav-item {
+                button.nav-link {
+                    font-size:1.2rem;
+                }
+            }
+        }
+        .tab-content {
+            padding: 1rem 0.5rem;
+            h2.tab-title {
+                font-size: 1.35rem;
+                text-align: center;
+                margin-bottom: 0.85rem;
+            }
+            label {
+                font-size: 0.95rem;
+            }
+            .tab-description {
+                font-size: 0.95rem;
+            }
+            .tab-pane {
+                .inner-tab {
+                    display: flex;
+                    flex-wrap: wrap;
+                    .inner-col {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+        .nav-tabs {
+            .nav-item {
+                button.nav-link {
+                    font-size:1rem;
+                }
+            }
+        }
+        .tab-content {
+            padding: 0.75rem 1rem;
+            h2.tab-title {
+                font-size: 1.35rem;
+                margin-bottom: 0.85rem;
+            }
+            .tab-pane {
+                .inner-tab {
+                    flex-wrap: nowrap;
+                    .inner-col.col-left {
+                        width: 50%;
+                    }
+                    .inner-col.col-right {
+                        width: unset;
+                        flex-grow: 1;
+                    }
+                }
+            }
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+
+}
+
+@import "payment-forms";
+@import "payment-success";
+
+/********************************************************
+* Nav Bar:
+*********************************************************/
+section.tb-top-nav {
+    width: 100%;
+    padding-top: 1rem;
+    @include debug-outline();
+    .row.tb-nav {
+        height:100%;
+    }
+    .logo-wrapper {
+        flex-grow: 0;
+        text-align: center;
+        padding-bottom: 0.8rem;
+        .main-logo {
+            width: 200px;
+        }
+    }
+    .tabs-wrapper {
+        flex-grow: 1;
+        padding:0px 10px;
+        .pages-tabs {
+            padding: 0;
+            padding-top: 5px;
+            border-top: 2px solid #ffffff40;
+            margin-top: 1rem;
+            margin-bottom: 0;
+            display: flex;
+            .page-tab {
+                margin: 0;
+                flex-grow: 1;
+                text-align: center;
+                > a {
+                    color: $tb-color-white;
+                    font-weight: 400;
+                    padding: 0.25rem 0.3rem;
+                    font-size: 0.75rem;
+                    text-decoration: none;
+                    display: inline-block;
+                    text-align: center;
+                    &:visited {
+                        color: $tb-color-white;
+                    }
+                    &:hover {
+                        color: $tb-color-orange;   
+                    }
+                    &:active {
+                        color: $tb-color-white;
+                    }
+                    i {
+                        font-size: 1.3rem;
+                    }
+                    span {
+                        display:block;
+                    }
+                }
+                &.tab-selected {
+                    > a {
+                        border-bottom: 4px solid $tb-color-orange;
+                    }
+                }
+            }
+            
+        }
+    } 
+    .button-wrapper { 
+        flex-basis: content;
+        flex-grow: 1;
+        text-align: center;
+        > button {
+            box-sizing: border-box;
+            font-size: 0.8rem;
+            min-width: 135px;
+        }
+    }
+    @include breakpoint-up(tablet) {
+        .row.tb-nav {
+            padding-top: 0.5rem;
+        }
+        .logo-wrapper {
+            width: 275px;
+            padding-bottom: 0;
+            text-align: left;
+            .main-logo {
+                width: 250px;
+            }
+        }
+        .tabs-wrapper {
+            .pages-tabs {
+                padding-top: 0.65rem;
+                .page-tab {
+                    margin:0;
+                    text-align: center;
+                    > a {
+                        font-size: 0.95rem;
+                    }
+                }
+            }
+        }
+        .button-wrapper {
+            text-align: right;
+            > button {
+                font-size: 0.95rem;
+                min-width: 150px;
+            } 
+        }
+    } 
+    @include breakpoint-up(pc) {
+        .row.tb-nav {
+            align-items: center !important;
+        }
+        .logo-wrapper {
+            width: 275px;
+        }
+        .tabs-wrapper {
+            order : 2;
+            flex-grow: 1;
+            .pages-tabs {
+                padding-top: 0;
+                border-top: 0;
+                display: inline-block;
+                .page-tab {
+                    flex-grow: unset;
+                    > a {
+                        padding: 0.5rem 0.55rem 0.25rem 0.55rem;
+                        font-size: 0.9rem;
+                        text-align: center;
+                        i {
+                            font-size: 1.15rem;
+                        }
+                        span {
+                            display:inline-block;
+                        }
+                    }
+                }
+            }
+        }
+        .button-wrapper {
+            order : 3;
+            flex-grow: 0;
+            > button {
+                font-size: 1rem;
+            }
+        }
+    } 
+    @include breakpoint-up(lg-pc) {
+        .tabs-wrapper {
+            .pages-tabs {
+                .page-tab {
+                    > a {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        text-align: center;
+                        margin-left: 1.5rem;
+                        i {
+                            font-size: 1.15rem;
+                            margin-right: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/********************************************************
+* Content:
+*********************************************************/
+section.tb-content {
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include debug-outline();
+    .tb-content-tab {
+        display: none;
+        &.current {
+            display:flex;
+        }
+        flex-direction: column;
+        padding: 1rem 1rem;
+        padding-top: 1.5rem;
+        height: 100%;
+        .tb-tab-left {
+            flex-grow: 0;
+            text-align: center;
+            padding-bottom: 1rem;
+            h1 {
+                text-shadow: $tb-text-shadow;
+                text-align: center;
+                font-size: 1.75rem;
+                text-decoration: underline;
+                text-decoration-color: $tb-color-orange;
+            }
+            p {
+                color: $tb-text-color-lighter;
+                text-align: center;
+                margin-bottom: 0.5rem;
+                font-weight: 300;
+                font-size: 0.9rem;
+            }
+        }
+        .tb-tab-right {
+            flex-grow: 1;
+            .application-slider {
+                background-color: transparent;
+                max-height:85%;
+                img {
+                    width:100%;
+                    margin: 0 auto;
+                    image-rendering: -moz-crisp-edges;
+                    image-rendering: -o-crisp-edges;
+                    image-rendering: -webkit-optimize-contrast;
+                    image-rendering: crisp-edges;
+                    -ms-interpolation-mode: nearest-neighbor;
+                }
+                h2 {
+                    text-shadow: $tb-text-shadow;
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    text-align: center;
+                    text-transform: capitalize;
+                    margin:0;
+                }
+                p {
+                    color: $tb-text-color-lighter;
+                    text-align: center;
+                    font-size: 0.9rem;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+    @include breakpoint-up(tablet) {
+        .tb-content-tab {
+            padding: 1rem 1.5rem;
+            padding-top: 3rem;
+            overflow-x: hidden;
+            // overflow-y: hidden;
+            .tb-tab-left {
+                padding-bottom: 1.5rem;
+                h1 {
+                    font-size: 2.5rem;
+                    margin-bottom: 1rem;
+                }
+                p {
+                    font-size: 1.15rem;
+                    margin-bottom: 1rem;
+                }
+            }
+            .tb-tab-right {
+                .application-slider {
+                    max-height:92%;
+                    img {
+                        width:90%;
+                    }
+                    h2 {
+                        font-size: 1.65rem;
+                    }
+                    p {
+                        font-size: 1.15rem;
+                    }
+                }
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+        .tb-content-tab {
+            flex-direction: row;
+            overflow-y: hidden;
+            width: 100%;
+            .tb-tab-left {
+                flex-basis: unset;
+                flex-grow: unset;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                row-gap: 25px;
+                padding:0 1rem;
+                transform: translate3d(0px, -90px, 0px);
+                h1 {
+                    font-size: 2.75rem;
+                    font-weight: 600;
+                    margin:0;
+                    text-align: left;
+                    display: block;
+                    width: 100%;
+                }
+                p {
+                    font-size: 1.2rem;
+                    margin:0;
+                    text-align: left;
+                }
+            }
+            .tb-tab-right {
+                flex-basis: unset;
+                flex-grow: unset;
+                padding:0 1rem;
+                width:60%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .application-slider {
+                    img {
+
+                    }
+                    h2 {
+
+                    }
+                    p {
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+/********************************************************
+* Bottom Bar:
+*********************************************************/
+section.tb-bottom-bar {
+    width: 100%;
+    padding: 0px 10px;
+    @include debug-outline();
+    .footer-logo {
+        display: none;
+    }
+    .footer-powered {
+        display: none;
+    }
+    .footer-links {
+        padding:0;
+        padding-top:10px;
+        border-top: 2px solid #ffffff40;
+        ul.list-links {
+            display: flex;
+            justify-content: flex-end;
+            li {
+                flex-grow: 0;
+                border-left: 2px solid #ffffff40;
+                margin: 0;
+                padding: 0 0.9rem;
+                padding-top: 5px;
+                &:first-of-type {
+                    flex-grow: 1;
+                    text-align: left;
+                    border-left: 0;
+                }
+                > a {
+                    color: $tb-color-white;
+                    font-size: 0.85rem;
+                    font-weight: 400;
+                    text-decoration: none;
+                    display: inline-block;
+                    opacity:.6;
+                    &:visited {
+                        color: $tb-color-white;
+                    }
+                    &:hover {
+                        opacity:1; 
+                    }
+                    &:active {
+                        color: $tb-color-white;
+                        opacity:1; 
+                    }
+                    i {
+                        font-size: 1.3rem;
+                        &.icon-bitcoin {
+                            font-size: 1.2rem;
+                        }
+                        &.icon-discord {
+                            margin-left:0.6rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include breakpoint-up(tablet) {
+        padding-bottom: 1rem;
+        .col {
+            height:30px;
+            span {
+                display: inline-block;
+                vertical-align: bottom;
+                height: 30px;
+                line-height: 30px;
+            }
+            a {
+                height:30px;
+                line-height: 30px;
+                display: inline-block;
+                vertical-align: bottom;
+            }
+        }
+        .footer-logo {
+            display: block;
+            flex-grow:0;
+            opacity:.4;
+            font-weight: 800;
+            padding-right:0;
+            font-size: 1.2rem;
+        }
+        .footer-powered {
+            display: block;
+            flex-grow:1;
+            > a {
+                color: $tb-color-white;
+                font-size: 0.75rem;
+                font-weight: 400;
+                text-decoration: none;
+                opacity:.4;
+                &:visited {
+                    color: $tb-color-white;
+                }
+                &:hover {
+                    opacity:1; 
+                }
+                &:active {
+                    color: $tb-color-white;
+                    opacity:1; 
+                }
+                img {
+                    height: 15px;
+                }
+                span {
+                    vertical-align: sub;
+                }
+            }
+        }
+        .footer-links {
+            flex-grow:0;
+            padding:0;
+            border-top: 0;
+            white-space: nowrap;
+            ul.list-links {
+                margin:0;
+                display: flex;
+                li {
+                    padding: 0 1rem;
+                    height: 30px;
+                    &:first-of-type {
+                        flex-grow: 1;
+                        text-align: left;
+                        border-left: 0;
+                    }
+                    > a {
+                        opacity:.4;
+                        vertical-align: baseline;
+                        &:hover {
+                            opacity:1;
+                            i.icon-bitcoin {
+                                color: $tb-color-bitcoin;
+                            }
+                        }
+                        i {
+                            font-size: 1.3rem;
+                            line-height: unset;
+                            &.icon-bitcoin {
+                            }
+                            &.icon-discord {
+                                margin-left:0.6rem;
+                            }
+                        }
+                        span {
+                            display: unset;
+                            vertical-align: top;
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    @include breakpoint-up(pc) {
+        .footer-logo {
+            
+        }
+        .footer-powered {
+            
+        }
+        .footer-links {
+
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+        .footer-logo {
+
+        }
+        .footer-powered {
+
+        }
+        .footer-links {
+
+        }
+    }
+}
+
+
+/********************************************************
+* Sports Tabs:
+*********************************************************/ 
+$tb-sport-card-background-color : rgba(24, 26, 31, 0.44); //#181A1F70;
+$tb-sport-card-border-color     : rgba(123, 123, 123, 1); //#372B7B24;
+$tb-sport-card-border-size      : 2px;
+
+.sport-cards-container {
+    width:100%;
+    height:100%;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    @include debug-outline();
+
+    .sport-card {
+        padding: 1rem;
+        background: $tb-sport-card-background-color 0% 0% no-repeat padding-box;
+        box-shadow: 0px 50px 99px rgba(55, 43, 123, 0.14);
+        border: $tb-sport-card-border-size solid $tb-sport-card-border-color;
+        border-radius: 1rem;
+        @include debug-outline();
+
+        i {
+            margin-right: 0.5rem;
+            font-size: 1.15rem;
+        }
+        h2 {
+            display: inline-block;
+            font-size: 1.25rem;
+            text-decoration: underline;
+            text-decoration-color: $tb-color-orange;
+            margin-bottom: 1rem;
+        }
+        ul.card-leagues {
+            display: block;
+            list-style: none;
+            padding:0px 0px 0px 0.4rem;
+            margin:0;
+            li.league-row {
+                margin-bottom: 0.75rem;
+                img.league-logo {
+                    max-height: 1.75rem;
+                    max-width: 1.75rem;
+                }
+                span.league-name {
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                }
+                span.league-description {
+                    color: $tb-text-color-lighter;
+                    font-weight: 300;
+                    font-size: 0.8em;
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    @include breakpoint-up(tablet) {
+        height:unset;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 1rem;
+
+        .sport-card {
+            padding: 1.25rem 1.5rem;
+            i {
+                margin-right: 0.5rem;
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-weight: 600;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            ul.card-leagues {
+                padding:0px 0px 0px 0.6rem;
+                li.league-row {
+                    margin-bottom: 0.9rem;
+                    img.league-logo {
+                        max-height: 1.95rem;
+                        max-width: 1.95rem;
+                    }
+                    span.league-name {
+                        font-size: 1rem;
+                    }
+                    span.league-description {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+        }
+
+    }
+    @include breakpoint-up(pc) {
+        ul.card-leagues {
+            li.league-row {
+                margin-bottom: 1rem;
+                img.league-logo {
+                    max-height: 1.95rem;
+                    max-width: 1.95rem;
+                    margin-right: 0.5rem;
+                }
+                span.league-name {
+                    font-size: 1rem;
+                }
+                span.league-description {
+                    font-size: 0.9em;
+                }
+            }
+        }
+    }
+}
+
+
+/********************************************************
+* Pricing Plans View specific:
+*********************************************************/ 
+$tb-choose-plan-title : $tb-text-shadow;
+.plans-wrapper {
+    padding-top:0.5rem;
+    @include debug-outline();
+
+    > h2 {
+        text-shadow: $tb-choose-plan-title;
+        text-align: center;
+        font-size: 1.35rem;
+        text-decoration: underline;
+        text-decoration-color: $tb-color-orange;
+        margin-bottom: 0.75rem;
+    }
+
+    @include breakpoint-up(tablet) {
+        > h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.85rem;
+        }
+    }
+    @include breakpoint-up(pc) {
+        height: 90%;
+        > h2 {
+            font-size: 2rem;
+            margin-bottom: 0.85rem;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    }
+}
+
+/********************************************************
+* Pricing Plans TOGGLER:
+*********************************************************/ 
+$tb-pricing-toggler-border-color: $tb-color-orange;
+$tb-pricing-toggler-thumb-color: $tb-color-orange;
+.toggle-monthly {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    @include debug-outline();
+
+    .toggle-plans {
+        text-align: center;
+        width:30%;
+        .form-check {
+            display: inline-block;
+            transform: scale(1.3) translate(0px, 15%);
+            &.form-switch {
+                .form-check-input {
+                    border: 2px solid $tb-pricing-toggler-border-color;
+                    background-color: transparent;
+                    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='#{toRGB($tb-pricing-toggler-thumb-color)}'/></svg>");
+                    &:focus {
+                        border-color: $tb-pricing-toggler-border-color;
+                        outline: 0;
+                        box-shadow: 0px 0px 7px 2px rgba($tb-pricing-toggler-border-color, .3);
+                    }
+                    &:checked {
+                        background-color: transparent;
+                        border-color: $tb-pricing-toggler-border-color;
+                        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='#{toRGB($tb-pricing-toggler-thumb-color)}'/></svg>");
+                    }
+                }
+                
+            }
+        }
+    }
+
+    .toggle-label {
+        flex: 1;
+        text-align: right;
+        font-weight: 300;
+        &:last-child {
+            text-align: left;
+        }
+    }   
+
+    
+
+    @include breakpoint-up(tablet) {
+        margin-bottom: 1rem;
+    }
+    @include breakpoint-up(pc) {
+        .toggle-plans {
+            width:20%;
+            .form-check {
+                display: inline-block;
+                transform: scale(1.5) translate(0px, 15%);
+            }
+        }
+        .toggle-label {
+            font-size: 1.25rem;
+        }  
+    }
+}
+.toggle-monthly.in-modal {
+    margin-bottom: 0.75rem;
+    @include debug-outline();
+    .toggle-plans {
+        width:30%;
+        .form-check {
+            transform: scale(1.3) translate(0px, 15%);
+            &.form-switch {
+                .form-check-input {
+                    border: 2px solid $tb-pricing-toggler-border-color;
+                    &:focus {
+                        box-shadow: 0px 0px 7px 2px rgba($tb-pricing-toggler-border-color, .3);
+                    }
+                }
+                
+            }
+        }
+    }
+    .toggle-label {
+        text-align: right;
+        font-weight: 300;
+        &:last-child {
+            text-align: left;
+        }
+    }
+    @include breakpoint-up(tablet) {
+        margin-bottom: 1rem;
+    }
+    @include breakpoint-up(pc) {
+        .toggle-plans {
+            width:20%;
+            .form-check {
+                transform: scale(1.2) translate(0px, 15%);
+            }
+        }
+        .toggle-label {
+            font-size: 1rem;
+        }  
+    }
+}
+/********************************************************
+* Pricing Plans:
+*********************************************************/ 
+$tb-pricing-plans-background-color: rgba(24, 26, 31, 0.44);
+$tb-pricing-plans-border-size:2px;
+$tb-pricing-plans-border-color: rgba(123, 123, 123, 1);
+$tb-pricing-plans-title-border: 3px solid $tb-color-orange;
+$tb-pricing-plans-icons-color:  $tb-color-orange;
+$tb-pricing-plans-tag-background-color:  $tb-color-orange;
+.plans-container {
+    padding-bottom: 1.5rem;
+    @include debug-outline();
+
+    ul.plans-list {
+        padding:0;
+        margin:0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 1rem;
+        > li {
+            position:relative;
+            background: $tb-pricing-plans-background-color 0% 0% no-repeat padding-box;
+            box-shadow: 0px 50px 99px rgba(55, 43, 123, 0.14);
+            border: $tb-pricing-plans-border-size solid $tb-pricing-plans-border-color;
+            border-radius: 0.65rem;
+            padding: .75rem;
+            h3.plan-title {
+                text-shadow: $tb-text-shadow;
+                font-weight: 500;
+                font-size: 1.15rem;
+                padding-bottom: 0.35rem;
+                border-bottom: $tb-pricing-plans-title-border;
+                margin-bottom: 1rem;
+            }
+            p.plan-description {
+                position:absolute;
+                margin:0;
+                top: 13px;
+                right: 20px;
+            }
+            span.plan-line {
+                display: block;
+                font-weight: 300;
+                color: $tb-text-color-lighter;
+                padding-left: 1ch;
+                margin-bottom: 0.35rem;
+                i {
+                    color: $tb-pricing-plans-icons-color;
+                    font-size: 1em;
+                    vertical-align: baseline;
+                    margin: 0 1px 0 3px;
+                    &.icon-check-round-round {
+                        font-size: 1.4em;
+                        vertical-align: text-bottom;
+                        margin: 0;
+                    }
+                }
+            }
+            p.select-plan-wrapper {
+                padding:0;
+                margin:0;
+                margin-top: 0.8rem;
+                text-align: center;
+            }
+            .form-check {
+                display:none;
+            }
+        }
+    }
+    @include breakpoint-up(tablet) {
+
+        ul.plans-list {
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 1rem;
+        }
+
+    }
+    @include breakpoint-up(pc) {
+
+    }
+    &:not(.in-modal) {
+        @include breakpoint-up(lg-pc) {
+            ul.plans-list {
+                grid-template-columns: repeat(4,1fr);
+                grid-gap: 0.5rem;
+                > li {
+                    padding: .75rem;
+                    text-align: center;
+                    h3.plan-title {
+                        display:inline-block;
+                        font-size: 1.4rem;
+                        padding: 1.75rem 0.75rem 0.75rem 0.75rem;
+                        border-bottom: $tb-pricing-plans-title-border;
+                        margin-bottom: 1rem;
+                        font-weight: 600;
+                    }
+                    p.plan-description {
+                        position: unset;
+                        display: block;
+                        margin-bottom:2rem;
+                        top: unset;
+                        right: unset;
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+                    span.plan-line {
+                        text-align: left;
+                        padding-left: 0;
+                        font-size: 0.9rem;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        margin-bottom: 1.75rem;
+                    }
+                    p.select-plan-wrapper {
+                        margin-top: 2.5rem;
+                        margin-bottom: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+.plans-container.in-modal {
+    ul.plans-list {
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 1rem;
+        > li {
+            padding: .5rem .5rem .5rem 1.5rem;
+            border: 1px solid #424347;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            &:hover {
+                border-color: $tb-color-orange;
+                box-shadow: 0 0 0 3px rgba($tb-color-orange, 0.15);
+            }
+            h3.plan-title {
+                border-bottom: 2px solid rgba($tb-color-orange, 0.3);
+                margin-bottom: 0.75rem;
+                font-size: 0.95rem;
+            }
+            p.plan-description {
+                top: 8px;
+                right: 20px;
+                font-size: 0.9rem;
+            }
+            span.plan-line {
+                display: inline-block;
+                margin-bottom: 0.2rem;
+                width: 48%;
+                font-size: 0.7rem;
+            }
+            p.select-plan-wrapper {
+                display: none;
+            }
+            .form-check {
+                display:block;
+                position:absolute;
+                left:0;
+                top:0;
+                transform: scale3d(1, 1, 1) translate(0.2rem, 0.2rem);
+                .form-check-input {
+                    background-color: $tb-pricing-plans-background-color;
+                    border-color: #424347;
+                    box-shadow: none !important;
+                    &:checked {
+                        background-color: $tb-pricing-plans-background-color;
+                        border-color: $tb-color-orange;
+                        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23FBB823'/%3e%3c/svg%3e")
+                    }
+                }
+            }
+            &.selected {
+                border-color: $tb-color-orange;
+                h3.plan-title {
+                    border-bottom: 2px solid rgba($tb-color-orange, 1);
+                }
+            }
+        }
+        .ribbon-left-top {
+            display:none !important;
+        }
+        .ribbon-right-bottom {
+            display:block !important;
+        }
+    }
+    @include breakpoint-up(tablet) {
+        padding-bottom: 0.75rem;
+        ul.plans-list {
+            > li {
+                padding: .5rem .5rem .5rem 2.1rem;
+                h3.plan-title {
+                    margin-bottom: 0.75rem;
+                    font-size: 1.15rem;
+                }
+                p.plan-description {
+                    top: 8px;
+                    right: 20px;
+                    font-size: 1rem;
+                }
+                span.plan-line {
+                    margin-bottom: 0.2rem;
+                    font-size: 0.85rem;
+                }
+                .form-check {
+                    transform: scale3d(1.2, 1.2, 1) translate(0.5rem, 0.3rem);
+                }
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+
+    }
+}
+
+/********************************************************
+* Contact Tab:
+*********************************************************/ 
+$tb-contact-form-background-color: rgba(24, 26, 31, 0.44);
+$tb-contact-form-border-size:3px;
+$tb-contact-form-border-color: rgba(123, 123, 123, 1);
+.tb-content-tab[data-tab-name='contact'] {
+    .tb-tab-left {
+        text-align: left;
+        @include debug-outline();
+        ul.contact-channels {
+            list-style: none;
+            padding:0.5rem 0 0.5rem 2rem;
+            margin:0;
+            text-align: left;
+            display: block;
+            width: 100%;
+            font-size: 0.85em;
+            li {
+                position: relative;
+                margin-bottom: 0.75rem;
+                &::after {
+                    content: '';
+                    position:absolute;
+                    width: 0.8rem;
+                    height: 0.8rem;
+                    background-color: $tb-color-white;
+                    left: -1.35rem;
+                    top : 0.25rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .tb-tab-right {
+
+        @include debug-outline();
+
+        form {
+            background-color: $tb-contact-form-background-color; 
+            border: $tb-contact-form-border-size solid $tb-contact-form-border-color;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            h2 {
+                font-size: 1.35rem;
+                text-align: center;
+                text-shadow: $tb-text-shadow;
+                text-decoration: underline;
+                text-decoration-color: $tb-color-orange;
+                margin-bottom: 1.75rem;
+            }
+            button {
+                padding: 0.6rem 2.5rem;
+                span, i {
+                    font-size: 1.4rem;
+                    vertical-align: sub;
+                }
+            }
+            #contact-message {
+                font-size: 0.8rem;
+                min-height: 65px;
+                max-height: 270px;
+                height: calc(6 * 1rem);
+            }
+        }
+
+    }
+    @include breakpoint-up(tablet) {
+
+        .tb-tab-left {
+            ul.contact-channels {
+                list-style: none;
+                padding:1rem 0 1rem 3rem;
+                font-size: 1em;
+                li {
+                    margin-bottom: 1rem;
+                    &::after {
+                    }
+                }
+    
+            }
+        }
+        .tb-tab-right {
+            form {
+                h2 {
+                    font-size: 1.85rem;
+                    margin-bottom: 1.75rem;
+                    text-align: left;
+                }
+                #contact-message {
+                    min-height: 65px;
+                    max-height: 270px;
+                    height: calc(8 * 1rem);
+                }
+            }
+        }
+    }
+    @include breakpoint-up(pc) {
+        .tb-tab-right {
+            form {
+                h2 {
+                    font-size: 2rem;
+                }
+                #contact-message {
+                    min-height: 65px;
+                    max-height: 270px;
+                    height: calc(12 * 1rem);
+                }
+            }
+        }
+    }
+    @include breakpoint-up(lg-pc) {
+
+    }
+}
