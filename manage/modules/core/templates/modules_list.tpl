@@ -36,7 +36,7 @@
                         <span class="module-meta-header">Privileges:</span>
                         <span class="module-meta-content">--------------</span>
                     </div>
-                    <div class="col col-1 module-actions">
+                    <div class="col col-2 module-actions">
                         <button type="button" class="btn btn-sm btn-bsik-action icon-info" data-action="open-settings-module" data-module="{{ module.name|e('html_attr') }}" {{ module.status != 'active' ? 'disabled' }}>
                             <i class="fas fa-cog"></i> Settings
                         </button>
