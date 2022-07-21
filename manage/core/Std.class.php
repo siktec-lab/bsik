@@ -289,7 +289,7 @@ class Std_Array {
                             (
                                 array_key_exists($cond[$i], $fn)
                             && is_callable($fn[$cond[$i]])
-                            && !call_user_func($fn[$cond[$i]], $check[$cur])
+                            && !call_user_func_array($fn[$cond[$i]], [$check[$cur], $cur])
                             )
                             ||
                             ($cond[$i] === "empty" && empty($check[$cur]))
@@ -306,66 +306,145 @@ class Std_Array {
         }
         return true;
     }
-        
+    
+    final public static function advanced_validate(array $rules, array $check, array $fn = [], array &$errors = []) {
+        $initial = count($errors);
+        foreach ($rules as $path => $rule) {
+            $cbs    = explode(":", $rule);
+            $types  = explode("|", array_shift($cbs) ?? "");
+            $cond = array_map(
+                function($c) {
+                    $c = str_replace("'","\"", $c);
+                    return [
+                        "cb"   =>  preg_replace('/\[.*\]/m', '', $c),
+                        "args" =>  json_decode(preg_replace('/^[^\[]*/m', '', $c), true) ?? []
+                    ];
+                },
+                $cbs
+            );
+            //Is type declaration used?
+            if (empty($types)) {
+                $errors[$path] = ["validation is missing type declaration."];
+                continue;
+            }
+            //Get values:
+            $values = self::path_get($path, $check);
+            if (is_null($values)) {
+                $errors[$path] = ["missing value"];
+                continue;
+            } elseif(!is_array($values)) {
+                $values = [$values];
+            }
+            //Validate values:
+            foreach ($values as $value) {
+                $verr = [];
+                $mytype = gettype($value);
+                if (!in_array("any", $types, true) && !in_array(gettype($mytype), $types, true)) {
+                    $verr[] = "invalid type - {$mytype}";
+                } else {
+                    foreach ($cond as $k => $cnd) {
+                        /** @var array $cnd */
+                        if ((is_callable($fn[$cnd['cb']] ?? null))) {
+                            $test = call_user_func_array(
+                                $fn[$cnd['cb']], 
+                                [$value, $path, ...$cnd["args"]]
+                            );
+                            if ($test !== true) {
+                                $verr[] = is_string($test) ? $test : "failed rule - {$cnd['cb']}";
+                            }
+                        } else {
+                            $verr[] = "undefined rule - {$cnd['cb']}";
+                        }
+                    }
+                }
+                if (!empty($verr)) {
+                    $errors[$path] = array_merge(is_array($errors[$path]) ? $errors[$path] : [], $verr);
+                }
+            }
+        }
+        return $initial - count($errors) === 0;
+    }
+
+    /**
+     * flatten_arr - fill an array with all key "paths" of a given array
+     * uses '.' for keys traversal - a path is 'key1.key2 => value'
+     * gist: https://gist.github.com/siktec-lab/dc2e7185011a30641d2e3d10db95a20c
+     * @param  array& $result = will be filled with all the found paths and their values
+     * @param  mixed  $arr    = the array to flatten
+     * @param  mixed  $key    = used internally to pass teh current traversable path
+     * @return void
+     */
+    final public static function flatten_to_paths(array &$result, mixed $arr, mixed $key = "") : void {
+        if ($key !== "") 
+            $result[$key] = $arr;
+        if (is_array($arr)) 
+            foreach ($arr as $k => $el) 
+                self::flatten_to_paths($result, $el, ($key !== "" ? $key.".".$k : $k));
+    }
+    
+    /**
+     * in_array_path - check if a key path is valid given an array traverse patterm
+     * -> *.num == one.two.num.
+     * use '.' for keys traversal
+     * use '*' for wildcard traversal
+     * use '~' for level ignore.
+     * @param  mixed $pattern
+     * @param  mixed $path
+     * @return void
+     */
+    final public static function in_array_path(string $pattern, string $path) {
+        $keys   = explode('.', $path);
+        $steps  = explode('.', $pattern);
+        $wild = false;
+        foreach ($steps as $step) {
+            switch ($step) {
+                case "*":  
+                    $wild = true; 
+                    break;
+                case "~":
+                    array_shift($keys);
+                    break;
+                default: {
+                    if ($wild) {
+                        while (!empty($keys))
+                            if (array_shift($keys) === $step)
+                                continue 3;
+                        return false;
+                    } else {
+                        $key = array_shift($keys);
+                        if ($step !== $key)
+                            return false;
+                    }
+                } break;
+            }
+        }
+        return empty($keys);
+    }
+
     /**
      * path_get
      * walks an array given a string of keys with '.' notation to get inner value or default return
      * Using a wildcard "*" will search intermediate arrays and return an array.
+     * ex *.num == one.two.num.
+     * use '.' for keys traversal
+     * use '*' for wildcard traversal
+     * use '~' for level ignore.
      * @param  string $path - example "key1.key2" | 'theme.*.color'
      * @param  array  $arr
-     * @param  mixed $default - default value to return - null by default
+     * @param  mixed $notfound - default value to return - null by default if nothing was found
      * @return mixed
      */
-    final public static function path_get(string $path, array $arr, mixed $default = null) : mixed {
-        //return early if empty:
-        if (empty($arr)) 
-            return $default;
-        if (array_key_exists($path, $arr)) 
-            return $arr[$path];
-        if (empty($path))
-            return $arr;
-        // Remove starting delimiters and spaces
-        $path = ltrim($path, ". ");
-        // Remove ending delimiters, spaces, and wildcards
-        $path = rtrim($path, ". *");
-        // Split the keys by delimiter
-        $keys = explode('.', $path);
-        //Iterate:
-        while (($key = array_shift($keys)) !== null) {
-            // Make the key an integer if needed:
-            if (ctype_digit($key)) {
-                $key = (int) $key;
-            }
-            //The key is in this level ?
-            if (array_key_exists($key, $arr)) {
-                if (!empty($keys)) {
-                    if (is_array($arr[$key]))
-                        $arr = $arr[$key];
-                    else
-                        break; // Unable to dig deeper
-                } else {
-                    return $arr[$key]; // Found requested
-                }
-            }
-            //Is a wild card?
-            elseif ($key === '*') {
-                $values = [];
-                foreach ($arr as $ar) {
-                    if ($value = self::path_get(implode('.', $keys), $ar)) {
-                        $values[] = $value;
-                    }
-                }
-                if (!empty($values)) {
-                    return $values; // Found the values requested
-                } else {
-                    break; // Unable to dig deeper
-                }
-            } else {
-                break; // Unable to dig deeper
+    final public static function path_get(string $path, array $data = [], mixed $notfound = null) : mixed {
+        //create a combined key path:
+        $keys   = [];
+        $return = [];
+        self::flatten_to_paths($keys, $data);
+        foreach ($keys as $key => $value) {
+            if (self::in_array_path($path, $key)) {
+                $return[] = $value;
             }
         }
-        // return default at this point:
-        return $default;
+        return empty($return) ? $notfound : $return;
     }
     
     /**
