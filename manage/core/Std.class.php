@@ -220,38 +220,56 @@ class Std_Array {
 
     /**
      * extend
-     * Merge two arrays - will preserve keys that start with $ e.x $key => finall value.
-     * @param array $arr1
-     * @param array $arr2
+     * Merge two arrays - ignores keys that start with $ e.x $key => finall value.
+     * @param array $def
+     * @param array $ext
      *
      * @return array
      */
     final public static function extend(array $def, array $ext) : array {
-        if (empty($def)) {
-            return $ext;
-        } else if (empty($ext)) {
-            return $def;
-        }
         foreach ($ext as $key => $value) {
             if (is_string($key) && $key[0] === '$')
                 continue;
-            if (is_int($key)) {
-                $def[] = $value;
-            } elseif (is_array($ext[$key])) {
-                if (!isset($def[$key])) {
-                    $def[$key] = array();
-                }
-                if (is_int($key)) {
-                    $def[] = self::extend($def[$key], $value);
-                } else {
+            if (is_string($key) || is_int($key)) {
+                if (array_key_exists('$'.$key, $def)) {
+                    continue;
+                } elseif (!array_key_exists($key, $def)) {
+                    $def[$key] = $value;
+                } else if (is_array($value) && is_array($def[$key])) {
                     $def[$key] = self::extend($def[$key], $value);
+                } else {
+                    $def[$key] = $value;
                 }
-            } else {
-                $def[$key] = $value;
             }
         }
         return $def;
     }
+    // final public static function extend(array $def, array $ext) : array {
+    //     if (empty($def)) {
+    //         return $ext;
+    //     } else if (empty($ext)) {
+    //         return $def;
+    //     }
+    //     foreach ($ext as $key => $value) {
+    //         if (is_string($key) && $key[0] === '$')
+    //             continue;
+    //         if (is_int($key)) {
+    //             $def[] = $value;
+    //         } elseif (is_array($ext[$key])) {
+    //             if (!isset($def[$key])) {
+    //                 $def[$key] = array();
+    //             }
+    //             if (is_int($key)) {
+    //                 $def[] = self::extend($def[$key], $value);
+    //             } else {
+    //                 $def[$key] = self::extend($def[$key], $value);
+    //             }
+    //         } else {
+    //             $def[$key] = $value;
+    //         }
+    //     }
+    //     return $def;
+    // }
 
     /**
      * validate - walks an array and validate specific key values.
