@@ -25,6 +25,55 @@ class StandardLibTest extends TestCase
 
     }
 
+    public function testArrayExtendHelper() : void {
+        $def1 = [
+            "one"  => false,
+            "two"  => [ "two1" => "two" ],
+            "jump" => "no" 
+        ];
+        $val1 = [
+            "one" => [ "test" => "yes" ],
+            "two" => [ "two2" => "twoo"],
+            "jump" => "yes",
+            "\$avoid" => "no"
+        ];
+        $expected1 = '{"one":{"test":"yes"},"two":{"two1":"two","two2":"twoo"},"jump":"yes"}';
+        $this->assertEquals(
+            $expected1, 
+            json_encode(Std::$arr::extend($def1, $val1)),
+            "Failed extending array - test1"
+        );
+
+        $def2 = [
+            "one",
+            "two",
+            "three",
+            "more" => [1, 2],
+            "test" => [ 
+                "lvl1" => [
+                    "me" => "no",
+                    "lvl2" => [
+                        "me" => "no",    
+                    ]    
+                ]
+            ]
+        ];
+        $val2 = [
+            "one1",
+            3 => "four",
+            "more" => [3,4,5],
+            "test" => [
+                "lvl11" => "added",
+                "lvl1" => ["lvl2" => ["me" => "yes"]]
+            ]
+        ];
+        $expected2 = '{"0":"one1","1":"two","2":"three","more":[3,4,5],"test":{"lvl1":{"me":"no","lvl2":{"me":"yes"}},"lvl11":"added"},"3":"four"}';
+        $this->assertEquals(
+            $expected2, 
+            json_encode(Std::$arr::extend($def2, $val2)),
+            "Failed extending array - test2"
+        );
+    }
     // arr_validate() - test:
     public function testArrayValidateHelper() : void {
         $usecase = [
