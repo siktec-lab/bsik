@@ -10,6 +10,7 @@ require_once PLAT_PATH_AUTOLOAD;
 
 use \Exception;
 use \Bsik\Std;
+use Bsik\Std_String;
 
 class SchemaObj {
     public bool     $status  = false;
@@ -19,6 +20,7 @@ class SchemaObj {
 
 class ModuleDefinition {
     public bool     $valid  = false;
+    public array    $errors = [];
     public array    $struct = [];
 }
 
@@ -36,6 +38,8 @@ class ModuleSchema {
         ],
     ];
 
+    public static array $CUSTOM_VALIDATORS = []; /** decalred in the constructor */
+
     private string $type;
     private string $version;
     private string $template_name;
@@ -50,10 +54,9 @@ class ModuleSchema {
      * @return void
      */
     public function __construct(string $_type, ?string $_version = null) {
-
         $this->type            = trim($_type);
         $this->version         = trim($_version ?? self::DEFAULT_VERSION);
-
+        //Load the correct template:
         if (array_key_exists($this->type, self::SCHEMAS) && Std::$str::is_version($this->version)) {
             $this->template_name     = sprintf(self::SCHEMAS[$this->type]["template"], $this->version);
             $this->schema_template = $this->get_template($this->template_name);
@@ -112,20 +115,54 @@ class ModuleSchema {
      * @param  array $struct
      * @return bool
      */
-    public function validate(array $struct) : bool {
-        //var_dump($this->schema_template->struct['$schema_required']);
-        //var_dump($struct['this']);
+    public function validate(ModuleDefinition $definition) : bool {
         return $this->is_loaded() 
-                ? Std::$arr::validate($this->schema_template->struct['$schema_required'], $struct)
+                ? Std::$arr::validate(
+                    $this->schema_template->struct['$schema_required'], 
+                    $definition->struct, 
+                    ModuleSchema::$CUSTOM_VALIDATORS, 
+                    $definition->errors
+                    )
                 : false;
     }
 
     public function create_definition(array $struct) : ModuleDefinition {
-        $def = new ModuleDefinition();
-        $def->struct = Std::$arr::extend($this->schema_template->struct, $struct);
-        $def->valid = $this->validate($def->struct);
-        //var_dump($def->valid);
-        return $def;
+        $definition = new ModuleDefinition();
+        $definition->struct = Std::$arr::extend($this->schema_template->struct, $struct);
+        $definition->valid = $this->validate($definition);
+        return $definition;
     }
 
 }
+
+/* 
+ * Declare some validators used by the schemaloader:
+ * Later bindings because we are using static methods
+ */
+
+ModuleSchema::$CUSTOM_VALIDATORS["version"] = \Closure::fromCallable([Std::$str, "is_version"]);
+ModuleSchema::$CUSTOM_VALIDATORS["strlen"] = function($value, $path, $min, $max) {
+    if (strlen($value) > $max) 
+        return "value is too long";
+    if (strlen($value) < $min) 
+        return "value is too short";
+    return true;
+};
+ModuleSchema::$CUSTOM_VALIDATORS["oneof"] = function($value, $path, $opt) {
+    if (!in_array($value, $opt, true)) 
+        return "value is not one of the allowed values";
+    return true;
+};
+ModuleSchema::$CUSTOM_VALIDATORS["url"] = function($value, $path) {
+    return empty($value) || filter_var($value, FILTER_VALIDATE_URL) !== false;
+};
+ModuleSchema::$CUSTOM_VALIDATORS["domain"] = function($value, $path, $allowed) {
+    $domain = parse_url($value, PHP_URL_HOST);
+    return empty($value) || in_array($domain, $allowed, true);
+};
+ModuleSchema::$CUSTOM_VALIDATORS["github"] = function($value, $path) {
+    return empty($value) || (filter_var($value, FILTER_VALIDATE_URL) && parse_url($value, PHP_URL_HOST) === "github.com");
+};
+ModuleSchema::$CUSTOM_VALIDATORS["email"] = function($value, $path) {
+    return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
+};
