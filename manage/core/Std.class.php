@@ -255,66 +255,27 @@ class Std_Array {
 
     /**
      * validate - walks an array and validate specific key values.
-     * use '.' for keys traversal
-     * use ':empty' after type to check its not empty.
-     * use ':' to declare your custom validation function passed in $fn as an anon func.
-     * types: any, boolean, integer, double, string, array, object, NULL, 'unknown type'
+     * use this structure for rules:
+     *   - path => rule "{types|}:{func[args]:}"
+     *   ex. ["key1" => "string:empty", "key2.key22" => "integer|bool:customFn"]
      * 
-     * @param array $rules - example ["key1" => "string:empty", "key2.key22" => "integer|bool:customFn"]
-     * @param array $check - the array to validate
-     * @param array $fn - assoc array with functions to use. 
-     * @return bool
+     * @param array $rules - all the rules to apply
+     * @param array $array - the array to validate
+     * @param array $fn    - assoc array with functions to use. 
+     * @param array &$error - error messages wil be added to this array. 
+     * @return bool true for valid
      * 
      */
-    final public static function validate(array $rules, array $check, array $fn = []) {
-	
-        foreach ($rules as $key => $type) {
-            $keys  = explode(".", $key);
-            $cond  = explode(":", $type);
-            $types = explode("|", $cond[0] ?? ""); 
-            $cur   = array_shift($keys);
-            if (
-                array_key_exists($cur, $check) && 
-                (
-                    (!empty($keys) && gettype($check[$cur]) === "array") 
-                    || 
-                    (empty($keys) && (in_array("any", $types, true) || in_array(gettype($check[$cur]), $types, true)))
-                )
-            ) {
-                if (!empty($keys) && !self::validate([implode(".", $keys) => $type], $check[$cur], $fn)) {
-                    return false;
-                } elseif (empty($keys)) {
-                    for ($i = 1; $i < count($cond); $i++) {
-                        if (
-                            (
-                                array_key_exists($cond[$i], $fn)
-                            && is_callable($fn[$cond[$i]])
-                            && !call_user_func_array($fn[$cond[$i]], [$check[$cur], $cur])
-                            )
-                            ||
-                            ($cond[$i] === "empty" && empty($check[$cur]))
-                            ||
-                            ($cond[$i] !== "empty" && !array_key_exists($cond[$i], $fn))
-                        ) {
-                            return false;
-                        }
-                    }
-                }
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    final public static function advanced_validate(array $rules, array $check, array $fn = [], array &$errors = []) {
+    final public static function validate(array $rules, array $array, array $fn = [], array &$errors = []) : bool {
         $initial = count($errors);
+        $data = []; 
+        self::flatten_to_paths($data, $array);
         foreach ($rules as $path => $rule) {
             $cbs    = explode(":", $rule);
             $types  = explode("|", array_shift($cbs) ?? "");
             $cond = array_map(
-                function($c) {
-                    $c = str_replace("'","\"", $c);
+                function ($c) {
+                    $c = str_replace("'", "\"", $c);
                     return [
                         "cb"   =>  preg_replace('/\[.*\]/m', '', $c),
                         "args" =>  json_decode(preg_replace('/^[^\[]*/m', '', $c), true) ?? []
@@ -324,22 +285,20 @@ class Std_Array {
             );
             //Is type declaration used?
             if (empty($types)) {
-                $errors[$path] = ["validation is missing type declaration."];
+                $errors[$path] = ["validation rule is missing type declaration."];
                 continue;
             }
             //Get values:
-            $values = self::path_get($path, $check);
+            $values = self::path_get($path, $data, null, true);
             if (is_null($values)) {
                 $errors[$path] = ["missing value"];
                 continue;
-            } elseif(!is_array($values)) {
-                $values = [$values];
             }
             //Validate values:
             foreach ($values as $value) {
                 $verr = [];
                 $mytype = gettype($value);
-                if (!in_array("any", $types, true) && !in_array(gettype($mytype), $types, true)) {
+                if (!in_array("any", $types, true) && !in_array($mytype, $types, true)) {
                     $verr[] = "invalid type - {$mytype}";
                 } else {
                     foreach ($cond as $k => $cnd) {
@@ -358,7 +317,7 @@ class Std_Array {
                     }
                 }
                 if (!empty($verr)) {
-                    $errors[$path] = array_merge(is_array($errors[$path]) ? $errors[$path] : [], $verr);
+                    $errors[$path] = array_merge(is_array($errors[$path] ?? false) ? $errors[$path] : [], $verr);
                 }
             }
         }
@@ -431,14 +390,19 @@ class Std_Array {
      * use '~' for level ignore.
      * @param  string $path - example "key1.key2" | 'theme.*.color'
      * @param  array  $arr
-     * @param  mixed $notfound - default value to return - null by default if nothing was found
+     * @param  mixed  $notfound - default value to return - null by default if nothing was found
+     * @param  bool   $already_flatten - if the data is allready flatten, This is usefull to prevent repeatedly flattening of the data 
      * @return mixed
      */
-    final public static function path_get(string $path, array $data = [], mixed $notfound = null) : mixed {
+    final public static function path_get(string $path, array $data = [], mixed $notfound = null, bool $already_flatten = false) : mixed {
         //create a combined key path:
         $keys   = [];
         $return = [];
-        self::flatten_to_paths($keys, $data);
+        if ($already_flatten) {
+            $keys = $data;
+        } else {
+            self::flatten_to_paths($keys, $data);
+        }
         foreach ($keys as $key => $value) {
             if (self::in_array_path($path, $key)) {
                 $return[] = $value;
