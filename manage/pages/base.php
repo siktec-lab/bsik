@@ -102,7 +102,7 @@ Trace::add_trace("Loaded & Render side-menu structure", __FILE__.__LINE__);
 
 //Module header:
 $doc_module_header = $APage->render_template("module_header", [
-    "module_name"   => APage::$module->menu["title"] ?? "",
+    "module_name"   => APage::$module->settings->get("title") ?? "",
     "module_which"  => APage::$module->current_view->settings->get("title", "No title"),
     "module_desc"   => APage::$module->current_view->settings->get("description", "No description")
 ]);
