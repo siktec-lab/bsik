@@ -118,6 +118,9 @@ AdminApi::register_endpoint(new ApiEndPoint(
             if ($clean) $installer->clean();
         };
 
+        $installed = [];
+        $Installer = null;
+
         // Perform sik module installation:
         try {
 
@@ -142,7 +145,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
             // install the module or pack:
             [$status, $errors, $installed] = $Installer->install($Api->get_user("id"));
             $Api->request->append_answer_data([
-                "installed"      => $installed
+                "installed" => $installed
             ]);
             if (!$status) {
                 $Endpoint->log_warning(
@@ -153,11 +156,14 @@ AdminApi::register_endpoint(new ApiEndPoint(
                 $Api->request->update_answer_status(200, $errors, "install_error");
                 return false;
             } 
-
         } catch (Throwable $e) {
             $Endpoint->log_error(
                 message : "Uploaded Module archive to install - internal error.", 
-                context : ["error" => $e->getMessage()]
+                context : [
+                    "error" => $e->getMessage(),
+                    "file"  => $e->getFile(),
+                    "line"  => $e->getLine()
+                ]
             );
             $Api->request->update_answer_status(200, $e->getMessage(), "internal_error");
             $cleanup($Installer, $ret, true);
