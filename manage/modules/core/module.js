@@ -73,7 +73,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                         text = `Failed to install module archive is not valid - Err {${res.errors ? res.errors.join('|') : "unknown"}}`;
                                     } break;
                                     case "install_error" : {
-                                        text = `Failed to install module files jsonc is not valid - ${res.errors ? res.errors.join('|') : "unknown"}`;
+                                        let errors = [];
+                                        if (res.errors && Array.isArray(res.errors)) {
+                                            errors = '<br />' + res.errors.join('<br />');
+                                        } else if (res.errors && typeof res.errors === 'object') {
+                                            for (const err in res.errors) {
+                                                errors.push(`${res.errors[err]} in ${err}`);
+                                            }
+                                            errors = '<br />' + errors.join('<br />');
+                                        } else {
+                                            errors = 'unknown';
+                                        }
+                                        text = `Failed to install module files jsonc is not valid - ${errors}`;
                                     } break;
                                     default: {
                                         text = `Unknown error while installing module - Err {${res.errors ? res.errors[0] : "unknown"}}`;
