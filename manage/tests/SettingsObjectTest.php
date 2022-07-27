@@ -27,7 +27,11 @@ class SettingsObjectTest extends TestCase
     public function testInitialization() : void {
         $set = new SettingsObject(
             defaults        : [ "name" => "noname", "last" => "lastname", "age" => 10 ],
-            options         : [ "name" => "string:notempty", "last" => "notempty", "age" => "integer" ],
+            options         : [ 
+                "name" => "string:notempty", 
+                "last" => "notempty", 
+                "age" => "integer" 
+            ],
             descriptions    : [ "name" => "appname" ],
         );
 
@@ -73,8 +77,7 @@ class SettingsObjectTest extends TestCase
             actual   : $set->get("age"), 
             message  : "failed default get integer"
         );
-
-        $set->set("age", "15");
+        $res = $set->set("age", "15");
         $this->assertEquals(
             expected : 15, 
             actual   : $set->get("age"), 
@@ -147,22 +150,22 @@ class SettingsObjectTest extends TestCase
         $this->assertEquals(
             expected : '{"name":"noname"}', 
             actual   : $set->defaults_json(), 
-            message  : "failed defaults_json serialization"
+            message  : "failed defaults_json serialization 1"
         );
         $this->assertEquals(
             expected : '{"name":"siktec"}', 
             actual   : $set->values_json(), 
-            message  : "failed defaults_json serialization"
+            message  : "failed defaults_json serialization 2"
         );
         $this->assertEquals(
             expected : '{"name":"string"}', 
             actual   : $set->options_json(), 
-            message  : "failed defaults_json serialization"
+            message  : "failed defaults_json serialization 3"
         );
         $this->assertEquals(
             expected : '{"name":"appname"}', 
             actual   : $set->descriptions_json(), 
-            message  : "failed defaults_json serialization"
+            message  : "failed defaults_json serialization 4"
         );
     }
 
