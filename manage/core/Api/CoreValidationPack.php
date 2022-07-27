@@ -93,6 +93,15 @@ class ValidationCorePack {
         }
         return true;
     }
+    final public static function count(array $input, string $min = '0', string $max = '1') {
+        $parsed_min = (int)$min;
+        $parsed_max = (int)$max;
+        $c = count($input);
+        if ($c > $parsed_max || $c < $parsed_min) {
+            return "@input@ array should be at least {$parsed_min} and maximum {$parsed_max} elements long";
+        }
+        return true;
+    }
     final public static function length(string $input, string $min = '1', string $max = '1') {
         //Handle inputs:
         $length = mb_strlen($input, Validate::$encoding);
