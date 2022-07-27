@@ -17,19 +17,24 @@ namespace Bsik\Objects;
 
 require_once PLAT_PATH_AUTOLOAD;
 
-use Bsik\Std;
+use \Bsik\Std;
 
 // is for boolean trues
 class SettingsObject {
 
-    const FLAG_REMOVE  = "@remove@";
-    const OPT_INT      = "integer";
+    const OPT_INT      = "integer"; //TODO: remove later this is from old version
     const OPT_FLOAT    = "float";
     const OPT_STR      = "string";
     const OPT_BOOL     = "boolean";
     const OPT_NOTEMPTY = "notempty";
+    
+    
+    const FLAG_REMOVE  = "@remove@"; 
     const CHAIN_DELI   = ":";
+    const TYPE_OR     = "|";
     const CONSIDERED_TRUE = [true, 1, '1', "true", "TRUE"];
+    const VALIDATE_TYPES = ["integer", "float", "string", "boolean", "array", "any"];
+    public static $validators = [];
 
     public array $values        = [];
     public array $defaults      = [];
@@ -59,7 +64,8 @@ class SettingsObject {
         $this->extend_defaults($settings["defaults"]);
         $this->extend($settings["values"]);
     }
-    /**
+
+    /** 
      * is_valid
      * mostly inner use that checks if given values are valid based on the options definition,
      * set $cast to true to force the types.
@@ -72,7 +78,7 @@ class SettingsObject {
         $validated = [];
         foreach ($values as $key => $value) {
             if (array_key_exists($key, $this->options) && $value !== self::FLAG_REMOVE) {
-                
+
                 //Array options validator -> they mean one of those:
                 if (is_array($this->options[$key])) {
                     if (!in_array($value, $this->options[$key]))
@@ -82,49 +88,46 @@ class SettingsObject {
                     continue;
                 }
 
-                //get options
-                $final_value = $value;
+                //get options:
                 $chain = explode(self::CHAIN_DELI, $this->options[$key]);
-                $allowed  = $chain[0] ?? "";
-                $notempty = ($chain[1] ?? "") === self::OPT_NOTEMPTY;
+                $type  = (str_contains($chain[0] ?? "", self::TYPE_OR) || in_array($chain[0] ?? "", self::VALIDATE_TYPES)) ? array_shift($chain) : "any";
+                $condition_str = implode(self::CHAIN_DELI, [$type, ...$chain]);
 
-                //Check
-                switch ($allowed) {
-                    case self::OPT_INT: {
-                        if (is_numeric($value)) {
-                            $final_value = $cast ? intval($value) : $value;
-                        } else {
-                            $errors[] = "{$key} value must be a integer";
-                        }
-                    } break;
-                    case self::OPT_FLOAT: {
-                        if (is_numeric($value)) {
-                            $final_value = $cast ? floatval($value) : $value;
-                        } else {
-                            $errors[] = "{$key} value must be a integer";
-                        }
-                    } break;
-                    case self::OPT_STR: {
-                        if ($cast) {
-                            $final_value = @strval($value);
-                        } else if (is_string($value)) {
-                            $final_value = $value;
-                        } else {
-                            $errors[] = "{$key} value must be a string";
-                        }
-                    } break;
-                    case self::OPT_BOOL: {
-                        $final_value = in_array($value, self::CONSIDERED_TRUE, true);
-                    } break;
+                $final_value = $value;
+                //First cast:
+                if ($cast && $type !== "any" && !str_contains($type ,self::TYPE_OR)) {
+                    switch ($type) {
+                        case "integer": 
+                            $final_value  = is_numeric($value) ? intval($value) : $value;
+                        break;
+                        case "float":
+                            $final_value  = is_numeric($value) ? floatval($value) : $value;
+                        break;
+                        case "string":
+                            $final_value  = !is_string($value) ? @strval($value) : $value;
+                        break;
+                        case "boolean":
+                            $final_value  = in_array($value, self::CONSIDERED_TRUE, true);
+                        break;
+                        default:
+                        $final_value  = $value;
+                    }
                 }
 
-                //check empties
-                if (
-                    ($notempty || $allowed === self::OPT_NOTEMPTY) 
-                    && 
-                    ($value === "" || is_null($value))
-                ) {
-                    $errors[] = "{$key} value can not be empty";
+                $value_errors = [];
+                if (!Std::$arr::validate([$key => $condition_str], [$key => $final_value ], self::$validators, $value_errors)) {
+                    if (!empty($value_errors)) {
+                        $value_errors = array_values($value_errors);
+                        foreach ($value_errors as $err) {
+                            if (is_array($err)) {
+                                foreach ($err as $er) {
+                                    $errors[] = str_contains($er, "%s") ? sprintf($er, $key) : $key." - ".$er;
+                                }
+                            } else {
+                                $errors[] = str_contains($err, "%s") ? sprintf($err, $key) : $key." - ".$err;
+                            }
+                        }
+                    }
                 } else {
                     $validated[$key] = $final_value;
                 }
@@ -133,7 +136,7 @@ class SettingsObject {
             }
         }
         return [empty($errors), $validated];
-    }    
+    }
 
     /**
      * extend_options
@@ -197,6 +200,9 @@ class SettingsObject {
             $extend = Std::$str::parse_json($extend, onerror: []);
         }
         [$valid, $values] = $this->is_valid($extend, $errors, $cast);
+        // var_dump($errors);
+        // var_dump($values);
+        // var_dump($valid);
         if ($valid) {
             $this->values = Std::$arr::extend($this->values, $values);
             $this->unset(); // removes all flagged values
@@ -373,7 +379,7 @@ class SettingsObject {
      * @return bool
      */
     public function set(string $key, mixed $value, array &$errors = [], bool $cast = true) : bool {
-        return $this->extend([ $key => $value], $errors, $cast);
+        return $this->extend([$key => $value], $errors, $cast);
     }
 
     /**
@@ -469,3 +475,8 @@ class SettingsObject {
         ]);
     }
 }
+
+
+SettingsObject::$validators["notempty"] = function($value, $path) {
+    return $value === "" || is_null($value) ? "%s value can not be empty" : true;
+};
