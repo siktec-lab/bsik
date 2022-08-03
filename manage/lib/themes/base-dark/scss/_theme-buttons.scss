@@ -58,3 +58,28 @@ version:
         vertical-align: middle;
     }
 }
+
+button.btn-bsik-action {
+    color: $text-main-color;
+    background-color: rgba(255,255,255, 0.04);
+    border-color: darken(rgb(255,255,255), 85%);
+    white-space: nowrap;
+    &:disabled {
+        opacity: 0.5;
+    }
+    &:hover {
+        background-color: rgba(255,255,255, 0.08);
+        &.icon-info i {
+            color: $info
+        }
+        &.icon-warning i {
+            color: $warning;
+        }
+        &.icon-danger i {
+            color: $danger;
+        }
+        &.icon-success i {
+            color: $success;
+        }
+    }
+}

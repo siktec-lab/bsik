@@ -60,6 +60,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
     describe        : "Return core system settings in a groups form",
     params      : [
         "groups"     => [],
+        "settings"   => [],
         "form"       => false,
         "object"     => false,
         "array"      => false,
@@ -67,17 +68,19 @@ AdminApi::register_endpoint(new ApiEndPoint(
     ],
     filter      : [
         "groups"   => Validate::filter("type", "array")::filter("strchars","A-Z","a-z","0-9","_","-")::create_filter(),
+        "settings" => Validate::filter("type", "array")::filter("strchars","A-Z","a-z","0-9","_","-")::create_filter(),
         "form"     => Validate::filter("type", "boolean")::create_filter(),
         "object"   => Validate::filter("type", "boolean")::create_filter(),
-        "array"   => Validate::filter("type", "boolean")::create_filter(),
-        "flatten"   => Validate::filter("type", "boolean")::create_filter()
+        "array"    => Validate::filter("type", "boolean")::create_filter(),
+        "flatten"  => Validate::filter("type", "boolean")::create_filter()
     ],
     validation  : [
         "groups"    => Validate::condition("required")::condition("type", "array")::condition("count", "0", "200")::create_rule(),
+        "settings"  => Validate::condition("required")::condition("type", "array")::condition("count", "0", "200")::create_rule(),
         "form"      => Validate::condition("type", "boolean")::create_rule(),
         "object"    => Validate::condition("type", "boolean")::create_rule(),
-        "array"    => Validate::condition("type", "boolean")::create_rule(),
-        "flatten"    => Validate::condition("type", "boolean")::create_rule()
+        "array"     => Validate::condition("type", "boolean")::create_rule(),
+        "flatten"   => Validate::condition("type", "boolean")::create_rule()
     ],
 
     method : function(AdminApi $Api, array $args, ApiEndPoint $Endpoint) {
@@ -90,6 +93,9 @@ AdminApi::register_endpoint(new ApiEndPoint(
         foreach($settings as $key => $value) {
             $group = explode("-", $key)[0];
             if (!empty($args["groups"]) && !in_array($group, $args["groups"])) {
+                continue;
+            }
+            if (!empty($args["settings"]) && !in_array($key, $args["settings"])) {
                 continue;
             }
             if (!array_key_exists($group, $filtered)) {
@@ -114,12 +120,14 @@ AdminApi::register_endpoint(new ApiEndPoint(
             }
         }
 
+        //Object type output:
         if ($args["object"]) {
             $Api->request->append_answer_data([
                 "object" => $filtered
             ]);
         }
 
+        //Array type output:
         if ($args["array"]) {
             $to_arr = [];
             foreach ($filtered as $group => $set) {
@@ -131,12 +139,96 @@ AdminApi::register_endpoint(new ApiEndPoint(
             ]);
         }
 
+        //Flatten type output:
         if ($args["flatten"]) {
             $Api->request->append_answer_data([
                 "flatten" => $flatten
             ]);
         }
+
+        //Form type output:
+        if ($args["form"]) {
+            //Build the form from template:
+            $engine = new Template();
+            $engine->addFolders([
+                CoreSettings::$path["manage-templates"]
+            ]);
+            $form = "";
+            $set  = [];
+            foreach ($filtered as $group => $setObj) {
+                $form .= Components::settings_form(
+                    settings : $setObj,
+                    attrs    : ["data-group" =>  $group],
+                    engine   : $engine,
+                    template : "settings_form"
+                );
+                $set  = Std::$arr::extend($set, $setObj->dump_parts());
+            }
+            $Api->request->append_answer_data([
+                "form" => $form,
+                "settings" => $set
+            ]);
+        }
+
         return true;
     }
 
+));
+
+/*********************************************************************************/
+/*****************  save core settings  ******************************************/
+/*********************************************************************************/
+$save_core_settings_policy = new Priv\RequiredPrivileges();
+$save_core_settings_policy->define(
+    new Priv\PrivAccess(manage : true),
+    new Priv\PrivCore(settings: true)
+);
+AdminApi::register_endpoint(new ApiEndPoint(
+    module      : "core",
+    name        : "save_core_settings", 
+    working_dir     : dirname(__FILE__).DS."..",
+    allow_global    : true,
+    allow_external  : true,
+    allow_override  : false,
+    policy          : $save_core_settings_policy,
+    params      : [
+        "settings"      => null,
+        "group"         => null
+    ],
+    filter      : [
+        "group"      => Validate::filter("trim")::filter("strchars","A-Z","a-z","0-9","_","-")::create_filter(),
+        "settings"   => Validate::filter("trim")::create_filter(),
+    ],
+    validation  : [
+        "group"      => Validate::condition("required")::condition("min_length", "2")::create_rule(),
+        "settings"   => Validate::condition("required")::condition("min_length", "1")::create_rule()
+    ],
+    method : function(AdminApi $Api, array $args, ApiEndPoint $Endpoint) {
+
+        //Get current settings:
+        $current = CoreSettings::$settings;
+
+        /** @var SettingsObject $current */
+        $errors = [];
+        
+        if ($current->extend($args["settings"], $errors)) {
+
+            //Save to db:
+            $Api::$db->where("name", "bsik-system")->update("bsik_settings", [
+                "object" => $current->values_json(true)
+            ], 1);
+
+            //Set answer:
+            $Api->request->answer_data([
+                "settings" => $current->dump_parts(false, "values", "defaults"),
+            ]);
+
+        } else {
+            //Errors while extending - return those:
+            $Api->request->add_errors($errors);
+            $Api->request->update_answer_status(500);
+        }
+
+        return true;
+    }
 ));

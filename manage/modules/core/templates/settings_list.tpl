@@ -30,7 +30,7 @@
                             <strong>{{ group_name|capitalize }}</strong>
                         </li>
                         <li class="group-description">
-                            <span>Attributes: {{ group|length }}</span>
+                            <span>Settings: {{ group|length }}</span>
                         </li>
                         <li class="group-expand">
                             <i class="fas fa-chevron-down"></i>
@@ -42,6 +42,9 @@
                                 <span class="material-icons fs-3">tune</span>
                                 <span class="setting-key fs-7">{{ setting_key }}</span>
                                 <span class="setting-description fs-9 fw-light fst-italic">{{ setting.description }}</span>
+                                <button class="btn btn-bsik-action btn-sm float-end icon-danger" data-setting="{{ setting_key|e('html_attr') }}" data-action="open-edit-settings-module">
+                                    <i class='fas fa-pen'></i>&nbsp;&nbsp;EDIT
+                                </button>
                             </h4>
                             {% set params_definition = setting|array_filter_keys('default','option','description') %}
                             {% set header_keys = "Current" %}
@@ -50,34 +53,6 @@
                             {% include 'params_table.tpl' %}
                         {% endfor %}
                     </div>
-                    
-                    {# <div class="endpoint-more-info">
-                        <h4>
-                            <i class="fas fa-calculator"></i>
-                            Expected Parameters:
-                        </h4>
-                        {% set params_definition = endpoint.params.expected %}
-                        {% set header_keys = "Name" %}
-                        {% set header_values = "Default" %}
-                        {% set empty_message = "Endpoint expect no parameters" %}
-                        {% include 'params_table.tpl' %}
-                        <h4>
-                            <i class="fas fa-clipboard-check"></i>
-                            Validation Rules:
-                        </h4>
-                        {% set params_definition = endpoint.params.rules %}
-                        {% set header_keys = "Name" %}
-                        {% set header_values = "Validation" %}
-                        {% set empty_message = "No validation rules" %}
-                        {% include 'params_table.tpl' %}
-                        <h4>
-                            <i class="fas fa-shield-alt"></i>
-                            Required Permission Policy:
-                        </h4>
-                        {% set privileges_tags = endpoint.policy %}
-                        {% include 'privileges_tag_list.tpl' %}
-                    </div> #}
-                    
                 </div>
         {% endfor %}
     </div>

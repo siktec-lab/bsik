@@ -55,10 +55,32 @@ final class TemplatingExtension extends AbstractExtension
             new TwigFilter(
                 name     : 'array_filter_keys', 
                 callable : [$this, 'filter_array_keys'], 
+            ),
+            new TwigFilter(
+                name     : 'print_variable', 
+                callable : [$this, 'return_print_variable'], 
             )
         ];
     }
 
+    public function return_print_variable($input) 
+    {
+        $type = gettype($input);
+        
+        switch ($type) {
+            case "string": 
+            case "integer":
+            case "double":
+            case "float":
+                return $input;
+            case "array":
+                return implode(', ', $input);
+            case "boolean":
+                return $input ? "TRUE" : "FALSE";
+            default:
+                return $type;
+        }
+    }
     /**
      * Return all the values of an array or object
      *

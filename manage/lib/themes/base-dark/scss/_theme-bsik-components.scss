@@ -280,32 +280,32 @@ $comp-modules-list: (
         }
         .module-actions > button { 
 
-            &.btn-bsik-action {
-                color: map-get($comp-modules-list, "white-text");
-                background-color: rgba(255,255,255, 0.04);
-                border-color: darken(rgb(255,255,255), 85%);
-                white-space: nowrap;
-                &:disabled {
-                    opacity: 0.5;
-                }
-                &:hover {
-                    background-color: rgba(255,255,255, 0.08);
-                    &.icon-info i {
-                        color: $info
-                    }
-                    &.icon-warning i {
-                        color: $warning;
-                    }
-                    &.icon-danger i {
-                        color: $danger;
-                    }
-                    &.icon-success i {
-                        color: $success;
-                    }
-                }
+            // &.btn-bsik-action {
+            //     color: map-get($comp-modules-list, "white-text");
+            //     background-color: rgba(255,255,255, 0.04);
+            //     border-color: darken(rgb(255,255,255), 85%);
+            //     white-space: nowrap;
+            //     &:disabled {
+            //         opacity: 0.5;
+            //     }
+            //     &:hover {
+            //         background-color: rgba(255,255,255, 0.08);
+            //         &.icon-info i {
+            //             color: $info
+            //         }
+            //         &.icon-warning i {
+            //             color: $warning;
+            //         }
+            //         &.icon-danger i {
+            //             color: $danger;
+            //         }
+            //         &.icon-success i {
+            //             color: $success;
+            //         }
+            //     }
                 
-            }
-            display: block;
+            // }
+            display: block; 
             width: 100%;
             margin-bottom: 10px;
         }

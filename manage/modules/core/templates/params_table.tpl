@@ -1,7 +1,6 @@
 
 
 {% if params_definition is defined and params_definition is iterable and params_definition is not empty %}
-
     <table class="parameters-table">
         <tr>
             <td class="header-style">
@@ -13,31 +12,15 @@
         </tr>
         <tr>
             <td class="header-style">
-                {{ header_values }}
+                {{ header_values|print_variable }}
             </td>
             {% for value in params_definition %}
-                
-                {% if value is iterable %}
-
-                    <td>[ {{ value|join(', ') }} ]</td>
-                
-                {% elseif value is empty %}
-
-                    <td>NULL</td>
-
-                {% else  %}
-
-                    <td>{{ value }}</td>
-
-                {% endif %}
+                    <td>{{ value|print_variable }}</td>
             {% endfor %}
         </tr>
     </table>
-
 {% else %}
-
     <span class="no-params">
         {{ empty_message }}
     </span>
-
 {% endif %}

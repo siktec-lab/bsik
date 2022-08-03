@@ -418,18 +418,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
             Bsik.modals.settingsElement = $(Bsik.modals.settings._element);
 
             //Settings Loader and Parser:
-            //let settings = new Bsik.SettingsParser(Bsik.modals.settingsElement, true);
+            let settings = new Bsik.SettingsParser(Bsik.modals.settingsElement, true);
 
-            Bsik.module[Bsik.loaded.module.name].modules = {
+            Bsik.module[Bsik.loaded.module.name].settings = {
 
                 filterList : null,
                 /************ Initiate the base js object: ******************/
-                openSettingsModal : function($btn, module = "") {
+                openSettingsEditModal : function($btn, setting = "") {
                     //First get the settings:
                     $btn.prop("disabled", true);
                     settings.loadSettings(
-                        "core.get_module_settings", 
-                        { module_name : module }, 
+                        "core.get_system_settings_groups", 
+                        { settings : [setting], form : true }, 
                         function() {
                             console.log(this, arguments);
                             $btn.prop("disabled", false);
@@ -438,31 +438,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
                             $body.html(this.formHtml);
                             //Set header:
                             let header   = this.container.find(".edit-settings-alert-info > span.alert-message").eq(0);
-                            header.html(`You are editing <strong>${module}</strong> module - Inherited and Overridden settings are marked with a tag.`);
+                            header.html(`You are editing <strong>${setting}</strong> setting - Please be carefull and only edit if you know what you are doing.`);
                             //Open modal:
                             Bsik.modals.settings.show();
                         }
                     );
                 },
-                saveModuleSettings : function($btn) {
+                saveCoreSettings : function($btn) {
                     let $form = Bsik.modals.settingsElement.find("#dyn-form-settings");
                     let revised = settings.getRevisedSettings($form);
-                    let module_name = $form.data("module");
-                    console.log(revised, module_name);
-                    // return;
+                    let group = $form.data("group");
+                    console.log(revised, group);
                     $btn.prop("disabled", true);
-                    Bsik.core.apiRequest(null, "core.save_module_settings", { 
+                    Bsik.core.apiRequest(null, "core.save_core_settings", { 
                             settings    : JSON.stringify(revised),
-                            module_name : module_name
+                            group       : group
                     }, {
                         error: function(jqXhr, textStatus, errorMessage) {
                             let error = jqXhr.responseJSON ? jqXhr.responseJSON.errors || [errorMessage] : [errorMessage];
-                            Bsik.notify.error(`Save revised settings error - ${error.join()}`, true);
+                            Bsik.notify.error(`Save revised setting error - ${error.join()}`, true);
                             console.log(jqXhr.responseJSON);
                         },
                         success: function(res) {
                             console.log(res);
-                            Bsik.notify.bubble("info", `Saved revised settings successfully.`);
+                            Bsik.notify.bubble("info", `Saved revised setting successfully.`);
                             Bsik.modals.settings.hide();
                         },
                         complete : function() {
@@ -474,57 +473,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             /************* Set user actions **********/
             $.extend(Bsik.userEvents, {
-                "click upload-module-btn" : function(e) {
-                    Bsik.module.core.modules.uploadFile($(this));
-                },
-                "click uninstall-module" : function(e) {
+                "click open-edit-settings-module" : function(e) {
                     let $btn = $(this);
-                    let $row = $btn.closest(".module-list").eq(0);
-                    let id = $row.data("id");
-                    Bsik.core.helpers.getConfirmation(
-                        `Please confirm the deletion of "<strong>${id}</strong>" module - All the related data will be removed from your system and lost.`,
-                        function yes(event) {
-                            //event.data.modal.hide();
-                            Bsik.module.core.modules.uninstallModule(id, $btn, $row, ()=>{
-                                event.data.modal.hide();
-                            });
-                            //Bsik.module.amazon.publish.publish_single_product(row.id, row.publish_upc, "#publish-que-table");
-                        }, 
-                        function no(event){
-                            event.data.modal.hide();
-                        }
-                    );
+                    let setting = $btn.data("setting");
+                    Bsik.module.core.settings.openSettingsEditModal($btn, setting);
                 },
-                "click status-module" : function(e) {
-                    let $btn    = $(this);
-                    let $row    = $btn.closest(".module-list").eq(0);
-                    let id      = $row.data("id");
-                    let status  = $btn.data("current");
-                    Bsik.core.helpers.getConfirmation(
-                        `You are about to disable "<strong>${id}</strong>" module - Please confirm this action.`,
-                        function yes(event) {
-                            event.data.modal.hide();
-                            Bsik.module.core.modules.statusModule(id, status, $btn, $row);
-                        }, 
-                        function no(event){
-                            event.data.modal.hide();
-                        }
-                    );
-                },
-                "click update-module" : function(e) {
+                "click save-core-settings" : function(e) {
                     let $btn = $(this);
-                    let $row = $btn.closest(".module-list").eq(0);
-                    let id = $row.data("id");
-                    console.log("click", id, $btn, $row);
-                },
-                "click open-settings-module" : function(e) {
-                    let $btn = $(this);
-                    let module = $btn.data("module");
-                    Bsik.module.core.modules.openSettingsModal($btn, module);
-                },
-                "click save-module-settings" : function(e) {
-                    let $btn = $(this);
-                    Bsik.module.core.modules.saveModuleSettings($btn);
+                    Bsik.module.core.settings.saveCoreSettings($btn);
                 },
             });
 
@@ -544,7 +500,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             });
 
             //Set filter field:
-            Bsik.module.core.modules.filterList = new Bsik.core.OnType(
+            Bsik.module.core.settings.filterList = new Bsik.core.OnType(
                 "#filter-settings-list",
                 function(value, event) {
                     let search = value.trim().toLowerCase();

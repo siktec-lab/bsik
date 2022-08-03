@@ -179,7 +179,38 @@ Modules::module("dev")->register_view(
                                         <option value="3">Three</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-primary me-2">Primary</button>
+                                    <button type="button" class="btn btn-secondary me-2">Secondary</button>
+                                    <button type="button" class="btn btn-info me-2">Info</button>
+                                    <button type="button" class="btn btn-success me-2">Success</button>
+                                    <button type="button" class="btn btn-danger me-2">Danger</button>
+                                    <button type="button" class="btn btn-warning me-2">Warning</button>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-outline-primary me-2">Primary</button>
+                                    <button type="button" class="btn btn-outline-secondary me-2">Secondary</button>
+                                    <button type="button" class="btn btn-outline-info me-2">Info</button>
+                                    <button type="button" class="btn btn-outline-success me-2">Success</button>
+                                    <button type="button" class="btn btn-outline-danger me-2">Danger</button>
+                                    <button type="button" class="btn btn-outline-warning me-2">Warning</button>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-primary btn-lg me-2">Primary</button>
+                                    <button type="button" class="btn btn-secondary btn-lg me-2">Secondary</button>
+                                    <button type="button" class="btn btn-info btn-lg me-2">Info</button>
+                                    <button type="button" class="btn btn-success btn-lg me-2">Success</button>
+                                    <button type="button" class="btn btn-danger btn-lg me-2">Danger</button>
+                                    <button type="button" class="btn btn-warning btn-lg me-2">Warning</button>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-primary btn-sm me-2">Primary</button>
+                                    <button type="button" class="btn btn-secondary btn-sm me-2">Secondary</button>
+                                    <button type="button" class="btn btn-info btn-sm me-2">Info</button>
+                                    <button type="button" class="btn btn-success btn-sm me-2">Success</button>
+                                    <button type="button" class="btn btn-danger btn-sm me-2">Danger</button>
+                                    <button type="button" class="btn btn-warning btn-sm me-2">Warning</button>
+                                </div>
                             </form>
                         </div>
                     </div>
