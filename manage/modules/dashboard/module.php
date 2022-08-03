@@ -9,7 +9,7 @@
 1.0.1:
     ->initial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use Bsik\Builder\Components;
 use Bsik\Module\Modules;

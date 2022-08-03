@@ -9,10 +9,10 @@
 1.0.1:
     ->intial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Render\Blocks\Block;
-use Bsik\Render\Template;
+use \Bsik\Render\Blocks\Block;
+use \Bsik\Render\Template;
 
 class FooterBlock extends Block {
 

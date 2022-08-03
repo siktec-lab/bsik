@@ -12,7 +12,7 @@
 
 namespace Bsik\Api;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Exception;
 use \Bsik\Trace;

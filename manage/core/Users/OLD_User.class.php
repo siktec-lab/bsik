@@ -14,7 +14,7 @@
 
 namespace Bsik\Users;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Base;
@@ -31,7 +31,6 @@ class OLD_User extends Base {
 
     /** Constructor
      * 
-     * @param array $conf
      */
     public function __construct() {
         $this->roles = self::$db->get('roles'); 

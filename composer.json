@@ -85,7 +85,8 @@
         "fortawesome/font-awesome": "5.15.*",
         "twbs/bootstrap": "5.0.0-beta3",
         "wenzhixin/bootstrap-table": "1.18.*",
-        "formr/formr": "1.1.*"
+        "formr/formr": "1.1.*",
+        "knplabs/github-api": "3.7"
     },
     "autoload": {
         "classmap": [

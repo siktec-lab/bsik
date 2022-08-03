@@ -9,10 +9,11 @@
 1.0.1:
     ->intial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Render\Blocks\Block;
-use Bsik\Render\Template;
+use \Bsik\Render\Blocks\Block;
+use \Bsik\Render\Template;
+use Bsik\Settings\CoreSettings;
 
 class HeaderBlock extends Block {
 
@@ -77,7 +78,7 @@ class HeaderBlock extends Block {
         $this->settings["ex_meta"]              = $this->Page->meta->additional_meta;
         $this->settings["favicon"] = [
             "name" => "favicon", 
-            "path" => $this->Page::$paths["global-lib"]."/img/fav"
+            "path" => CoreSettings::$url["manage-lib"]."/img/fav"
         ];
         $this->settings["meta_token"] = $this->Page::$token["meta"];
         $this->settings["body_tag"]   = $this->Page->custom_body_tag;

@@ -2,7 +2,7 @@
 
 namespace Bsik\DB;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 /**
  * MysqliDb Class
@@ -223,8 +223,8 @@ class MysqliDb
      * Variables for query execution tracing
      */
     protected $traceStartQ;
-    protected $traceEnabled = EXPOSE_OP_TRACE;
-    protected $traceStripPrefix;
+    public static $traceEnabled = true;
+    protected $traceStripPrefix = 'xxxxxx';
     public $trace = array();
 
     /**
@@ -444,7 +444,7 @@ class MysqliDb
      */
     protected function reset()
     {
-        if ($this->traceEnabled) {
+        if (self::$traceEnabled) {
             //$time = number_format((microtime(true) - $this->traceStartQ),5);
             $time = (microtime(true) - $this->traceStartQ);
             $this->trace[] = array($this->_lastQuery, $time, $this->_traceGetCaller());
@@ -1999,7 +1999,7 @@ class MysqliDb
         $stmt = $this->mysqli()->prepare($this->_query);
 
         if ($stmt !== false) {
-            if ($this->traceEnabled)
+            if (self::$traceEnabled)
                 $this->traceStartQ = microtime(true);
             return $stmt;
         }
@@ -2333,9 +2333,9 @@ class MysqliDb
      *
      * @return MysqliDb
      */
-    public function setTrace($enabled, $stripPrefix = null)
+    public function setTrace($enabled, $stripPrefix = 'xxxxx')
     {
-        $this->traceEnabled = $enabled;
+        self::$traceEnabled = $enabled;
         $this->traceStripPrefix = $stripPrefix;
         return $this;
     }
@@ -2352,7 +2352,6 @@ class MysqliDb
         while (isset($caller) && $caller["file"] == __FILE__) {
             $caller = next($dd);
         }
-
         return __CLASS__ . "->" . $caller["function"] . "() >>  file \"" .
             str_replace($this->traceStripPrefix, '', $caller["file"]) . "\" line #" . $caller["line"] . " ";
     }

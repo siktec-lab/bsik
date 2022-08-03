@@ -9,13 +9,13 @@
 1.0.1:
     ->initial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Module\Modules;
+use \Bsik\Module\Modules;
 use Bsik\Module\Module;
-use Bsik\Module\ModuleView;
-use Bsik\Privileges as Priv;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Module\ModuleView;
+use \Bsik\Privileges as Priv;
+use \Bsik\Objects\SettingsObject;
 
 /****************************************************************************/
 /*******************  local Includes    *************************************/

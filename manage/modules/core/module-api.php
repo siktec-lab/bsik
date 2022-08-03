@@ -1,8 +1,9 @@
 <?php
 //Extending the Api of:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
+use \Bsik\Settings\CoreSettings;
 use \Bsik\Api\ApiEndPoint;
 use \Bsik\Api\AdminApi;
 use \Bsik\Api\Validate;
@@ -12,11 +13,14 @@ use \Bsik\Render\Template;
 use \Bsik\Objects\SettingsObject;
 use \Bsik\Privileges as Priv;
 use \Bsik\Builder\Components;
-use Bsik\FsTools\BsikFileSystem;
+use \Bsik\FsTools\BsikFileSystem;
 use \Bsik\Render\APage;
 use \Bsik\FsTools\BsikZip;
 
 require_once "includes".DS."endpoints-api.php";
+
+require_once "includes".DS."settings-api.php";
+
 /****************************************************************************/
 /*******************  Custom filters / Validators     ***********************/
 /****************************************************************************/
@@ -93,7 +97,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
         // Perform file upload with Api safe file:
         [$status, $ret] = $Api->file(
             name        : "module_file", 
-            to          : PLAT_PATH_MANAGE.DS."uploaded", 
+            to          : CoreSettings::$path["manage"].DS."uploaded", 
             max_bytes   : Std::$fs::format_size_to(10, "MB", "B"),
             mime        : ["zip"]
         );
@@ -450,7 +454,9 @@ AdminApi::register_endpoint(new ApiEndPoint(
 
                 //Build the form from template:
                 $engine = new Template();
-                $engine->addFolders([PLAT_PAGES_TEMPLATES]);
+                $engine->addFolders([
+                    CoreSettings::$path["manage-templates"]
+                ]);
 
 
                 //Create form:

@@ -10,21 +10,16 @@
     ->Creation - Initial
             
 *******************************************************************************/
-
-define('DS', DIRECTORY_SEPARATOR);
-define("ROOT_PATH", dirname(__FILE__).DS.".." );
 define('USE_BSIK_ERROR_HANDLERS', true);
 
 /******************************  Requires       *****************************/
-
-require_once ROOT_PATH.DS.'conf.php';
-require_once PLAT_PATH_AUTOLOAD;
-require_once PLAT_PATH_CORE.DS.'Excep.class.php';
+require_once '..'.DIRECTORY_SEPARATOR.'bsik.php';
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
+use \Bsik\Settings\CoreSettings;
 use \Bsik\Api\AdminApi;
 use \Bsik\Base;
-use Bsik\Module\Modules;
 use Bsik\Privileges\PrivAccess;
 use Bsik\Privileges\RequiredPrivileges;
 use \Bsik\Trace;
@@ -33,13 +28,28 @@ use \Bsik\Render\APage;
 
 Trace::add_step(__FILE__, "Controller - manage index");
 
-if(!session_id()){ session_start(); }
 
 /*********************  Load Conf and DataBase  *****************************/
 Base::configure($conf);
 Trace::add_trace("Loaded Base Configuration Object",__FILE__, $conf);
 Base::connect_db();
 Trace::add_trace("Establish db connection",__FILE__);
+
+/******************************************************************************/
+/*********************  LOAD CORE SETTINGS  ***********************************/
+/******************************************************************************/
+if (!CoreSettings::extend_from_database(Base::$db)) {
+    throw new Exception("Cant Load Settings", E_PLAT_ERROR);
+}
+//Core settings:
+CoreSettings::load_constants();
+//Set object defaults:
+Trace::$enable = CoreSettings::get("trace-debug-expose", false);
+Base::$db->setTrace(Trace::$enable);
+\Bsik\Render\Template::$default_debug      = CoreSettings::get("template-rendering-debug-mode", false);
+\Bsik\Render\Template::$default_autoreload = CoreSettings::get("template-rendering-auto-reload", true);
+//Start session:
+if(!session_id()){ session_start(); }
 
 /******************************  Load Admin      *****************************/
 $User = new User();
@@ -52,9 +62,6 @@ $User->initial_user_login_status();
 Trace::reg_vars(["User signed" => $User->is_signed]);
 Trace::add_trace("User login status",__FILE__, $User->user_data);
 Trace::reg_vars(["User granted privileges" => $User->priv->all_granted(true)]);
-
-// Trace::expose_trace();
-// exit;
 
 /******************************  Load Modules And Page Controller *****************************/
 APage::set_user_string($User->user_identifier());
@@ -70,8 +77,8 @@ $APage = new APage(
 
 //Initialize Api:
 $AApi = new AdminApi(
-    csrf                : APage::csrf(),                      // CSRF TOKEN
-    debug               : PLAT_ADMIN_PANEL_API_DEBUG_MODE,    // Operation Mode
+    csrf                : APage::csrf(), // CSRF TOKEN
+    debug               : CoreSettings::get("api-responses-with-debug-info", false),    // Operation Mode
     issuer_privileges   : $User->priv
 );
 
@@ -84,8 +91,8 @@ Trace::reg_vars(["Requested which"    => APage::$request->which]);
 Trace::reg_vars(["Available modules"  => APage::$modules->get_all_installed()]);
 
 /******************************  Core Includes      *****************************/
-require_once PLAT_ADMIN_COMPONENTS;
-require_once PLAT_ADMIN_API;
+require_once CoreSettings::$path["manage-components"];
+require_once CoreSettings::$path["manage-api"];
 
 /***************************  Required Privileges  *****************************/
 $access_policy = new RequiredPrivileges();
@@ -105,12 +112,13 @@ switch (APage::$request->type) {
         //Must be signed in and have access :
         if (!$User->is_signed) {
             Trace::add_trace("Module requires User to be signed in - redirecting", __FILE__);
-            require_once PLAT_PATH_MANAGE.DS."pages".DS."login.php";
+            require_once CoreSettings::$path["manage-pages"].DS."login.php";
+            
         }
         elseif (!$User->priv->has_privileges($access_policy)) {
             Trace::add_trace("No privileges to access manage panel", __FILE__);
             $User->errors["login"] = "privileges";
-            require_once PLAT_PATH_MANAGE.DS."pages".DS."login.php";
+            require_once CoreSettings::$path["manage-pages"].DS."login.php";
         }
 
         //Make sure Module Exists:
@@ -144,7 +152,7 @@ switch (APage::$request->type) {
             Trace::reg_var("Loaded View settings", $APage::$module->current_view->settings->get_all(true));
             //-----
             
-            require_once PLAT_PATH_MANAGE.DS."pages".DS."base.php";
+            require_once CoreSettings::$path["manage-pages"].DS."base.php";
         }
         Trace::expose_trace();
     } break;
@@ -163,7 +171,6 @@ switch (APage::$request->type) {
             Trace::add_trace("User check successfully - signed, is-set, is-allowed", __FILE__);
             $APage->load_module();
             Trace::add_trace("Loaded module", __FILE__, $APage::$module);
-            Trace::add_trace("Loaded page paths", __FILE__, $APage::$paths);
             Trace::add_trace("Loaded module paths", __FILE__, $APage::$module->paths);
             Trace::add_trace("User check successfully - signed, is-set, is-allowed", __FILE__);
             //Preloads the module endpoints:

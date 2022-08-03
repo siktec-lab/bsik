@@ -12,9 +12,9 @@
 
 namespace Bsik;
 
-use Exception;
+use Bsik\Settings\CoreSettings;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 /**********************************************************************************************************
 * Object Methods:
@@ -522,44 +522,47 @@ class Std_FileSystem {
      * @return array
      */
     final public static function path_to(string $in, array|string $path_to_file = []) : array {
-        //TODO: improve this $urls, to be dynamically extracted.
         $path = $in;
-        $url  = PLAT_FULL_DOMAIN;
+        $url  = CoreSettings::$url["full"];
         switch ($in) {
             case "root":
-                $path = PLAT_PATH_BASE.DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["base"].DIRECTORY_SEPARATOR;
                 $url  .= "/"; 
                 break;
+            case "templates":
+                $path = CoreSettings::$path["manage-templates"].DIRECTORY_SEPARATOR;
+                $url  .= "/manage/pages/templates/"; 
+                break;
             case "modules":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."modules".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-modules"].DIRECTORY_SEPARATOR;
                 $url  .= "/manage/modules/"; 
                 break;
             case "trash":
-                    $path = PLAT_PATH_TRASH.DIRECTORY_SEPARATOR;
+                    $path = CoreSettings::$path["manage-trash"].DIRECTORY_SEPARATOR;
                     $url  .= "/manage/trash/"; 
                     break;
             case "admin-lib-required":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR."required".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-lib"].DIRECTORY_SEPARATOR."required".DIRECTORY_SEPARATOR;
                 $url  .= "/manage/lib/required/"; 
                 break;
             case "admin-lib":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-lib"].DIRECTORY_SEPARATOR;
                 $url  .= "/manage/lib/"; 
                 break;
             case "themes":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-lib"].DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR;
                 $url  .= "/manage/lib/themes/"; 
                 break;
             case "core":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."core".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-core"].DIRECTORY_SEPARATOR;
                 $url  .= "/manage/core/"; 
                 break;
             case "schema":
-                $path = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."core".DIRECTORY_SEPARATOR."schema".DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["manage-core"].DIRECTORY_SEPARATOR."schema".DIRECTORY_SEPARATOR;
                 $url  .= "/manage/core/schema/"; 
                 break;
             case "front-pages":
-                $path = PLAT_FRONT_PAGES.DIRECTORY_SEPARATOR;
+                $path = CoreSettings::$path["front-pages"].DIRECTORY_SEPARATOR;
                 $url  .= "/front/pages/"; 
                 break;
             case "raw":

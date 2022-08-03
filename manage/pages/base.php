@@ -1,11 +1,12 @@
 <?php
 /******************************  includes  *****************************/
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Users\User;
 use \Bsik\Render\APage;
+use Bsik\Settings\CoreSettings;
 use \Bsik\Trace;
 
 /******************************  intellisense  *****************************/
@@ -13,9 +14,9 @@ use \Bsik\Trace;
 /** @var User $User */
 
 /******************************  Guard  *****************************/
-/* TODO: improve that guard this is old stuff */
+/* TODO: improve that guard this is old stuff and with autoload will probably fail */
 if (!isset($conf)) {
-    include_once PLAT_PATH_MANAGE."/error/?p=main&code=10";
+    include_once CoreSettings::$path["manage"]."/error/?p=main&code=10";
     die();
 }
 
@@ -38,7 +39,7 @@ Trace::add_trace("Required META set done.", __FILE__.__LINE__);
 Trace::add_trace("Optional META extend done.", __FILE__.__LINE__, "Total: ".count($APage->settings["addmeta"] ?? []));
 
 /******************************  Store Important values  *****************************/
-$APage->store("plat-logo", PLAT_FULL_DOMAIN."/manage/lib/img/logo.svg");
+$APage->store("plat-logo", CoreSettings::$url["manage-lib"]."/img/logo.svg");
 
 /******************************  Set Body tag  *****************************/
 $APage->body_tag("style=''");
@@ -85,19 +86,19 @@ Trace::add_trace("Parsed defined menu entries ", __FILE__.__LINE__);
 /******************************  Render Page  *****************************/
 
 //Build html / Head / Meta / includes:
-$doc_head = $APage->render_block("global", "header", "HeaderBlock", []);
+$doc_head = $APage->render_block("header", "HeaderBlock", []);
 Trace::add_trace("Loaded & Render Header structure", __FILE__.__LINE__);
 
 //Close document + bottom includes:
-$doc_end = $APage->render_block("global", "footer", "FooterBlock", []);
+$doc_end = $APage->render_block("footer", "FooterBlock", []);
 Trace::add_trace("Loaded & Render End of document structure", __FILE__.__LINE__);
 
 //Top bar:
-$doc_admin_bar = $APage->render_block("global", "topbar", "TopBarBlock", []);
+$doc_admin_bar = $APage->render_block("topbar", "TopBarBlock", []);
 Trace::add_trace("Loaded & Render Admin Top Bar", __FILE__.__LINE__);
 
 //Side Menu:
-$doc_side_menu = $APage->render_block("global", "sidemenu", "SideMenuBlock", []);
+$doc_side_menu = $APage->render_block("sidemenu", "SideMenuBlock", []);
 Trace::add_trace("Loaded & Render side-menu structure", __FILE__.__LINE__);
 
 //Module header:

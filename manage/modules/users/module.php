@@ -9,18 +9,16 @@
 1.0.1:
     ->initial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Render\APage;
-use Bsik\Builder\Components;
-use Bsik\Builder\BsikIcon;
-use Bsik\Users\User;
-use Bsik\Api\BsikApi;
-use Bsik\Module\Modules;
-use Bsik\Module\Module;
-use Bsik\Module\ModuleView;
-use Bsik\Privileges as Priv;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Settings\CoreSettings;
+use \Bsik\Builder\Components;
+use \Bsik\Builder\BsikIcon;
+use \Bsik\Module\Modules;
+use \Bsik\Module\Module;
+use \Bsik\Module\ModuleView;
+use \Bsik\Privileges as Priv;
+use \Bsik\Objects\SettingsObject;
 
 /****************************************************************************/
 /*******************  local Includes    *************************************/
@@ -172,7 +170,7 @@ Modules::module("users")->register_view(
                 "data-side-pagination"  =>"server",
                 "data-search-align"     =>"left"
             ],
-            api     : PLAT_URL_BASE."/manage/api/users/",
+            api     : CoreSettings::$url["manage"]."/api/users/",
             table   : "bsik_users", 
             fields  : [
                 [
@@ -382,7 +380,7 @@ Modules::module("users")->register_view(
                 "data-side-pagination"  =>"server",
                 "data-search-align"     =>"left"
             ],
-            api     : PLAT_URL_BASE."/manage/api/users/",
+            api     : CoreSettings::$url["manage"]."/api/users/",
             table   : "bsik_users_roles", 
             fields  : [
                 [

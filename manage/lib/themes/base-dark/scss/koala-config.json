@@ -11,7 +11,7 @@
 
         "autoCompile": true,
 
-        "outputStyle": "nested",
+        "outputStyle": "compressed",
 
         "lineComments": false,
 

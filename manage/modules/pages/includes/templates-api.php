@@ -1,12 +1,13 @@
 <?php
 //Extending the Api of manage:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Api\ApiEndPoint;
 use \Bsik\Api\AdminApi;
 use \Bsik\Api\Validate;
-use Bsik\Privileges as Priv;
+use \Bsik\Privileges as Priv;
+use Bsik\Settings\CoreSettings;
 
 /********************************************************************************/
 /*****************  get page names  *********************************************/
@@ -33,7 +34,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
             case "2":
             case "file": {
                 $folders = [];
-                foreach (Std::$fs::list_folders_in(PLAT_FRONT_PAGES) as $folder) {
+                foreach (Std::$fs::list_folders_in(CoreSettings::$path["front-pages"]) as $folder) {
                     $folders[] = [ "id" => $folder, "name" => $folder];
                 }
                 $Api->request->answer_data([

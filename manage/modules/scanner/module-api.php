@@ -1,12 +1,12 @@
 <?php
 //Extending the Api of manage:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
+use \Bsik\Std;
 use \Bsik\Api\ApiEndPoint;
 use \Bsik\Api\AdminApi;
 use \Bsik\Api\ApiAnswerObj;
 use \Bsik\Api\Validate;
-use Bsik\Std;
 use Bsik\Privileges as Priv;
 
 /****************************************************************************/

@@ -1,7 +1,7 @@
 <?php
 
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Api\FrontApi;
 use \Bsik\Api\ApiEndPoint;

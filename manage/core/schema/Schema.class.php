@@ -6,7 +6,7 @@ if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 if (!defined('ROOT_PATH')) define("ROOT_PATH", dirname(__FILE__).DS."..".DS.".." );
 
 /******************************  Requires       *****************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Exception;
 use \Bsik\Std;

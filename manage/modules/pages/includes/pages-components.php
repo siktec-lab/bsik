@@ -1,10 +1,10 @@
 <?php
 //Extending the Api of manage:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Builder\Components;
-use Bsik\Render\Template;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Builder\Components;
+use \Bsik\Render\Template;
+use \Bsik\Objects\SettingsObject;
 
 /****************************************************************************/
 /*******************  Custom filters / Validators     ***********************/

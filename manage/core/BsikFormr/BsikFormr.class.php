@@ -12,7 +12,7 @@
 
 namespace Bsik\Formr;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 class GenerateForm
 {

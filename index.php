@@ -10,28 +10,24 @@
     ->Creation - Initial
             
 *******************************************************************************/
-
-define('DS', DIRECTORY_SEPARATOR);
-define("ROOT_PATH", dirname(__FILE__) );
 define('USE_BSIK_ERROR_HANDLERS', true);
 
 /******************************************************************************/
 /******************************  REQUIRES  ************************************/
 /******************************************************************************/
-require_once ROOT_PATH.DS.'conf.php';
-require_once PLAT_PATH_AUTOLOAD;
-require_once PLAT_PATH_CORE.DS.'Excep.class.php';
+require_once 'bsik.php';
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
-use \Bsik\Api\FrontApi;
 use \Bsik\Base;
+use \Bsik\Settings\CoreSettings;
+use \Bsik\Api\FrontApi;
 use \Bsik\Trace;
 use \Bsik\Users\User;
 use \Bsik\Render\FPage;
 
 Trace::add_step(__FILE__, "Controller - front index");
 
-if(!session_id()){ session_start(); }
 
 /******************************************************************************/
 /*********************  LOAD CONF AND DB CONNECTION  **************************/
@@ -40,6 +36,25 @@ Base::configure($conf);
 Trace::add_trace("Loaded Base Configuration Object",__FILE__, $conf);
 Base::connect_db();
 Trace::add_trace("Establish db connection",__FILE__);
+
+/******************************************************************************/
+/*********************  LOAD CORE SETTINGS  ***********************************/
+/******************************************************************************/
+if (!CoreSettings::extend_from_database(Base::$db)) {
+    throw new Exception("Cant Load Settings", E_PLAT_ERROR);
+}
+
+//Core settings:
+CoreSettings::load_constants();
+
+//Set object defaults:
+Trace::$enable = CoreSettings::get("trace-debug-expose", false);
+Base::$db->setTrace(Trace::$enable);
+\Bsik\Render\Template::$default_debug      = CoreSettings::get("template-rendering-debug-mode", false);
+\Bsik\Render\Template::$default_autoreload = CoreSettings::get("template-rendering-auto-reload", true);
+
+//Session start:
+if(!session_id()){ session_start(); }
 
 /******************************************************************************/
 /**************************   LOAD USER   *************************************/
@@ -62,12 +77,12 @@ Trace::reg_vars(["User granted privileges" => $User->priv->all_granted(true)]);
 /******************************************************************************/
 /************************  FRONT PAGE CONSTANTS  ******************************/
 /******************************************************************************/
-FPage::set_user_string("blablabla");
-FPage::$index_page_url = Std::$url::normalize_slashes(FPage::$conf["path"]["site_base_url"]);
+FPage::set_user_string("----------");
+FPage::$index_page_url = CoreSettings::$url["full"];
 FPage::tokenize();
 FPage::load_request($_REQUEST ?? []);
 FPage::load_logger(
-    path : PLAT_LOG_DIRECTORY,
+    path : CoreSettings::$path["logs"],
     channel: FPage::$request->type == "api" ? "fapi-front" : "fpage-general",
 );
 FPage::load_defined_pages();
@@ -75,8 +90,8 @@ FPage::load_paths(global_dir  : ["front", "global"]);
 
 //Initialize Api:
 $FApi = new FrontApi(
-    csrf                : FPage::csrf(),                      // CSRF TOKEN
-    debug               : PLAT_ADMIN_PANEL_API_DEBUG_MODE,    // Operation Mode
+    csrf                : FPage::csrf(),  // CSRF TOKEN
+    debug               : CoreSettings::get("api-responses-with-debug-info", false), 
     issuer_privileges   : $User->priv
 );
 

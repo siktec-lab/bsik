@@ -9,18 +9,18 @@
 1.0.1:
     ->initial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Builder\Components;
-use Bsik\Builder\BsikButtons;
-use Bsik\Builder\BsikForms;
-use Bsik\Module\Modules;
-use Bsik\Module\Module;
-use Bsik\Module\ModuleView;
-use Bsik\Privileges as Priv;
-use Bsik\Objects\SettingsObject;
-use Bsik\Trace;
-use Bsik\Builder\BsikIcon;
+use \Bsik\Builder\Components;
+use \Bsik\Builder\BsikButtons;
+use \Bsik\Builder\BsikForms;
+use \Bsik\Module\Modules;
+use \Bsik\Module\Module;
+use \Bsik\Module\ModuleView;
+use \Bsik\Privileges as Priv;
+use \Bsik\Objects\SettingsObject;
+use \Bsik\Trace;
+use \Bsik\Builder\BsikIcon;
 /****************************************************************************/
 /*******************  local Includes    *************************************/
 /****************************************************************************/
@@ -42,7 +42,7 @@ $module_policy->define(
 Modules::register_module_once(new Module(
     name          : "core",
     privileges    : $module_policy,
-    views         : ["modules", "endpoints"],
+    views         : ["settings", "modules", "endpoints"],
     default_view  : "modules",
     settings      : new SettingsObject(
         defaults : [
@@ -59,6 +59,107 @@ Modules::register_module_once(new Module(
         ]
     )
 )); 
+
+/****************************************************************************/
+/*******************  View - settings  *************************************/
+/****************************************************************************/
+$view_core_settings_policy = new Priv\RequiredPrivileges();
+$view_core_settings_policy->define(
+    new \Bsik\Privileges\PrivCore(settings: true)
+);
+Modules::module("core")->register_view(
+    view : new ModuleView(
+        name        : "settings",
+        privileges  : $view_core_settings_policy,
+        settings    : new SettingsObject([
+            "title"         => "Core Platform Settings",
+            "description"   => "View / Change low level core settings.",
+        ])
+    ),
+    render : function() {
+
+        /** @var Module $this */
+
+        // Include confiramtion modal in page:
+        // $this->page->additional_html(Components::confirm());
+
+        //////////////////////////////////////////
+        // Endpoints List:
+        //////////////////////////////////////////
+        $settings_list_title = Components::title(text : "Filter Settings", attrs : ["class" => "module-title"]);
+        
+        $endpoints_list = $this->api->call(
+            args     : [ "groups" => [], "array" => true, "object" => true, "flatten" => true ], 
+            endpoint : "core.get_system_settings_groups"
+        );
+
+        Trace::reg_var("test", $endpoints_list);
+
+        $loader = Components::loader(
+            class : "loading-spinner",
+            color : "primary",
+            size  : "md",
+            align : "center",
+            show  : false,
+            type  : "border",
+            text  : "Loading..."    
+        );
+
+        $settings_list = $this->page->engine->render(
+            name    : "settings_list",
+            context : [
+                "loading"       => $loader,
+                "settings"      => $endpoints_list->answer_data()["flatten"],
+                "search"        => ""
+            ]
+        );
+
+        ////////////////////////////////////////
+        // Modal Settings:
+        ////////////////////////////////////////
+        $this->page->additional_html(Components::modal(
+            "group-settings-modal", 
+            BsikIcon::fas("fa-cogs")."&nbsp;&nbsp;Edit Settings",
+            [
+                Components::alert(
+                    text : "<span class='alert-message'>alert text</span>",
+                    color : "warning",
+                    icon : "fas fa-edit",
+                    classes : ["edit-settings-alert-info"]
+                ),
+                "<div class='form-modal-container'></div>"
+            ],
+            "",
+            [
+                ["button.btn.btn-secondary", ["data-action" => "save-core-settings"], "Save Core Settings", false],
+                ["button.btn.btn-primary",   [],     "Cancel", true],
+            ],
+            [
+                "close-white"    => true,
+                "size"     => "lg",
+                "backdrop" => "static",
+                "keyboard" => "false",
+            ]
+        ));
+
+        //Template:
+        // return <<<HTML
+        //     <div class='container'>
+        //         {$actions_bar}
+        //     </div>
+        //     <div class='container sik-form-init'>
+        //         {$endpoints_list_title}
+        //         {$endpoint_list}
+        //     </div>
+        // HTML;
+        return <<<HTML
+            <div class='container'>
+                {$settings_list_title}
+                {$settings_list}
+            </div>
+        HTML;
+    }
+);
 
 /****************************************************************************/
 /*******************  View - modules  ***************************************/

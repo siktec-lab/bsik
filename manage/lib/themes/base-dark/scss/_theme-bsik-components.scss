@@ -325,7 +325,7 @@ $comp-modules-list: (
 }
 
 /***************************************************************************/
-/* Components::modules_list
+/* Components::endopoints_list
 /***************************************************************************/
 $comp-endpoints-list: (
     "row-background"            : rgba(255,255,255, 0.03),
@@ -502,6 +502,169 @@ $comp-endpoints-list: (
         }
     }
 }
+
+/***************************************************************************/
+/* Components::settings_list
+/***************************************************************************/
+$comp-settings-list: (
+    "row-background"            : rgba(255,255,255, 0.03),
+    "row-expanded-background"   : rgba(255,255,255, 0.02),
+    "row-background-icon"       : rgba(255,255,255, 1),
+    "sections-border"           : 1px solid rgba(255,255,255, 0.05),
+    "group-name-color"          : #ebebeb,
+    "white-text"                : $text-main-color,
+    "description-text-color"    : $text-main-color-f2,
+    "group-icon-color"       : bsik-colors("purple", "lighten-3"),
+    "privileges-tags-bg"        : #cdae00,
+    "privileges-tags-color"     : #242424
+) !default;
+.comp-settings-list {
+    position: relative;
+    .settings-row {
+        margin-top: 1rem;
+        .settings-header {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            border: map-get($comp-settings-list, "sections-border");
+            background-color: map-get($comp-settings-list, "row-background");
+            display: flex;
+            align-items: baseline;
+            > li {
+                display: inline-block;
+                padding: 0.85rem 0.75rem;
+                line-height: 1rem;
+                &.group-name {
+                    flex-grow: 0;
+                    font-size: 1rem;
+                    strong {
+                        color: map-get($comp-settings-list, "group-name-color");
+                        font-weight: bold;
+                    }
+                    span.material-icons {
+                        margin: 0 0.75rem 0 0.75rem;
+                        font-size: 1.35rem;
+                        color: map-get($comp-settings-list, "group-icon-color");
+                    }
+                }
+                &.group-description {
+                    color: map-get($comp-settings-list, "description-text-color");
+                    flex-grow: 1;
+                    font-size: 0.9rem;
+                    border-left: map-get($comp-settings-list, "sections-border");
+                    border-right: map-get($comp-settings-list, "sections-border");
+                }
+                &.group-expand {
+                    flex-grow: 0;
+                    font-size: 1rem;
+                    i {
+                        cursor: pointer;
+                        padding: 0.35rem 0.75rem;
+                        color: map-get($comp-settings-list, "white-text");
+                        transition: color ease .2s,
+                                    transform ease .2s;
+                        &:hover {
+                            color: $primary-color;
+                        }
+                        &.expanded { 
+                            color: $primary-color;
+                            transform: rotateX(180deg);
+                        }
+                    }
+                }
+            }
+        }
+        .group-settings {
+            background-color: map-get($comp-settings-list, "row-expanded-background");
+            box-shadow: inset 0px 15px 10px -15px black;
+            padding: 1rem;
+            display: none;
+            h4 {
+                width: 100%;
+                margin-bottom: 0.65rem;
+                padding-left: 0.5rem;
+                padding-bottom: 0.65rem;
+                border-bottom: map-get($comp-endpoints-list, "sections-border");
+                text-align: left;
+                .material-icons {
+                    margin-right: 5px;
+                }
+                .setting-description {
+                    margin-left: 10px;
+                    color: map-get($comp-settings-list, "description-text-color");
+                }
+            }
+            .settings-priv-tags {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: inline-block;
+                padding-left: 2rem;
+                li.priv-tags-group {
+                    display:inline-block;
+                    font-size: 0.8rem;
+                    padding: 0.15rem 0.65rem 0.05rem 0.65rem;
+                    background-color: map-get($comp-settings-list, "privileges-tags-bg");
+                    font-weight: 600;
+                    border-radius: 0.25rem;
+                    color: map-get($comp-settings-list, "privileges-tags-color");
+                    i:not(:first-child) {
+                        margin: 0 0.5rem;
+                    }
+                }
+            }
+            .no-params,
+            .no-policy {
+                display: block;
+                color: map-get($comp-settings-list, "description-text-color");
+                font-size: 0.9rem;
+                padding-left: 2rem;
+            }
+            .no-params {
+                margin-bottom: 1.5rem;
+            }
+            table.parameters-table {
+                font-size: 0.9rem;
+                margin-left: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 1.5rem;
+                td {
+                    border: map-get($comp-settings-list, "sections-border");
+                    padding: 0.35rem 0.8rem;
+                    &:not(.header-style) {
+                        color: map-get($comp-settings-list, "description-text-color");
+                    }
+                    &.header-style {
+                        background-color: map-get($comp-settings-list, "row-background");
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+    .loading-spinner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0, 0.3);
+        z-index: 5;
+    }
+
+    .alert.failed-label {
+        padding: $input-padding-y-sm $input-padding-x-sm;
+        font-size: 0.9rem;
+        margin: 0;
+        i {
+            margin-right: 1ch;
+        }
+    }
+}
+
 /***************************************************************************/
 /* Components::settings_form
 /***************************************************************************/ 

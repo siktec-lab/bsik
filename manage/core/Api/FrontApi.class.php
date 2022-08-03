@@ -12,15 +12,13 @@
 
 namespace Bsik\Api;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Trace;
-use \Bsik\Base;
+use \Bsik\Settings\CoreSettings;
 use \Bsik\Privileges as Priv;
 use \Bsik\Api\BsikApi;
-use \Bsik\Api\ApiEndPoint;
-use \Bsik\Api\Validate;
 use \Bsik\Render\FPage;
 use \Bsik\Api\AdminApi;
 use Bsik\Module\Modules;
@@ -121,7 +119,7 @@ class FrontApi extends BsikApi
         
         $AApi = new AdminApi(
             csrf                : $this->csrf,  // CSRF TOKEN
-            debug               : PLAT_ADMIN_PANEL_API_DEBUG_MODE,
+            debug               : CoreSettings::get("api-responses-with-debug-info", false),
             issuer_privileges   : self::$issuer_privileges,
             only_front          : true
         );
@@ -132,8 +130,8 @@ class FrontApi extends BsikApi
         //Change endpoint:
         $AApi->request->type = $this->prepare_endpoint_for_manage();
         
-        //Load core:
-        require_once PLAT_ADMIN_API;
+        //Load api:
+        require_once CoreSettings::$path["manage-api"];
 
         //Execute call:
         $AApi->execute(self::$external);

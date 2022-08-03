@@ -1,13 +1,13 @@
 <?php
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Builder\Components;
 use \Bsik\Builder\BsikButtons;
-use Bsik\Builder\BsikIcon;
-use Bsik\Render\Template;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Builder\BsikIcon;
+use \Bsik\Render\Template;
+use \Bsik\Objects\SettingsObject;
 
 /**
  * helloworld - a helloworld component.

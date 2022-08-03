@@ -2,6 +2,8 @@
 
 namespace Bsik\Exceptions {
 
+    use Bsik\Settings\CoreSettings;
+
     if (!defined("USE_BSIK_ERROR_HANDLERS"))    define("USE_BSIK_ERROR_HANDLERS",   false);
     if (!defined("E_PLAT_NOTICE"))              define("E_PLAT_NOTICE",             E_USER_NOTICE);
     if (!defined("E_PLAT_WARNING"))             define("E_PLAT_WARNING",            E_USER_WARNING);
@@ -114,7 +116,7 @@ namespace Bsik\Exceptions {
             } elseif (ERROR_METHOD == 'redirect') {
                 header(
                     "Location: ".
-                str_replace('\\', '/', PLAT_FULL_DOMAIN.DS."error.php?"."&pack=".base64_encode(self::json_pack($e))),
+                str_replace('\\', '/', CoreSettings::$url["full"].DS."error.php?"."&pack=".base64_encode(self::json_pack($e))),
                     true,
                     301
                 );

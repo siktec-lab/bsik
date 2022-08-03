@@ -2,11 +2,11 @@
 
 namespace Bsik\Forms;
 
-use Bsik\Formr\GenerateForm;
 
 # load the remaining default classes
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
+use \Bsik\Formr\GenerateForm;
 
 class BootstrapForms extends GenerateForm
 {

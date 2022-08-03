@@ -15,15 +15,15 @@
 
 namespace Bsik\Render;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Std;
+use \Bsik\Std;
 use \Bsik\Base;
 use \Bsik\Render\Template;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Objects\SettingsObject;
 use \Bsik\Users\User;
 use \Bsik\Privileges as Priv;
-
+use \Bsik\Settings\CoreSettings;
 use \Exception;
 
 class FPageStatus {
@@ -361,7 +361,7 @@ class FPage extends Base {
     ) {
 
         //Platform base root:
-        self::$index_page_url  = Std::$url::normalize_slashes($this::$conf["path"]["site_base_url"]);
+        self::$index_page_url  = CoreSettings::$url["full"];
         
         //Set policy:
         self::$page_policy = $policy ?? new Priv\RequiredPrivileges();
@@ -427,7 +427,7 @@ class FPage extends Base {
     final public static function load_request(array $request_data = []) : void {
         self::$request = new FPageRequest(empty($request_data) ? [] : $request_data);
         self::$request->type("page");
-        self::$request->page(self::$conf["default-page"] ?? "");
+        self::$request->page(CoreSettings::get("front-default-page", ""));
         self::$request->which("default");
         self::$request->when();
     }
@@ -604,13 +604,19 @@ class FPage extends Base {
                 foreach ($path as $what) {
                     switch ($what) {
                         case "bsik": {
-                            $this->include($pos, "js", "link", ["name" => PLAT_PATH_LIB_URL."/js/front.module.js"]);
+                            $this->include($pos, "js", "link", [
+                                "name" => CoreSettings::$url["manage-lib"]."/js/front.module.js"
+                            ]);
                         } break;
                         case "jquery": {
-                            $this->include($pos, "js", "link", ["name" => PLAT_PATH_LIB_URL."/required/jquery/jquery.min.js"]);
+                            $this->include($pos, "js", "link", [
+                                "name" => CoreSettings::$url["manage-lib"]."/required/jquery/jquery.min.js"
+                            ]);
                         } break;
                         default: {
-                            $this->include($pos, $type, "link", ["name" => PLAT_PATH_LIB_URL."/".$what]);
+                            $this->include($pos, $type, "link", [
+                                "name" => CoreSettings::$url["manage-lib"]."/".$what
+                            ]);
                         }
                     }
                 }

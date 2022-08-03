@@ -1,8 +1,9 @@
 <?php
 /******************************  includes  *****************************/
 /* TODO: remake this page to be loaded like base */
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
+use \Bsik\Settings\CoreSettings;
 use \Bsik\Users\User;
 use \Bsik\Render\APage;
 
@@ -12,16 +13,16 @@ if (!isset($User)) { $User = new User(); }
 
 /******************************  Set Includes  *****************************/
 
-$APage->include("head", "css", "path", ["name" => PLAT_FULL_DOMAIN."/manage/lib/required/font-awesome/css/all.min.css"]);
-$APage->include("head", "css", "path", ["name" => PLAT_FULL_DOMAIN."/manage/lib/required/bootstrap/css/bootstrap.css"]);
-$APage->include("head", "css", "path", ["name" => PLAT_FULL_DOMAIN."/manage/lib/css/global.css"]);
-$APage->include("head", "css", "path", ["name" => PLAT_FULL_DOMAIN."/manage/lib/css/login.css"]);
-$APage->include("head", "js",  "path", ["name" => PLAT_FULL_DOMAIN."/manage/lib/required/jquery/jquery.min.js"]);
+$APage->include("head", "css", "path", ["name" => CoreSettings::$url["manage-lib"]."/required/font-awesome/css/all.min.css"]);
+$APage->include("head", "css", "path", ["name" => CoreSettings::$url["manage-lib"]."/required/bootstrap/css/bootstrap.css"]);
+$APage->include("head", "css", "path", ["name" => CoreSettings::$url["manage-lib"]."/css/global.css"]);
+$APage->include("head", "css", "path", ["name" => CoreSettings::$url["manage-lib"]."/css/login.css"]);
+$APage->include("head", "js",  "path", ["name" => CoreSettings::$url["manage-lib"]."/required/jquery/jquery.min.js"]);
 
 /******************************  Basic login Form values  *****************************/
 $APage->store("form-title",         "ADMIN PANEL LOGIN");
-$APage->store("form-logo",          PLAT_FULL_DOMAIN."/manage/lib/img/logo.svg");
-$APage->store("plat-info",          "BSik by SIKTEC - Version: ".APP_VERSION);
+$APage->store("form-logo",          CoreSettings::$url["manage-lib"]."/img/logo.svg");
+$APage->store("plat-info",          "BSik by SIKTEC - Version: ".BSIK_VERSION);
 $APage->store("form-user-label",    "USERNAME");
 $APage->store("form-user-pass",     "PASSWORD");
 $APage->store("form-btn-login",     "LOGIN");
@@ -62,7 +63,7 @@ if (!empty($User->errors)) {
         <meta name="description" content="PHP made simple the correct way to build fast and powerful PHP web apps">
         <meta http-equiv="X-UA-Compatible" content="IE=7">
         <?php print APage::$token["meta"]; ?>
-        <?php $APage->render_favicon(PLAT_FULL_DOMAIN."/manage/lib/img/fav"); ?>
+        <?php $APage->render_favicon(CoreSettings::$url["manage-lib"]."/img/fav"); ?>
         <title>SIK Framework - Login Page</title>
         <link rel="icon" href="">
         <!-- START : Head includes -->

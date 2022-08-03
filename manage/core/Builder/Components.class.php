@@ -3,13 +3,9 @@
 
 namespace Bsik\Builder;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Exception;
-
-if (!defined("PLAT_PATH_MODULES")) {
-    define("PLAT_PATH_MODULES", "");
-}
 
 /**
  * @method static string helloworld( string $name ) return a hello world message

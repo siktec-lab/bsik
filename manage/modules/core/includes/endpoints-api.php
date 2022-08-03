@@ -4,19 +4,14 @@
 
 
 //Extending the Api of:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Api\ApiEndPoint;
 use \Bsik\Api\AdminApi;
 use \Bsik\Render\APage;
 use \Bsik\Api\Validate;
-use \Bsik\Module\ModuleInstaller;
-use Bsik\Module\Modules;
-use \Bsik\Render\Template;
-use Bsik\Objects\SettingsObject;
-use Bsik\Privileges as Priv;
-use Bsik\Builder\Components;
+use \Bsik\Privileges as Priv;
 
 /*********************************************************************************/
 /*****************  save module settings  ******************************************/

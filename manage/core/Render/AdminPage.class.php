@@ -15,7 +15,7 @@
 
 namespace Bsik\Render;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Base;
@@ -25,6 +25,7 @@ use Bsik\Module\Module;
 use Bsik\Module\ModuleView;
 use \Bsik\Render\Template;
 use \Bsik\Privileges as Priv;
+use Bsik\Settings\CoreSettings;
 use \Bsik\Users\User;
 
 use \Exception;
@@ -241,13 +242,6 @@ class APage extends Base
     //Issuer privileges:
     public static Priv\PrivDefinition $issuer_privileges;
 
-    //Paths: 
-    public static array $paths = [
-        "global-blocks"         => PLAT_PAGES_BLOCKS,
-        "global-templates"      => PLAT_PAGES_TEMPLATES,
-        "global-lib"            => PLAT_PATH_LIB_URL
-    ];
-
     //Loaded:
     public static Modules $modules;
     public static Module  $module;         //will hols an object that defines the loaded module 
@@ -272,7 +266,6 @@ class APage extends Base
     public $platform_libs = [];
 
     /* Page constructor.
-     *  @param $conf => SIK configuration array Used in Base Parent
      *  @Default-params: none
      *  @return none
      *  @Examples:
@@ -283,11 +276,11 @@ class APage extends Base
         ?Priv\PrivDefinition $issuer_privileges = null
     ) {
 
-        $this::$index_page_url = Std::$url::normalize_slashes($this::$conf["path"]["site_admin_url"]);
+        $this::$index_page_url = CoreSettings::$url["manage"];
 
         //Set logger:
         self::load_logger(
-            path : PLAT_LOG_DIRECTORY,
+            path : CoreSettings::$path["logs"],
             channel: $logger_channel
         );
 
@@ -296,11 +289,11 @@ class APage extends Base
 
         //Set admin platform core templates:
         $this->engine = new Template(
-            cache : PLAT_TEMPLATES_CACHE
+            cache : CoreSettings::$path["manage-cache"]
         );
 
         $this->engine->addFolders([
-            PLAT_PAGES_TEMPLATES
+            CoreSettings::$path["manage-templates"]
         ]);
 
         //Initialize meta object:
@@ -357,13 +350,14 @@ class APage extends Base
     final public static function load_request(array $request_data = []) : void {
         self::$request = new AModuleRequest(empty($request_data) ? [] : $request_data);
         self::$request->type("module");
-        self::$request->module(self::$conf["default-module"] ?? "");
-        self::$request->which("default");
+        self::$request->module(CoreSettings::get("module-default-load", ""));
+        self::$request->which(CoreSettings::get("module-default-load-view", ""));
         self::$request->when();
     }
 
 
     public function load_settings(string $which = "global", bool $load_libs = true) {
+        //TODO: this is old and not used set as new ObjectSettings and change the libs structure
         $set = self::$db->where("name", $which)->getOne("bsik_settings", ["object", "libs"]);
         if (!empty($set) && !empty($set["object"])) {
             $this->platform_settings = json_decode($set["object"], true);
@@ -534,15 +528,15 @@ class APage extends Base
     public function include_asset($pos, $type, $in, $path) {
         switch ($in) {
             case "me": {
-                $url = Std::$fs::path_url(self::$paths["module-lib"], ...$path);
+                $url = Std::$fs::path_url(self::$module->paths["module-lib"], ...$path);
                 $this->include($pos, $type, "link", ["name" => $url]);
             } break;
             case "global": {
-                $url = Std::$fs::path_url(self::$paths["global-lib"], ...$path);
+                $url = Std::$fs::path_url(CoreSettings::$url["manage-lib"], ...$path);
                 $this->include($pos, $type, "link", ["name" => $url]);
             } break;
             case "required": {
-                $url = Std::$fs::path_url(self::$paths["global-lib"], "required", ...$path);
+                $url = Std::$fs::path_url(CoreSettings::$url["manage-lib"], "required", ...$path);
                 $this->include($pos, $type, "link", ["name" => $url]);
             } break;
         }
@@ -589,19 +583,19 @@ class APage extends Base
                             switch ($lib_obj["place"]) {
                                 case "required": {
                                     $this->lib_toload[$type]["path".$this->static_links_counter] = [
-                                        "name" => PLAT_FULL_DOMAIN."/manage/lib/required/".$lib_obj["path"],
+                                        "name" => CoreSettings::$url["manage-lib"]."/required/".$lib_obj["path"],
                                         "pos"  => $lib_obj["pos"]
                                     ];
                                 } break;
                                 case "lib": {
                                     $this->lib_toload[$type]["path".$this->static_links_counter] = [
-                                        "name" => PLAT_FULL_DOMAIN."/manage/lib/".$lib_obj["path"],
+                                        "name" => CoreSettings::$url["manage-lib"]."/".$lib_obj["path"],
                                         "pos"  => $lib_obj["pos"]
                                     ];
                                 } break;
                                 case "module": {
                                     $this->lib_toload[$type]["path".$this->static_links_counter] = [
-                                        "name" => PLAT_FULL_DOMAIN."/manage/lib/".$lib_obj["path"],
+                                        "name" => CoreSettings::$url["manage-lib"]."/".$lib_obj["path"],
                                         "pos"  => $lib_obj["pos"]
                                     ];
                                 } break;
@@ -747,8 +741,8 @@ class APage extends Base
         }
     } 
     
-    public function render_block(string $placement, string $name, string $class, array $args = []) {
-        $path = self::$paths[$placement."-blocks"].DS.$name.".block.php";
+    public function render_block(string $name, string $class, array $args = []) {
+        $path = CoreSettings::$path["manage-blocks"].DS.$name.".block.php";
         if (file_exists($path)) {
             include $path;
             $ref = new \ReflectionClass($class);

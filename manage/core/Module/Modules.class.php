@@ -12,18 +12,18 @@
 
 namespace Bsik\Module;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\DB\MysqliDb;
+use \Bsik\DB\MysqliDb;
 use \Bsik\Std;
 use \Exception;
-use Bsik\Privileges as Priv;
-use Bsik\Privileges\RequiredPrivileges;
-use Bsik\Objects\SettingsObject;
-use Bsik\Api\AdminApi;
-use Bsik\Render\APage;
-use Bsik\Users\User;
-use Bsik\Render\AModuleRequest;
+use \Bsik\Privileges as Priv;
+use \Bsik\Privileges\RequiredPrivileges;
+use \Bsik\Objects\SettingsObject;
+use \Bsik\Api\AdminApi;
+use \Bsik\Render\APage;
+use \Bsik\Users\User;
+use \Bsik\Render\AModuleRequest;
 
 class ModuleView {
 

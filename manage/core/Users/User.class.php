@@ -16,7 +16,7 @@
 
 namespace Bsik\Users;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Base;
@@ -38,7 +38,6 @@ class User extends Base {
 
     /** Constructor
      * 
-     * @param array $conf
      */
     public function __construct() {
         $this->priv = new Priv\GrantedPrivileges();

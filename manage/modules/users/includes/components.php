@@ -2,7 +2,7 @@
 /*
  * Simply a local module php file that will extend module and api
  */
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Builder\Components;
 use \Bsik\Render\Template;

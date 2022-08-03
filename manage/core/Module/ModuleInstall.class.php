@@ -6,9 +6,10 @@ if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 if (!defined('ROOT_PATH')) define("ROOT_PATH", dirname(__FILE__).DS."..".DS.".." );
 
 /******************************  Requires       *****************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
+use \Bsik\Settings\CoreSettings;
 use \Exception;
 use \ZipArchive;
 use \Bsik\Base;
@@ -37,14 +38,14 @@ class ModuleInstaller {
     public  ZipArchive      $zip;
 
     //Validation related
-    public const REQUIRED_FILES = [
-        "module.jsonc" => "jsonc",
-        "module.php"   => "exists"
+    public const REQUIRED_FILES_INSTALL = [
+        "module.jsonc" => "jsonc"
+        //"module.php"   => "exists" //TODO: this should be checked only when single included or 
     ];
-
-    //Installation related:
-    private string $schema_install_template = "module.install.%s.jsonc";
-    private string $schema_module_template  = "module.define.%s.jsonc";
+    public const REQUIRED_FILES_MODULE = [
+        "module.jsonc" => "jsonc",
+        "module.php" => "exists"
+    ];
 
     /** 
      * Construct ModuleInstaller
@@ -56,8 +57,9 @@ class ModuleInstaller {
      */
     public function __construct(
         string|SplFileInfo $source, 
-        string|SplFileInfo $in = PLAT_PATH_MANAGE.DIRECTORY_SEPARATOR."modules"
+        string|SplFileInfo|null $in = null
     ) {
+        $in = $in ?? CoreSettings::$path["manage-modules"];
         $this->source           = is_string($source) ? new SplFileInfo($source) : $source;
         $this->install_in       = is_string($in) ? new SplFileInfo($in) : $in;
         $this->rand_id          = std::$date::time_datetime("YmdHis");
@@ -76,7 +78,7 @@ class ModuleInstaller {
             //List the files in zip
             $list = BsikZip::list_files($this->zip);
             //Validate required - simple validation just of presence and format:
-            foreach (self::REQUIRED_FILES as $file => $validate) {
+            foreach (self::REQUIRED_FILES_INSTALL as $file => $validate) {
                 if (array_key_exists($file, $list)) {
                     $content = $this->zip->getFromIndex($list[$file]["index"]);
                     if (!$this->validate_file("", $validate, $content)) {
@@ -97,10 +99,10 @@ class ModuleInstaller {
      * @param  mixed $folder => null for loaded, string for given folder path 
      * @return array         => array of errors message if any
      */
-    public function validate_required_files_in_extracted($folder = null) : array {
+    public function validate_required_files_in_extracted($folder = null, array $required = []) : array {
         $folder = $folder ?? $this->temp_extracted->getRealPath();
         $errors = [];
-        foreach (self::REQUIRED_FILES as $file => $validate) {
+        foreach ($required as $file => $validate) {
             if (!Std::$fs::path_exists($folder, $file)) {
                 $errors[] = "Required file missing [{$file}]";
                 continue;
@@ -206,93 +208,93 @@ class ModuleInstaller {
         //Create the given definition and validate:
         $module_def = $schema->create_definition($module_json);
         if (!$module_def->valid) {
-            return [false, "module.jsonc is invalid", $module_def->struct]; //TODO: remove struct
+            return [false, $module_def->errors, []];
         }
-        return [true, "installed", $module_def->struct];
-        
-        // //Extend:
-        // $module_def = Std::$arr::extend($schema->obj->data, $module_def);
 
-        // //Required:
-        // if (!$schema->check($module_def)) {
-        //     return [false, "module.jsonc is missing some required properties", []];
-        // }
-        
-        // //Install module depends on the type:
-        // switch ($module_def["this"]["type"]) {
-        //     case "single" : {
-        //         $_path   = rtrim($this->install_in, "/\\").DS.$folder;
-        //         $_module = $module_def[$schema->naming('modules_container')][0];
-        //         [$status, $module_name, $message] = $this->install_module($module_def, $_module, $_path, $by);
-        //         if (!$status) {
-        //             return [false, $message, $installed];
-        //         } else {
-        //             $installed[] = $module_name;
-        //         }
-        //     } break;
-        //     case "bundle" : {
-        //         return [false, "bundle are not supported yet", []];
-        //     } break;
-        // }
+        //Install module depends on the type:
+        switch ($module_def->struct["this"]["type"]) {
+            case "single" : {
+                //Install the module:
+                $module = $module_def->struct[$schema->naming('modules_container')][0];
+                [$status, $module_name, $errors] = $this->install_module($module, $by);
+                if (!$status) {
+                    return [false, $errors, $installed];
+                } else {
+                    $installed[] = $module_name;
+                }
+            } break;
+            case "bundle" : {
+                return [false, "bundle installation is not supported yet", []];
+            } break;
+        }
         
         //Return
         return [true, "installed", $installed];
     }
 
-    private function install_module(array $definition, array $module, string $folder, $by = null) : array {
-        $module_name = Std::$str::filter_string($module["name"] ?? "unknown", ["A-Z","a-z","0-9", "_"]);
-        $module_path = trim($folder, " /\\").DS.$module_name;
+    private function install_module(array $single_definition, $by = null) : array {
+        $module_name = Std::$str::filter_string($single_definition["name"] ?? "unknown", ["A-Z","a-z","0-9", "_"]);
+        $module_path = Std::$fs::path($this->install_in->getRealPath(), $module_name);
 
-        // //Validate name:
-        // if (Base::$db->where("name", $module_name)->has("bsik_modules")) {
-        //     return [false, $module_name, "allready installed"];
-        // }
+        // validate its new module:
+        if (
+                Base::$db->where("name", $module_name)->has("bsik_modules")
+            ||  Std::$fs::path_exists($module_path)
+        ) {
+            return [true, $module_name, "allready installed"]; // We return true because its allready in
+        }
+        
+        //Load schema:
+        $schema = new Schema\ModuleSchema("module", $single_definition["schema"] ?? "");
+        if (!$schema->is_loaded()) {
+            return [false, $module_name, $schema->get_message()];
+        }
 
-        // //Parse schema module:
-        // if (empty($module["schema"] ?? "")) {
-        //     return [false,$module_name,"schema not defined"];
-        // }
+        //Create the given definition and validate:
+        $module = $schema->create_definition($single_definition);
+        if (!$module->valid) {
+            return [false, $module_name, $module->errors];
+        }
 
-        // //Load schema:
-        // $schema = new Schema\ModuleSchema("module", $module["schema"]);
-        // if (!$schema->obj->status) {
-        //     return [false,$module_name,$schema->obj->message];
-        // }
-
-        // //Extend:
-        // $module = Std::$arr::extend($schema->obj->data, $module);
-
-        // //Check Required files:
-        // if (!$schema->check($module)) {
-        //     return [false,$module_name,"module definition is invalid"];
-        // }
-
-        // //Move module folder:
-        // if (!BsikFileSystem::xcopy($module_path, rtrim($this->install_in, "/\\").DS.$module_name)) {
-        //     return [false,$module_name,"failed to copy module to destination"];
-        // }
-
-        // //Register to db:
-        // if (!Base::$db->insert("bsik_modules", [
-        //     "name"          => $module_name,
-        //     "status"        => 0,
-        //     "updates"       => 0,
-        //     "priv_users"    => 0,
-        //     "priv_content"  => 0,
-        //     "priv_admin"    => 0,
-        //     "priv_install"  => 0,
-        //     "path"          => $module_name.'/',
-        //     "settings"      => json_encode($module[$schema->naming("settings_container")]),
-        //     "defaults"      => json_encode($module[$schema->naming("defaults_container")]),
-        //     "menu"          => json_encode($module[$schema->naming("menu_container")]),
-        //     "version"       => $module["ver"],
-        //     "created"       => Base::$db->now(),
-        //     "updated"       => Base::$db->now(),
-        //     "info"          => json_encode($module),
-        //     "installed_by"  => $by,
-        // ])) {
-        //     return [false, $module_name, "failed to register module to database"];
-        // };
-        return [true,$module_name,"module installed"];
+        //Now install the module:
+        switch ($module->struct["type"]) {
+            case "included": {
+                //Vallidate required:
+                $errors = $this->validate_required_files_in_extracted(null, self::REQUIRED_FILES_MODULE);
+                if (!empty($errors)) {
+                    return [false, $module_name, $errors];
+                }
+                //Move temp folder:
+                if (!BsikFileSystem::xcopy($this->temp_extracted->getRealPath(), $module_path)) {
+                    return [false,$module_name,"failed to copy module to destination"];
+                }
+                //Register on DataBase:
+                $info = $module->struct;
+                unset($info["menu"]);
+                unset($info["\$schema_naming"]);
+                unset($info["\$schema_required"]);
+                if (!Base::$db->insert("bsik_modules", [
+                    "name"          => $module_name,
+                    "status"        => 1,
+                    "updates"       => 0,
+                    "path"          => $module_name.DIRECTORY_SEPARATOR,
+                    "settings"      => "{}",
+                    "menu"          => json_encode($module->struct[$schema->naming("menu_container")]),
+                    "version"       => $module->struct["ver"],
+                    "created"       => Base::$db->now(),
+                    "updated"       => Base::$db->now(),
+                    "info"          => json_encode($info),
+                    "installed_by"  => $by
+                ])) {
+                    //Remove folder:
+                    BsikFileSystem::clear_folder($module_path, true);
+                    return [false, $module_name, "failed to register module to database"];
+                };
+            } break;
+            case "remote": {
+                return [false, $module_name, "remote modules are not supported yet"];
+            } break;
+        }
+        return [true, $module_name, "module installed"];
     }
 }

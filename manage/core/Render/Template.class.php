@@ -2,40 +2,40 @@
 
 namespace Bsik\Render;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
+use Bsik\Settings\CoreSettings;
 use \Twig\Loader\FilesystemLoader;
 use \Twig\Loader\ArrayLoader;
 use \Twig\Loader\ChainLoader;
 use \Twig\Environment;
 
-if (!defined("PLAT_PAGES_BLOCKS")) define("PLAT_PAGES_BLOCKS", "");
-if (!defined("PLAT_PAGES_TEMPLATES")) define("PLAT_PAGES_TEMPLATES", "");
-if (!defined("PLAT_TEMPLATES_CACHE")) define("PLAT_TEMPLATES_CACHE", "cache");
-
 class Template {
 
+	public static $default_debug 	  = false;
+	public static $default_autoreload = true;
 	private static string $ext = 'tpl';
 
 	private string $cache_path = "";
 
 	private bool   $cache_enable = false;
 	private bool   $debug 		 = false;
-	private bool   $auto_reload  = false;
+	private bool   $auto_reload  = true;
 
 	public ChainLoader $loader;
 	public Environment $env;
 
 	public function __construct(
-		string $cache 			= PLAT_TEMPLATES_CACHE,
+		string|null $cache 		= null,
 		bool   $cache_enable 	= true,
-		bool   $debug 			= PLAT_TEMPLATE_DEBUG,
-		bool   $auto_reload 	= PLAT_TEMPLATE_RELOAD
+		?bool   $debug 			= null,
+		?bool   $auto_reload 	= null
 	) {
+		$cache = $cache ?? CoreSettings::$path["manage-cache"];
 		$this->cache_enable = $cache_enable;
 		$this->cache_path   = $cache;
-		$this->debug 		= $debug;
-		$this->auto_reload  = $auto_reload;
+		$this->debug 		= is_null($debug) ? self::$default_debug : $debug;
+		$this->auto_reload  = is_null($auto_reload) ? self::$default_autoreload : $auto_reload;
 		$this->set();
 	}
 
@@ -44,7 +44,7 @@ class Template {
 		$this->env = new Environment($this->loader, [
 			'debug' 		=> $this->debug,
 			'auto_reload' 	=> $this->auto_reload,
-			'cache' 		=> !empty($this->cache_path) ? $this->cache_path : false,
+			'cache' 		=> !empty($this->cache_path) && $this->cache_enable ? $this->cache_path : false,
 		]);
 		$this->env->addGlobal("__DEBUG__", $this->debug);
 		$this->addExtension(new \Twig\Extension\DebugExtension());

@@ -15,7 +15,7 @@
 
 namespace Bsik\Objects;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 
@@ -51,8 +51,23 @@ class SettingsObject {
         $this->extend_options($options);
         $this->extend_defaults($defaults);
     }
+        
+    /**
+     * is_empty
+     * checks is there are any settings defined is this instance
+     * @return bool
+     */
+    public function is_empty() : bool {
+        return empty($this->values) && empty($this->defaults);
+    }
     
-    public function import(string|array $from) {
+    /**
+     * import
+     * import settings to this instance
+     * @param  string|array $from
+     * @return void
+     */
+    public function import(string|array $from) : void {
         //If json:
         if (is_string($from)) {
             $from = Std::$str::parse_json($from, onerror: []);
@@ -200,9 +215,6 @@ class SettingsObject {
             $extend = Std::$str::parse_json($extend, onerror: []);
         }
         [$valid, $values] = $this->is_valid($extend, $errors, $cast);
-        // var_dump($errors);
-        // var_dump($values);
-        // var_dump($valid);
         if ($valid) {
             $this->values = Std::$arr::extend($this->values, $values);
             $this->unset(); // removes all flagged values
@@ -268,6 +280,17 @@ class SettingsObject {
      * @param  mixed $default
      * @return mixed - the value
      */
+    public function get_value(string $key = "", $default = null) : mixed {
+        return $this->values[$key] ?? $default;
+    }
+
+    /**
+     * get_default
+     * get specific default value
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed - the value
+     */
     public function get_default(string $key = "", $default = null) : mixed {
         return $this->defaults[$key] ?? $default;
     }
@@ -309,7 +332,18 @@ class SettingsObject {
         }
         return $default;
     }
-         
+    
+    public function get_key(string $key = "") : null|array {
+        if ($this->has($key)) {
+            return [
+                "value"         => $this->get_value($key),
+                "default"       => $this->get_default($key),
+                "option"        => $this->get_option($key),
+                "description"   => $this->get_description($key),
+            ];
+        }
+        return null;
+    }
     /**
      * get_all
      * return all values merged with defaults or not
@@ -357,6 +391,18 @@ class SettingsObject {
     }
 
     /**
+     * set_description
+     * sets a key description value
+     * @param  string $key
+     * @param  mixed $value
+     * @return bool
+     */
+    public function set_description(string $key, mixed $value) : bool {
+        $this->extend_descriptions([ $key => $value]);
+        return true;
+    }
+
+    /**
      * set_default
      * sets a key default value
      * @param  string $key
@@ -369,6 +415,7 @@ class SettingsObject {
         return $this->extend_defaults([ $key => $value], $errors, $cast);
     }
 
+    
     /**
      * set
      * sets a key value

@@ -5,16 +5,13 @@
 // Creation Date: 12/09/2013
 // Copyright 2013, shlomo hassid.
 /******************************************************************************/
-
-/*****************************      DEPENDENCE      ***************************/
-// conf.php ( Defined: EXPOSE_OP_TRACE ) 
 /******************************************************************************/
 
 /*****************************      Changelog       ***************************/
 // 1.1: initial
 // 1.2:
 //      -> added a remove button in the debugger console.
-//      -> Improved styling bystreching left:0, right:0 of the console.
+//      -> Improved styling by stretching left:0, right:0 of the console.
 // 1.3
 //      -> Improved add_trace to support several argument registration. 
 //      -> Added multiple vars registration reg_vars(["name" => $var1, "name" => $var])
@@ -24,10 +21,11 @@
 
 namespace Bsik;
 
-if (!defined('EXPOSE_OP_TRACE')) define('EXPOSE_OP_TRACE', false);
+require_once BSIK_AUTOLOAD;
 
 class Trace {
-    
+
+    public static $enable = true;
     public static $trace_arr = array();
     public static $script_start;
     public static $queries_used = array();
@@ -35,7 +33,7 @@ class Trace {
     public static $peak_mem = array("r"=>0,"e"=>0);
     public static $exec_q = 0;
     public static function add_trace($op, $class = 'unknown', ...$var_catch) {
-        if (!EXPOSE_OP_TRACE) { return; }
+        if (!self::$enable) { return; }
         $b_arr = array(
             "method"    => $class,
             "operation" => $op,
@@ -60,7 +58,7 @@ class Trace {
         self::$trace_arr[] = $b_arr;
     }
     public static function add_query_trace($query = '', $time = 0, $info = '') {
-        if (!EXPOSE_OP_TRACE) { return; }
+        if (!self::$enable) { return; }
         self::$exec_q++;
         self::$queries_used[] = array(
             'query'     => $query, 
@@ -73,15 +71,15 @@ class Trace {
         return (self::$exec_q + 1);
     }
     public static function add_step($file, $step) {
-        if (!EXPOSE_OP_TRACE) { return; }
+        if (!self::$enable) { return; }
         self::$trace_arr[] = basename($file).' => '.$step;
     }
     public static function reg_var($name, $var) {
-        if (!EXPOSE_OP_TRACE || !is_string($name)) { return; }
+        if (!self::$enable || !is_string($name)) { return; }
         self::$registered_vars[] = array($name,self::dump($var));
     }
     public static function reg_vars($vars) {
-        if (!EXPOSE_OP_TRACE) { return; }
+        if (!self::$enable) { return; }
         if (is_array($vars)) {
             foreach ($vars as $name => $var) {
                 self::$registered_vars[] = array($name, self::dump($var));
@@ -91,7 +89,7 @@ class Trace {
         }
     }
     public static function expose_trace() {
-        if (!EXPOSE_OP_TRACE) { return; }
+        if (!self::$enable) { return; }
         //Get peaks before:
         self::$peak_mem['r'] = memory_get_peak_usage(true);
         self::$peak_mem['e'] = memory_get_peak_usage(false);

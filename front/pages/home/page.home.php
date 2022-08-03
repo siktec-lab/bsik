@@ -1,7 +1,7 @@
 <?php
 
 /******************************  includes  *****************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Render\Template;

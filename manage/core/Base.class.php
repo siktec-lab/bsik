@@ -12,13 +12,13 @@
 
 namespace Bsik;
 
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Std;
-use Bsik\DB\MysqliDb;
+use \Bsik\Std;
+use \Bsik\DB\MysqliDb;
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use \Monolog\Logger;
+use \Monolog\Handler\StreamHandler;
 
 class Base {
 
@@ -134,7 +134,9 @@ class Base {
     final public static function load_logger(string $path, string $channel = "page-general") : void {
         //Logger:
         self::$logger = new Logger($channel);
-        self::$logger->pushHandler(new StreamHandler($path.$channel.".log"));
+        self::$logger->pushHandler(new StreamHandler(
+            Std::$fs::path($path,$channel.".log")
+        ));
         self::$logger->pushProcessor(function ($record) {
             $record['extra']['user'] = self::$user_string;
             return $record;
@@ -162,6 +164,7 @@ class Base {
     /** GLOBAL CONFIGURATION:
      **********************************************************************************************************/
     public static $conf;
+
     //Set configuration object:
     public static function configure( array $_conf) : void {
         self::$conf = $_conf;
@@ -172,6 +175,7 @@ class Base {
     /** DATABASE:
      **********************************************************************************************************/    
     public static MysqliDb $db;
+    
     /**
      * connect_db
      * establish a db connection based on global conf set.

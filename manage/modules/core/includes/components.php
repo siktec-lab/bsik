@@ -2,11 +2,10 @@
 /*
  * Simply a local module php file that will extend module and api
  */
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Builder\Components;
-use Bsik\Render\Template;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Render\Template;
 
 /****************************************************************************/
 /******** component creates a badge list row  *******************************/
@@ -69,20 +68,4 @@ Components::register_once("modules_list", function(array $modules, $title, Templ
         name : "modules_list", 
         context : [ "modules" => $modules_data, "title_ele" => $title_html ]
     );
-
-        // $update_button      = "<button type='button' class='btn btn-sm btn-success' data-action='update-module' style='display:none'>Update</button>";
-        // $disable_button     = "<button type='button' class='btn btn-sm btn-warning' data-action='status-module' data-current='{$status_toggle}'>{$status_button}</button>";
-        // $uninstall_button   = "<button type'button' class='btn btn-sm btn-danger' data-action='uninstall-module'>Uninstall</button>";
-        
-        // if ($updates) {
-        //     $status_tag     = "Update Pending";
-        //     $status_color   = "has-update";
-        //     $update_button  = "<button type='button' class='btn btn-sm btn-success' data-action='update-module' style='display:block'>Update</button>";
-        // }
-        // if ($module["core"] ?? 0) {
-        //     $disable_button = "";
-        //     $uninstall_button = "";
-        //     $status_tag = "Core Module";
-        //     $status_color = "core";
-        // }
 });

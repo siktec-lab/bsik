@@ -9,11 +9,12 @@
 1.0.1:
     ->intial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 use \Bsik\Render\Blocks\Block;
 use \Bsik\Render\Template;
+use \Bsik\Settings\CoreSettings;
 
 class SideMenuBlock extends Block {
 
@@ -65,7 +66,8 @@ class SideMenuBlock extends Block {
                 $this->Page::$module->header["title"]       = $parts["title"];
             }
             //Create module base url:
-            $parts["url"] = $this->Page::$conf["path"]["site_admin_url"]."/".strtolower($parts["action"]);
+            
+            $parts["url"] = CoreSettings::$url["manage"]."/".strtolower($parts["action"]);
             $parts["has_sub"] = false;
             $parts["sub_menu"] = [];
 

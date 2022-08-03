@@ -1,6 +1,6 @@
 <?php
 //Extending the Api of manage:
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
 use \Bsik\Api\ApiEndPoint;
 use \Bsik\Api\AdminApi;
