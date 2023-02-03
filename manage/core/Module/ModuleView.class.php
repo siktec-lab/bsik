@@ -12,7 +12,6 @@
 
 namespace Bsik\Module;
 
-
 require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
@@ -20,6 +19,14 @@ use \Bsik\Privileges as Priv;
 use \Bsik\Objects\SettingsObject;
 use \Bsik\Render\AModuleRequest;
 
+/** 
+ * ModuleView
+ * 
+ * This defines a module view which is used to render the module in a specific way.
+ * 
+ * @package Bsik\Module
+ * 
+ */
 class ModuleView {
 
     public string $name;

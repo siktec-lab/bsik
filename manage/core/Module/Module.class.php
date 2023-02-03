@@ -24,6 +24,14 @@ use \Bsik\Api\AdminApi;
 use \Bsik\Render\APage;
 use \Bsik\Users\User;
 
+/** 
+ * Module
+ * 
+ * This is the main module class, it holds all the module data and methods.
+ * 
+ * @package Bsik\Module
+ * 
+ */
 class Module {
 
     public  string $module_name         = "";

@@ -400,7 +400,7 @@ function _process_post($data)
 
             # sanitize string
             if ($rule == 'sanitize_string') {
-                $post = filter_var($post, FILTER_SANITIZE_STRING);
+                $post = filter_var($post, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             }
 
             # sanitize URL

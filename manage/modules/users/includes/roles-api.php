@@ -1,4 +1,5 @@
 <?php
+
 //Extending the Api of manage:
 require_once BSIK_AUTOLOAD;
 
@@ -161,7 +162,6 @@ AdminApi::register_endpoint(new ApiEndPoint(
     allow_override  : false,
     policy: $required_edit_role
 ));
-
 
 /********************************************************************************/
 /******* Endpoint -> create a new role: *****************************************/

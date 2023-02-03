@@ -16,14 +16,18 @@ require_once BSIK_AUTOLOAD;
 
 use \Bsik\DB\MysqliDb;
 use \Bsik\Std;
-use \Exception;
-use \Bsik\Privileges as Priv;
-use \Bsik\Privileges\RequiredPrivileges;
-use \Bsik\Objects\SettingsObject;
 use \Bsik\Api\AdminApi;
 use \Bsik\Render\APage;
 use \Bsik\Users\User;
+use \Exception;
 
+/** 
+ * Modules 
+ * 
+ * This class is a singleton that holds all the modules and their views and events
+ * 
+ * @package Bsik\Module
+ */
 class Modules {
     
     private static  $installed  = []; //This holds the installed modules from db as array definitions

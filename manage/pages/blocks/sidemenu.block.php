@@ -7,7 +7,7 @@
 /******************************************************************************/
 /*****************************      Changelog       ****************************
 1.0.1:
-    ->intial, Creation
+    ->initial, Creation
 *******************************************************************************/
 require_once BSIK_AUTOLOAD;
 
@@ -16,6 +16,14 @@ use \Bsik\Render\Blocks\Block;
 use \Bsik\Render\Template;
 use \Bsik\Settings\CoreSettings;
 
+/**
+ * SideMenuBlock
+ * 
+ * This class is used to render the side menu block of a specific module.
+ * 
+ * @package Bsik\Render\Blocks
+ * 
+ */
 class SideMenuBlock extends Block {
 
     /** 
@@ -66,7 +74,7 @@ class SideMenuBlock extends Block {
                 $this->Page::$module->header["which"]       = "";
                 $this->Page::$module->header["title"]       = $parts["title"];
             }
-            
+
             //Create module base url:
             
             $parts["url"] = CoreSettings::$url["manage"]."/".strtolower($parts["action"]);

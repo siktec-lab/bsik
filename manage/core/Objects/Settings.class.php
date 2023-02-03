@@ -19,7 +19,13 @@ require_once BSIK_AUTOLOAD;
 
 use \Bsik\Std;
 
-// is for boolean trues
+/**
+ * SettingsObject
+ * 
+ * This class is used to construct a settings object which is used to store settings in a bsik way.
+ * 
+ * @package Bsik\Objects
+ */
 class SettingsObject {
 
     const OPT_INT      = "integer"; //TODO: remove later this is from old version
@@ -522,7 +528,6 @@ class SettingsObject {
         ]);
     }
 }
-
 
 SettingsObject::$validators["notempty"] = function($value, $path) {
     return $value === "" || is_null($value) ? "%s value can not be empty" : true;

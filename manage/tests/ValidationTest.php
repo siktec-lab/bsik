@@ -24,7 +24,7 @@ class ValidationTest extends TestCase
 
     public function testFilterSanitize() : void {
 
-        $filter = Validate::filter("sanitize", FILTER_SANITIZE_STRING)
+        $filter = Validate::filter("sanitize", FILTER_SANITIZE_FULL_SPECIAL_CHARS)
                           ::create_filter();
 
         $input_string = "sik<div>tec";                   

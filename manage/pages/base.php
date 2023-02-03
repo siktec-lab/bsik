@@ -32,11 +32,11 @@ if (!isset($conf)) {
 Trace::add_trace("Required META set done.", __FILE__.__LINE__);
 
 /******************************  Set Meta - optional  *****************************/
-
+//TODO: what is this? restore that from loaded module settings?
 // foreach($APage->settings["addmeta"] ?? [] as $opm) {
 //     $APage->meta->add($opm);
 // }
-Trace::add_trace("Optional META extend done.", __FILE__.__LINE__, "Total: ".count($APage->settings["addmeta"] ?? []));
+// Trace::add_trace("Optional META extend done.", __FILE__.__LINE__, "Total: ".count($APage->settings["addmeta"] ?? []));
 
 /******************************  Store Important values  *****************************/
 $APage->store("plat-logo", CoreSettings::$url["manage-lib"]."/img/logo.svg");

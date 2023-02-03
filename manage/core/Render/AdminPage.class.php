@@ -1,8 +1,5 @@
 <?php
 /******************************************************************************/
-
-
-
 // Created by: Shlomi Hassid.
 // Release Version : 1.0.1
 // Creation Date: date
@@ -12,7 +9,6 @@
 1.0.1:
     ->creation - initial
 *******************************************************************************/
-
 namespace Bsik\Render;
 
 require_once BSIK_AUTOLOAD;
@@ -20,214 +16,24 @@ require_once BSIK_AUTOLOAD;
 use \Bsik\Std;
 use \Bsik\Base;
 use \Bsik\Api\BsikApi;
-use Bsik\Module\Modules;
-use Bsik\Module\Module;
-use Bsik\Module\ModuleView;
+use \Bsik\Module\Modules;
+use \Bsik\Module\Module;
 use \Bsik\Render\Template;
 use \Bsik\Privileges as Priv;
-use Bsik\Settings\CoreSettings;
+use \Bsik\Settings\CoreSettings;
 use \Bsik\Users\User;
 
 use \Exception;
-use Throwable;
+use \Throwable;
 
-class AModuleRequest {
-    
-    //values filter paterns:
-    public static $name_pattern  = "A-Za-z0-9_-";
-    public static $which_pattern = "A-Za-z0-9_-";
-
-    //Allowed types:
-    public static $types = [
-        "module",
-        "api",
-        "error",
-        "logout"
-    ];
-
-    //Raw request:
-    private array $requested; 
-    
-    //Values:
-    public string $type     = "";
-    public string $module  = "";
-    public string $which = "";
-    public string $when  = "";
-
-    /**
-     * __construct
-     * @param  array $request -> the request params
-     * @return AModuleRequest
-     */
-    public function __construct(array $request = []) {
-        $this->requested = $request;
-    }    
-
-    /**
-     * set_type
-     * - sets the request type. 
-     * @param  string $default
-     * @return bool
-     */
-    public function type(string $default) : bool {
-        $this->type = isset($this->requested["type"]) && in_array($this->requested["type"], self::$types) ? $this->requested["type"] : $default;
-        return !empty($this->type);
-    }    
-    
-    /**
-     * set_page
-     * - sets the requested page name
-     * @param  string $default
-     * @return bool
-     */
-    public function module(string $default) : bool {
-        $this->module = isset($this->requested["module"])
-                        ? Std::$str::filter_string($this->requested["module"], self::$name_pattern)
-                        : $default;
-        return !empty($this->module);
-    }    
-
-    /**
-     * set_which
-     * - sets the which query string
-     * @param  string $default
-     * @return bool
-     */
-    public function which(string $default) : bool {
-        $this->which = (isset($this->requested["which"]))
-                            ? Std::$str::filter_string($this->requested["which"], self::$which_pattern)
-                            : $default;
-        return !empty($this->which);
-    }
-    
-    /**
-     * set_when
-     * - sets the timestamp of the request
-     * @param  string $time_str
-     * @return void
-     */
-    public function when(string $time_str = "") : void {
-        $this->when = empty($time_str) ? Std::$date::time_datetime() : $time_str;
-    }
-    
-    /**
-     * get - serialize the request to an array
-     *
-     * @return array
-     */
-    public function get() : array {
-        return Std::$obj::to_array($this, filter : [
-            "name_pattern",
-            "which_pattern",
-            "types",
-        ]);
-    }
-}
-
-class APageMeta {
-
-    public array $defined_metas;
-    public array $additional_meta;
-
-    public function __construct()
-    {
-        $this->defined_metas    = [];
-        $this->additional_meta  = [];
-    }
-        
-    /**
-     * define
-     * - defines required page meta tags.
-     * @param  array $_metas
-     * @return void
-     */
-    public function define(array $_metas = []) : void {
-        $this->defined_metas = Std::$arr::is_assoc($_metas) ? $_metas : array_fill_keys($_metas, "");
-    }
-    
-    /**
-     * meta
-     * sets a defined meta value that will be rendered
-     * 
-     * @param  string $name     => meta name
-     * @param  string|bool $set => if false will return value otherwise will set the meta
-     * @return object|string
-     */
-    public function set(string $name, string|bool $set = false) : object|string {
-        if (!isset($this->defined_metas[$name]))
-            trigger_error("'Page->meta()' you must use a valid meta type. [unknown entry '$name']", E_PLAT_WARNING);
-        if ($set === false) 
-            return $this->defined_metas[$name];
-        $this->defined_metas[$name] = $set;
-        return $this;
-    }  
-
-    /**
-     * op_meta - declare a custom optional meta tag:
-     * op_meta(["name" => "text", "content" => "text"])
-     *
-     * @param array $define - associative array that defines the attributes
-     * @return object
-     */
-    public function add(array $define) : object {
-        $attrs = "";
-        foreach ($define as $attr => $value) {
-            $attrs .= $attr.'="'.htmlspecialchars($value).'" '; 
-        }
-        $this->additional_meta[] = sprintf("<meta %s />", $attrs);
-        return $this;
-    }
-
-    public function data_object(array $data, string $name = "module-data") : void {
-        $this->add([
-            "name"      => $name, 
-            "content"   => base64_encode(json_encode($data))
-        ]);
-    }
-    /**
-     * get - serialize the metas object to an array
-     *
-     * @return array
-     */
-    public function get() : array {
-        return Std::$obj::to_array($this, filter : [
-            "name_pattern",
-            "which_pattern",
-            "types",
-        ]);
-    }
-
-}
-
-class APageHttpHeaders {
-
-    public static $str = [
-        'OK'                        => 200,
-        'Created'                   => 201,
-        'Accepted'                  => 202,
-        'No Content'                => 204,
-        'Not Modified'              => 304,
-        'Bad Request'               => 400,
-        'Forbidden'                 => 403,
-        'Not Found'                 => 404,
-        'Method Not Allowed'        => 405,
-        'Unsupported Media Type'    => 415,
-        'Upgrade Required'          => 426,
-        'Internal Server Error'     => 500,
-        'Not Implemented'           => 501
-    ];
-
-    final public static function getCodeOf(string $mes) {
-        return self::$str[$mes] ?? 0;
-    }
-    final public static function getMessageOf(int $code) {
-        return array_search($code, self::$str);
-    }
-    final public static function send_response_code(int $code) : bool {
-        return http_response_code($code);
-    }
-}
-
+/**
+ * APage
+ * 
+ * The main admin page class.
+ * 
+ * @package Bsik\Render
+ * 
+ */
 class APage extends Base
 {   
 
@@ -417,7 +223,7 @@ class APage extends Base
                 }
                 return true;
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $origin = $e->getPrevious();
             self::log("error", $e->getMessage(), 
                 context : [
@@ -678,7 +484,7 @@ class APage extends Base
             } else {
                 throw new Exception("tried to render module from APage - without loading a module.", E_PLAT_ERROR);
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             self::log("error", "Error captured on module render [{$e->getMessage()}].", [
                 "module"    => self::$module->module_name, 
                 "view"      => self::$module->which, 

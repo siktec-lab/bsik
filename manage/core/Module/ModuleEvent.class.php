@@ -12,9 +12,16 @@
 
 namespace Bsik\Module;
 
-
 require_once BSIK_AUTOLOAD;
 
+/** 
+ * ModuleEvent
+ * 
+ * This class is used to create a module event.
+ * Those events are used to trigger actions on module events.
+ * 
+ * @package Bsik\Module
+ */
 class ModuleEvent {
     /**
      * Module events name : 
