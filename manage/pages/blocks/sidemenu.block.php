@@ -59,12 +59,14 @@ class SideMenuBlock extends Block {
         foreach ($this->Page->menu as $entry) {
             $parts = Std::$arr::get_from($entry, ["text", "title", "desc", "icon", "action", "sub"], "");
             $parts["loaded"] = strtolower($parts["action"]) === $current;
+
             //Save title + desc for later when rendering module:
             if ($parts["loaded"]) {
                 $this->Page::$module->header["sub-title"]   = $parts["desc"];
                 $this->Page::$module->header["which"]       = "";
                 $this->Page::$module->header["title"]       = $parts["title"];
             }
+            
             //Create module base url:
             
             $parts["url"] = CoreSettings::$url["manage"]."/".strtolower($parts["action"]);

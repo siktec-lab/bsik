@@ -543,4 +543,4 @@ BsikApi::$user_string       = &Base::$user_string;
 BsikApi::$logger            = &Base::$logger;
 BsikApi::$logger_enabled    = &Base::$logger_enabled;
 BsikApi::$db                = &Base::$db;
-// BsikApi::$endpoints         = new RegisteredEndpoints();
+// BsikApi::$endpoints         = new RegisteredEndpoints(); //TODO: removed this line maybe? 

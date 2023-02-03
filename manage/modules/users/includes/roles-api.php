@@ -24,23 +24,23 @@ require_once "components.php";
 /**********************  privileges policies  *******************************/
 /****************************************************************************/
 
-$reuired_edit_role = new Priv\RequiredPrivileges();
-$reuired_edit_role->define(
+$required_edit_role = new Priv\RequiredPrivileges();
+$required_edit_role->define(
     new Priv\PrivRoles(edit : true)
 );
 
-$reuired_edit_priv_role = new Priv\RequiredPrivileges();
-$reuired_edit_priv_role->define(
+$required_edit_priv_role = new Priv\RequiredPrivileges();
+$required_edit_priv_role->define(
     new Priv\PrivRoles(edit : true, grant: true),
 );
 
-$reuired_create_role = new Priv\RequiredPrivileges();
-$reuired_create_role->define(
+$required_create_role = new Priv\RequiredPrivileges();
+$required_create_role->define(
     new Priv\PrivRoles(create : true, grant: true),
 );
 
-$reuired_delete_role = new Priv\RequiredPrivileges();
-$reuired_delete_role->define(
+$required_delete_role = new Priv\RequiredPrivileges();
+$required_delete_role->define(
     new Priv\PrivRoles(delete : true)
 );
 
@@ -159,7 +159,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
     allow_global    : false,
     allow_external  : true,
     allow_override  : false,
-    policy: $reuired_edit_role
+    policy: $required_edit_role
 ));
 
 
@@ -182,7 +182,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
                                 ::create_filter(),
 
         "role_desc"  => Validate::filter("type", "string")
-                                ::filter("sanitize", FILTER_SANITIZE_STRING)
+                                ::filter("sanitize", FILTER_SANITIZE_FULL_SPECIAL_CHARS)
                                 ::filter("trim")
                                 ::create_filter(),
 
@@ -244,7 +244,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
     allow_global    : false,
     allow_external  : true,
     allow_override  : false,
-    policy          : $reuired_create_role
+    policy          : $required_create_role
 ));
 
 /********************************************************************************/
@@ -267,7 +267,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
                                 ::create_filter(),
 
         "role_desc"  => Validate::filter("type", "string")
-                                ::filter("sanitize", FILTER_SANITIZE_STRING) //TODO: this should be changes for php 8.0.1
+                                ::filter("sanitize", FILTER_SANITIZE_FULL_SPECIAL_CHARS) //TODO: this should be changes for php 8.0.1
                                 ::filter("trim")
                                 ::create_filter(),
 
@@ -319,7 +319,7 @@ AdminApi::register_endpoint(new ApiEndPoint(
     allow_global    : false,
     allow_external  : true,
     allow_override  : false,
-    policy          : $reuired_edit_role 
+    policy          : $required_edit_role 
 ));
 
 /********************************************************************************/
@@ -366,5 +366,5 @@ AdminApi::register_endpoint(new ApiEndPoint(
     allow_global    : false,
     allow_external  : true,
     allow_override  : false,
-    policy          : $reuired_delete_role
+    policy          : $required_delete_role
 ));

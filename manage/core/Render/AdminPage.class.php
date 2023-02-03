@@ -428,58 +428,6 @@ class APage extends Base
             );
         }
         return false;
-    //     if ($this->is_module_installed()) {
-
-    //         $module_name        = empty($module) ? self::$request->module : $module;
-    //         $module_installed   = self::$modules::module_installed($module_name);
-    //         $module_installed["which"] = empty($which) ? self::$request->which  : $which;
-    //         $module_file        = Std::$fs::path_to("modules", [$module_installed["path"], "module.php"]);
-
-    //         //Require module
-    //         if (file_exists($module_file["path"])) {
-    //             try {
-    //                 //Load module & views:
-    //                 require $module_file["path"];
-    //                 //Save ref and load data + settings:
-    //                 self::$module = self::$modules::module($module_name);
-    //                 if (self::$module) {
-    //                     self::$module->load(
-    //                         data:   $module_installed, 
-    //                         DB:     self::$db,
-    //                         Api:    $Api, 
-    //                         Page:   $this, 
-    //                         User:   $User
-    //                     );
-    //                 }
-    //                 //Set template origin:
-    //                 if (file_exists(self::$module->paths["module-templates"])) {
-    //                     $this->engine->addFolders([
-    //                         self::$module->paths["module-templates"]
-    //                     ]);
-    //                 }
-    //                 return true;
-    //             } catch (\Throwable $e) {
-    //                 self::log("error", "Internal Error captured on module load [{$e->getMessage()}].", 
-    //                     context : [
-    //                         "module" => $module_name,
-    //                         "path"   => $module_file["path"],
-    //                         "file"   => $e->getFile(),
-    //                         "line"   => $e->getLine()
-    //                     ]
-    //                 );
-    //                 return false;
-    //             }
-    //         } else {
-    //             self::log("error", "Could not find module file to load.", 
-    //                 context: [
-    //                     "module" => $module_name, 
-    //                     "path"   => $module_file["path"]
-    //                 ]
-    //             );
-    //             return false;
-    //         }
-    //     }
-    //     return false;
     }
 
     public function load_menu() {
@@ -746,6 +694,7 @@ class APage extends Base
         if (file_exists($path)) {
             include $path;
             $ref = new \ReflectionClass($class);
+            /** @var \Block $Block */
             $Block = $ref->newInstanceArgs([$this, $this->engine, $args]);
             return $Block->render();
         } else {
