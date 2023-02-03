@@ -20,8 +20,8 @@ use \Bsik\Std;
 use \Bsik\Settings\CoreSettings;
 use \Bsik\Api\AdminApi;
 use \Bsik\Base;
-use Bsik\Privileges\PrivAccess;
-use Bsik\Privileges\RequiredPrivileges;
+use \Bsik\Privileges\PrivAccess;
+use \Bsik\Privileges\RequiredPrivileges;
 use \Bsik\Trace;
 use \Bsik\Users\User;
 use \Bsik\Render\APage;
@@ -41,13 +41,16 @@ Trace::add_trace("Establish db connection",__FILE__);
 if (!CoreSettings::extend_from_database(Base::$db)) {
     throw new Exception("Cant Load Settings", E_PLAT_ERROR);
 }
+
 //Core settings:
 CoreSettings::load_constants();
+
 //Set object defaults:
 Trace::$enable = CoreSettings::get("trace-debug-expose", false);
 Base::$db->setTrace(Trace::$enable);
 \Bsik\Render\Template::$default_debug      = CoreSettings::get("template-rendering-debug-mode", false);
 \Bsik\Render\Template::$default_autoreload = CoreSettings::get("template-rendering-auto-reload", true);
+
 //Start session:
 if(!session_id()){ session_start(); }
 
