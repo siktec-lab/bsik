@@ -2,6 +2,8 @@
 
 namespace Bsik\Api\FileUpload;
 
+use stdClass;
+
 //TODO: we need to improve this and make it more BSIK style
 
 class Exif {
@@ -67,7 +69,7 @@ class Exif {
 
 }
 
-class File {
+class File extends stdClass {
 
 	public $_exif = null;
 
@@ -391,9 +393,9 @@ class File {
 	public function get_info($icon_prefix = 'octicon') {
 		preg_match('/\.[^\.]+$/i', $this->name, $ext);
         $return = new \stdClass;
-        $extetion = isset($ext[0]) ? $ext[0] : '';
+        $extention = isset($ext[0]) ? $ext[0] : '';
         $category = "";
-        switch (strtolower($extetion)) {
+        switch (strtolower($extention)) {
             case ".pdf":
             case ".doc":
             case ".rtf":
@@ -465,9 +467,9 @@ class File {
                 break;
         }
         $return->icon_class = $icon;
-        $return->extension = $extetion;
+        $return->extension = $extention;
         $return->category = $category;
-        $return->type = isset($this->_mime_types[$extetion]) ? $this->_mime_types[$extetion] : 'application/octet-stream';
+        $return->type = isset($this->_mime_types[$extention]) ? $this->_mime_types[$extention] : 'application/octet-stream';
         return $return;
 	}
 
@@ -508,7 +510,7 @@ class File {
 class Upload {
 
 	/**
-	 * files array for mutliple
+	 * files array for multiple
 	 * @var array
 	 */
 	public $files = array();

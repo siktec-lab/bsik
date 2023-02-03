@@ -3,6 +3,13 @@
 namespace Bsik\Objects;
 
 
+/** 
+ * Password
+ * 
+ * This class is used to validate and hash passwords.
+ * 
+ * @package Bsik\Objects
+ */
 class Password {
 
     protected string $hash = "";

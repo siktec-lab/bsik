@@ -21,9 +21,17 @@ use \Bsik\Privileges as Priv;
 use \Bsik\Api\BsikApi;
 use \Bsik\Render\FPage;
 use \Bsik\Api\AdminApi;
-use Bsik\Module\Modules;
+use \Bsik\Module\Modules;
 use \Bsik\Render\APage;
 
+/**
+ * FrontApi
+ * 
+ * this class is the Front api implementation
+ * front api is a subset of the admin api, it is used to expose api to the front end
+ * 
+ * @package Bsik\Api
+ */
 class FrontApi extends BsikApi
 {
 

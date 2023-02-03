@@ -211,6 +211,10 @@ Components::register("modal", function(
         </div>
     HTML;
 });
+
+/** Confirm Modal Component.
+ *  @return string => HTML of the modal
+*/
 Components::register("confirm", function(){
     $confirm_modal = Components::modal(
         "bsik-confirm-modal", 

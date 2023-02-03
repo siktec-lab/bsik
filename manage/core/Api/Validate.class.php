@@ -39,6 +39,15 @@ if (!defined("PLAT_VALIDATION_INPUT_CHARSET")) {
     define("PLAT_VALIDATION_INPUT_CHARSET", !defined("PLAT_CHARSET") ? "UTF-8" : PLAT_CHARSET);
 }
 
+/** 
+ * Validate
+ * 
+ * - A simple validation class that can be used to validate inputs of the Api endpoints.
+ * - Can be used to validate inputs of any kind.
+ * - it implements a simple chain syntax to allow for easy validation and filtering.
+ * 
+ * @package Bsik\Api
+ */
 class Validate {
 
     //Use encoding:
@@ -53,8 +62,8 @@ class Validate {
     ];
     
     //A buffer that holds conditions until create rule is called:
-    private static $filter_buffer = [];
-    private static $rule_buffer = [];
+    private static $filter_buffer   = [];
+    private static $rule_buffer     = [];
 
     //Rule string symbols:
     private static $sym_chain       = "->";

@@ -20,6 +20,13 @@ use \Bsik\Privileges as Priv;
 use \Bsik\Api\BsikApi;
 use \Bsik\Render\APage;
 
+/** 
+ * AdminApi
+ * 
+ * this class is the Admin api implementation
+ * 
+ * @package Bsik\Api
+ */
 class AdminApi extends BsikApi
 {
 
