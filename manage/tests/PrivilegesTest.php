@@ -26,7 +26,7 @@ class PrivilegesTest extends TestCase
     //Check serialization of definitions:
     public function testSerializationOfPrivileges() : void {
         $required   = new Priv\RequiredPrivileges();
-        $mypriv     = new Priv\GrantedPrivileges();
+        $my_priv     = new Priv\GrantedPrivileges();
         $required->define(
             new Priv\PrivUsers(
                 edit : true, 
@@ -40,7 +40,7 @@ class PrivilegesTest extends TestCase
                 product : false
             )
         );
-        $mypriv->define(
+        $my_priv->define(
             new Priv\PrivUsers(
                 edit    : false, 
                 create  : true, 
@@ -50,8 +50,8 @@ class PrivilegesTest extends TestCase
             new Priv\PrivCore(view:true)
         );
         $gate = serialize($required);
-        $ask  = serialize($mypriv);
-        unset($mypriv);
+        $ask  = serialize($my_priv);
+        unset($my_priv);
         unset($required);
         $gate = Priv\RequiredPrivileges::safe_unserialize($gate);
         $ask  = Priv\GrantedPrivileges::safe_unserialize($ask);
@@ -66,17 +66,17 @@ class PrivilegesTest extends TestCase
         $required->define(
             new Priv\PrivAccess(manage : true)
         );
-        $mypriv_ok = new Priv\GrantedPrivileges();
-        $mypriv_ok->define(
+        $my_priv_ok = new Priv\GrantedPrivileges();
+        $my_priv_ok->define(
             new Priv\PrivAccess(manage : true)
         );
-        $mypriv_no = new Priv\GrantedPrivileges();
-        $mypriv_no->define(
+        $my_priv_no = new Priv\GrantedPrivileges();
+        $my_priv_no->define(
             new Priv\PrivAccess(manage : false)
         );
 
-        $this->assertTrue($required->has_privileges($mypriv_ok), "Access granted expected but was rejected");
-        $this->assertFalse($required->has_privileges($mypriv_no), "Access should have been declined. Instead was granted.");
+        $this->assertTrue($required->has_privileges($my_priv_ok), "Access granted expected but was rejected");
+        $this->assertFalse($required->has_privileges($my_priv_no), "Access should have been declined. Instead was granted.");
     }
 
     //Check for simple privileges met check:
@@ -97,7 +97,7 @@ class PrivilegesTest extends TestCase
     //Check Definition Simple Update from Objects:
     public function testDefinitionUpdatingFromObjects() : void {
         $required = new Priv\RequiredPrivileges();
-        $mypriv = new Priv\GrantedPrivileges();
+        $my_priv = new Priv\GrantedPrivileges();
         $required->define(
             new Priv\PrivUsers(
                 edit : true, 
@@ -111,7 +111,7 @@ class PrivilegesTest extends TestCase
                 product : false
             )
         );
-        $mypriv->define(
+        $my_priv->define(
             new Priv\PrivUsers(
                 edit    : false, 
                 create  : true, 
@@ -120,8 +120,8 @@ class PrivilegesTest extends TestCase
             new Priv\PrivGod(grant : true),
             new Priv\PrivCore(view:true)
         );
-        $required->update($mypriv);
-        unset($mypriv);
+        $required->update($my_priv);
+        unset($my_priv);
         $granted = trim(Priv\PrivDefinition::str_tag_list($required, "", " "));
         $this->assertEquals(
             "users > create,delete god > grant access > manage core > view", 
@@ -198,13 +198,14 @@ class PrivilegesTest extends TestCase
         ));
 
         $all = $new_from_other->all_privileges();
-        $this->assertEqualsCanonicalizing(
+        $this->assertEquals(
             [
                 "modules" => [
                     "view"      => true,
                     "install"   => null,
                     "activate"  => null,
-                    "settings"  => null
+                    "settings"  => null,
+                    "endpoints" => null,
                 ],
                 "users" => [
                     "view"      => false,

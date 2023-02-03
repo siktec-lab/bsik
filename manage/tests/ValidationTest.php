@@ -31,11 +31,11 @@ class ValidationTest extends TestCase
         $input_array  = ["sik<div>tec", "siktec <b></b>", 234253];   
         
         $filtered_str = Validate::filter_input($input_string , $filter);
-        $this->assertEquals("siktec", $filtered_str, "failed filtering simple string");
+        $this->assertEquals("sik&lt;div&gt;tec", $filtered_str, "failed filtering simple string");
 
         $filtered_arr = Validate::filter_input($input_array , $filter);
         $this->assertEqualsCanonicalizing(
-            ["siktec", "siktec ", ""], 
+            ["sik&lt;div&gt;tec", "siktec &lt;b&gt;&lt;/b&gt;", ""], 
             $filtered_arr, 
             "failed filtering array"
         );

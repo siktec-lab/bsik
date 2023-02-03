@@ -189,7 +189,7 @@ class BsikZip {
      * @throws Exception => E_PLAT_ERROR on zip cant be opened.
      * @return ZipArchive => the zip object
      */
-    final public static function open_zip(string $path, ?int $flags = null) : ZipArchive {
+    final public static function open_zip(string $path, int $flags = 0) : ZipArchive {
         $zip = new ZipArchive();
         $result = $zip->open($path, $flags);
         if ($result !== true) {
@@ -207,10 +207,10 @@ class BsikZip {
      * @throws Exception => E_PLAT_ERROR on zip cant be opened.
      * @return bool      => the extracted path
      */
-    final public static function extract_zip(ZipArchive|string $zip, string $to) : bool {
+    final public static function extract_zip(ZipArchive|string $zip, string $to, int $flags = 0) : bool {
         $close = false;
         if (is_string($zip)) {
-            $zip = self::open_zip($zip);
+            $zip = self::open_zip($zip, $flags);
             $close = true;
         }
         $success = $zip->extractTo($to);

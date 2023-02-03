@@ -159,8 +159,8 @@ class ModuleInstaller {
      * @param   bool $close_after - whether to close the zip file or not.
      * @return  bool true when success
      */
-    public function temp_deploy(bool $close_after = false) : bool {
-        if ($result = BsikZip::extract_zip($this->zip, $this->temp_folder_path)) {
+    public function temp_deploy(bool $close_after = false, int $flags = 0) : bool {
+        if ($result = BsikZip::extract_zip($this->zip, $this->temp_folder_path, $flags)) {
             $this->temp_extracted = new SplFileInfo($this->temp_folder_path);
         } 
         if ($close_after) {
